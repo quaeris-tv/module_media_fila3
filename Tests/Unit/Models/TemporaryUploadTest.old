@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Modules\Media\Models;
 
 use Modules\Media\Models\TemporaryUpload;
@@ -22,9 +24,9 @@ final class TemporaryUploadTest extends TestCase
         parent::setUp();
 
         /**
-* 
+*
          *
- * @todo Correctly instantiate tested object to use it. 
+ * @todo Correctly instantiate tested object to use it.
 */
         $this->temporaryUpload = new TemporaryUpload();
     }
@@ -42,9 +44,9 @@ final class TemporaryUploadTest extends TestCase
     public function testFindByMediaUuid(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
@@ -52,9 +54,9 @@ final class TemporaryUploadTest extends TestCase
     public function testFindByMediaUuidInCurrentSession(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
@@ -62,9 +64,9 @@ final class TemporaryUploadTest extends TestCase
     public function testCreateForFile(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
@@ -72,9 +74,9 @@ final class TemporaryUploadTest extends TestCase
     public function testCreateForRemoteFile(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
@@ -82,9 +84,9 @@ final class TemporaryUploadTest extends TestCase
     public function testRegisterMediaConversions(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
@@ -92,9 +94,9 @@ final class TemporaryUploadTest extends TestCase
     public function testMoveMedia(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }

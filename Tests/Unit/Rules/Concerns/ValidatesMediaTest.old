@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Media\Tests\Unit\Rules\Concerns;
 
 use Modules\Media\Rules\Concerns\ValidatesMedia;
@@ -22,9 +24,9 @@ final class ValidatesMediaTest extends TestCase
         parent::setUp();
 
         /**
-* 
+*
          *
- * @todo Correctly instantiate tested object to use it. 
+ * @todo Correctly instantiate tested object to use it.
 */
         $this->validatesMedia = $this->getMockBuilder(ValidatesMedia::class)
             ->setConstructorArgs([])
@@ -44,9 +46,9 @@ final class ValidatesMediaTest extends TestCase
     public function testValidateResolved(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
@@ -54,9 +56,9 @@ final class ValidatesMediaTest extends TestCase
     public function testGetRewrittenRules(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
@@ -64,9 +66,9 @@ final class ValidatesMediaTest extends TestCase
     public function testMoveItemRulesToMediaItems(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
@@ -74,9 +76,9 @@ final class ValidatesMediaTest extends TestCase
     public function testFilterItemRules(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
