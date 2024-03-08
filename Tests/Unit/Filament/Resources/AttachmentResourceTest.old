@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Media\Tests\Unit\Filament\Resources;
 
 use Modules\Media\Filament\Resources\AttachmentResource;
@@ -22,9 +24,9 @@ final class AttachmentResourceTest extends TestCase
         parent::setUp();
 
         /**
-* 
+*
          *
- * @todo Correctly instantiate tested object to use it. 
+ * @todo Correctly instantiate tested object to use it.
 */
         $this->attachmentResource = new AttachmentResource();
     }
@@ -42,9 +44,9 @@ final class AttachmentResourceTest extends TestCase
     public function testForm(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
@@ -52,9 +54,9 @@ final class AttachmentResourceTest extends TestCase
     public function testTable(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
@@ -62,9 +64,9 @@ final class AttachmentResourceTest extends TestCase
     public function testGetFormSchema(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
@@ -72,9 +74,9 @@ final class AttachmentResourceTest extends TestCase
     public function testFormHandlerCallback(): void
     {
         /**
-* 
+*
          *
- * @todo This test is incomplete. 
+ * @todo This test is incomplete.
 */
         self::markTestIncomplete();
     }
