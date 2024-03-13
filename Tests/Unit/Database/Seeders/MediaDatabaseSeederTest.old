@@ -1,4 +1,4 @@
-trict_types=1);
+<?php
 
 namespace Modules\Media\Tests\Unit\Database\Seeders;
 
@@ -39,3 +39,5 @@ final class MediaDatabaseSeederTest extends TestCase
     {
         /** @todo This test is incomplete. */
         self::markTestIncomplete();
+    }
+}
