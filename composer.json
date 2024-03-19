@@ -33,7 +33,9 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
-
-
+    "prefer-stable": true,
+    "require-dev": {
+        "orchestra/testbench": "^9.0",
+        "orchestra/pest-plugin-testbench": "*"
+    }
 }
