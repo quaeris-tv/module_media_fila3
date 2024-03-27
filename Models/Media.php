@@ -102,10 +102,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media as SpatieMedia;
  *
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
-<<<<<<< HEAD
-=======
  *
->>>>>>> 445add1e (up)
  * @mixin \Eloquent
  */
 class Media extends SpatieMedia
