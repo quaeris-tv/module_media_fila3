@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Media\Tests\Unit\View\Components;
 
 use Modules\Media\View\Components\VideoPlayer;
@@ -51,9 +49,9 @@ final class VideoPlayerTest extends TestCase
     public function testRender(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }

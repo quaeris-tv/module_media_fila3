@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Tests\Unit\Modules\Media\Exceptions;
 
 use Modules\Media\Exceptions\CouldNotAddUpload;
@@ -24,9 +22,9 @@ final class CouldNotAddUploadTest extends TestCase
         parent::setUp();
 
         /**
-*
+* 
          *
- * @todo Correctly instantiate tested object to use it.
+ * @todo Correctly instantiate tested object to use it. 
 */
         $this->couldNotAddUpload = new CouldNotAddUpload();
     }
@@ -44,9 +42,9 @@ final class CouldNotAddUploadTest extends TestCase
     public function testUuidAlreadyExists(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }

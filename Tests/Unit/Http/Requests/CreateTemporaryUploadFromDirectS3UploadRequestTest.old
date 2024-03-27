@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Media\Tests\Unit\Http\Requests;
 
 use Modules\Media\Http\Requests\CreateTemporaryUploadFromDirectS3UploadRequest;
@@ -24,9 +22,9 @@ final class CreateTemporaryUploadFromDirectS3UploadRequestTest extends TestCase
         parent::setUp();
 
         /**
-*
+* 
          *
- * @todo Correctly instantiate tested object to use it.
+ * @todo Correctly instantiate tested object to use it. 
 */
         $this->createTemporaryUploadFromDirectS3UploadRequest = new CreateTemporaryUploadFromDirectS3UploadRequest();
     }
@@ -44,9 +42,9 @@ final class CreateTemporaryUploadFromDirectS3UploadRequestTest extends TestCase
     public function testRules(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -54,9 +52,9 @@ final class CreateTemporaryUploadFromDirectS3UploadRequestTest extends TestCase
     public function testMessages(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }

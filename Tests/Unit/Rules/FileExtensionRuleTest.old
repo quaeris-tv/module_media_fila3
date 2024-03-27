@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Tests\Unit\Modules\Media\Rules;
 
 use Modules\Media\Rules\FileExtensionRule;
@@ -43,9 +41,9 @@ final class FileExtensionRuleTest extends TestCase
     public function testPassesWhenOk(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::assertTrue($this->fileExtensionRule->passes('attribute', 'valid value'));
     }
@@ -53,9 +51,9 @@ final class FileExtensionRuleTest extends TestCase
     public function testPassesWhenFailed(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::assertFalse($this->fileExtensionRule->passes('attribute', 'invalid value'));
     }
@@ -63,9 +61,9 @@ final class FileExtensionRuleTest extends TestCase
     public function testMessage(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }

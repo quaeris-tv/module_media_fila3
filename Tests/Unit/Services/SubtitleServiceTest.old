@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Tests\Unit\Modules\Media\Services;
 
 use Illuminate\Database\Eloquent\Model;
@@ -28,9 +26,9 @@ final class SubtitleServiceTest extends TestCase
         parent::setUp();
 
         /**
-*
+* 
          *
- * @todo Correctly instantiate tested object to use it.
+ * @todo Correctly instantiate tested object to use it. 
 */
         $this->subtitleService = new SubtitleService();
     }
@@ -57,9 +55,9 @@ final class SubtitleServiceTest extends TestCase
     public function testMake(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -67,9 +65,9 @@ final class SubtitleServiceTest extends TestCase
     public function testSetFilePath(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -95,9 +93,9 @@ final class SubtitleServiceTest extends TestCase
     public function testUpateModel(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -105,9 +103,9 @@ final class SubtitleServiceTest extends TestCase
     public function testGetPlain(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -115,9 +113,9 @@ final class SubtitleServiceTest extends TestCase
     public function testGet(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -125,9 +123,9 @@ final class SubtitleServiceTest extends TestCase
     public function testGetContent(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -135,9 +133,9 @@ final class SubtitleServiceTest extends TestCase
     public function testGetFromXml(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -145,9 +143,9 @@ final class SubtitleServiceTest extends TestCase
     public function testSrtToVtt(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }

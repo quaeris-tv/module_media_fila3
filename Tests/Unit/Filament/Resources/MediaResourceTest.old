@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Media\Tests\Unit\Filament\Resources;
 
 use Modules\Media\Filament\Resources\MediaResource;
@@ -24,9 +22,9 @@ final class MediaResourceTest extends TestCase
         parent::setUp();
 
         /**
-*
+* 
          *
- * @todo Correctly instantiate tested object to use it.
+ * @todo Correctly instantiate tested object to use it. 
 */
         $this->mediaResource = new MediaResource();
     }
@@ -44,9 +42,9 @@ final class MediaResourceTest extends TestCase
     public function testForm(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -54,9 +52,9 @@ final class MediaResourceTest extends TestCase
     public function testGetFormSchema(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -64,9 +62,9 @@ final class MediaResourceTest extends TestCase
     public function testTable(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -74,9 +72,9 @@ final class MediaResourceTest extends TestCase
     public function testGetRelations(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -84,9 +82,9 @@ final class MediaResourceTest extends TestCase
     public function testGetPages(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }

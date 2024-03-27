@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Tests\Unit\Modules\Media\Enums;
 
 use Modules\Media\Enums\AttachmentTypeEnum;
@@ -24,9 +22,9 @@ final class AttachmentTypeEnumTest extends TestCase
         parent::setUp();
 
         /**
-*
+* 
          *
- * @todo Correctly instantiate tested object to use it.
+ * @todo Correctly instantiate tested object to use it. 
 */
         $this->attachmentTypeEnum = new AttachmentTypeEnum();
     }
@@ -44,9 +42,9 @@ final class AttachmentTypeEnumTest extends TestCase
     public function testGetTypeNoteDescriptionsByValues(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -54,9 +52,9 @@ final class AttachmentTypeEnumTest extends TestCase
     public function testOperationCases(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -64,9 +62,9 @@ final class AttachmentTypeEnumTest extends TestCase
     public function testGetTypeNote(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -74,9 +72,9 @@ final class AttachmentTypeEnumTest extends TestCase
     public function testGetLabel(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -84,9 +82,9 @@ final class AttachmentTypeEnumTest extends TestCase
     public function testCases(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -94,9 +92,9 @@ final class AttachmentTypeEnumTest extends TestCase
     public function testFrom(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
@@ -104,9 +102,9 @@ final class AttachmentTypeEnumTest extends TestCase
     public function testTryFrom(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }

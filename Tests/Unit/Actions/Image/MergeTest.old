@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Modules\Media\Tests\Unit\Actions\Image;
 
 use Modules\Media\Actions\Image\Merge;
@@ -39,9 +37,9 @@ final class MergeTest extends TestCase
     public function testExecute(): void
     {
         /**
-*
+* 
          *
- * @todo This test is incomplete.
+ * @todo This test is incomplete. 
 */
         self::markTestIncomplete();
     }
