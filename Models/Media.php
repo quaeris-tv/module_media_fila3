@@ -102,6 +102,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media as SpatieMedia;
  *
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ *
  * @mixin \Eloquent
  */
 class Media extends SpatieMedia
@@ -111,18 +112,21 @@ class Media extends SpatieMedia
     /** @var string */
     protected $connection = 'media';
 
-    /** @var array<string, string> */
-    protected $casts = [
-        'updated_by' => 'string',
-        'created_by' => 'string',
-        'deleted_by' => 'string',
+    /** @return array<string, string> */
+    protected function casts(): array
+    {
+        return [
+            'updated_by' => 'string',
+            'created_by' => 'string',
+            'deleted_by' => 'string',
 
-        // 'attachment_type' => AttachmentTypeEnum::class,
-        'manipulations' => 'array',
-        'custom_properties' => 'array',
-        'generated_conversions' => 'array',
-        'responsive_images' => 'array',
-    ];
+            // 'attachment_type' => AttachmentTypeEnum::class,
+            'manipulations' => 'array',
+            'custom_properties' => 'array',
+            'generated_conversions' => 'array',
+            'responsive_images' => 'array',
+        ];
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Collection
