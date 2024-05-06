@@ -35,3 +35,4 @@ build/
 docs/vendor
 /docs/vendor
 node_modules
+.git-blame-ignore-revs
