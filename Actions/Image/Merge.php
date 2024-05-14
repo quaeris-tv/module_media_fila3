@@ -9,7 +9,9 @@ declare(strict_types=1);
 namespace Modules\Media\Actions\Image;
 
 use Exception;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+// use Intervention\Image\Facades\Image;
+use Intervention\Image\Drivers\Gd\Driver;
 use Spatie\QueueableAction\QueueableAction;
 
 class Merge
@@ -32,7 +34,11 @@ class Merge
         $height = 0;
         $imgs = [];
         foreach ($filenames as $filename) {
-            $img = Image::make(public_path($filename));
+            // $img = Image::make(public_path($filename));
+
+            $manager = new ImageManager(new Driver());
+            $img = $manager->read(public_path($filename));
+
             $imgs[] = $img;
             $width += $img->width();
             $height = max($height, $img->height());
@@ -44,10 +50,15 @@ class Merge
 
         $width = (int) $width;
         $height = (int) $height;
-        $img_canvas = Image::canvas($width, $height);
+        // $img_canvas = Image::canvas($width, $height);
+
+        $manager = new ImageManager(Driver::class);
+        $img_canvas = $manager->create($width, $height);
+
         $delta = 0;
         foreach ($imgs as $img) {
-            $img_canvas->insert($img, 'top-left ', $delta, 0);
+            // $img_canvas->insert($img, 'top-left ', $delta, 0);
+            $img_canvas->place($img, 'top-left ', $delta, 0);
             $delta += $img->width();
         }
 
