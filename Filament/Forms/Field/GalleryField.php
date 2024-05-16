@@ -161,7 +161,7 @@ class GalleryField extends Repeater
                 // $component->state($media->id);
 
                 //  return $media->id;
-                // dddx('a');
+                //
                 // });
             }
         );
