@@ -1,4 +1,7 @@
 <?php
+/**
+ * @see https://github.com/filamentphp/filament/discussions/9237
+ */
 
 declare(strict_types=1);
 
@@ -43,7 +46,7 @@ class GalleryField extends Repeater
                 // FileUpload::make('img'),
                 // SpatieMediaLibraryFileUpload::make('img')->image(),
                 // FileUpload::make('file_name'),
-                Forms\Components\SpatieMediaLibraryFileUpload::make('image'),
+                SpatieMediaLibraryFileUpload::make('image'),
                 Forms\Components\TextInput::make('name'),
                 Forms\Components\TextInput::make('collection_name'),
             ]
@@ -55,7 +58,7 @@ class GalleryField extends Repeater
         parent::setUp();
         $this->schema(
             [
-                Forms\Components\Repeater::make('grupo_fotos')
+                Repeater::make('grupo_fotos')
                     ->label('')
                     ->reorderable(false)
                     ->defaultItems(1)
