@@ -9,15 +9,14 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
 use Modules\Media\Enums\AttachmentTypeEnum;
+use Modules\Sam\Filament\Resources\AssetResource\Actions\AttachmentDownloadBulkAction;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Webmozart\Assert\Assert;
 
@@ -101,7 +100,9 @@ class AttachmentResource extends XotBaseResource
     }
 
     /**
-     * @return (Radio|TextInput|BaseFileUpload|FileUpload)[]
+     * return (Radio|TextInput|BaseFileUpload|FileUpload)[].
+     *
+     * @return array<\Filament\Forms\Components\Component>
      */
     public static function getFormSchema(bool $asset = true): array
     {
@@ -137,46 +138,11 @@ class AttachmentResource extends XotBaseResource
             // Radio::make('attachment_type')->columnSpanFull(),
             TextInput::make('name')
                 ->translateLabel()
-                ->label(static::trans('fields.name.field_name'))
-                ->hint(static::trans('fields.name.hint'))
+                ->label(static::trans('fields.name'))
+                ->hint(static::trans('fields.name_hint'))
                 ->autocomplete(false)
                 ->maxLength(255)
                 ->columnSpanFull(),
         ];
-    }
-
-    public static function formHandlerCallback(RelationManager $livewire, array $data): void
-    {
-        $ownerRecord = $livewire->getOwnerRecord();
-        $mediaCollection = $data['attachment_type'] ?? 'default';
-        // $mediaCollection = 'default';
-
-        if (! method_exists($ownerRecord, 'addMediaFromDisk')) {
-            throw new \Exception('wip');
-        }
-
-        $attachment = $ownerRecord
-            ->addMediaFromDisk(
-                $data['file'],
-                config('attachment.upload.disk.driver'),
-            )
-            ->setName(
-                $data['name'] ?? Str::beforeLast($data['original_file_name'], '.'),
-            )
-            ->preservingOriginal()
-            ->toMediaCollection($mediaCollection);
-
-        $user_id = authId();
-        $attachment->update(
-            [
-                'created_by' => $user_id,
-                'updated_by' => $user_id,
-            ]
-        );
-        /*
-        $attachment->created_by=$user_id;
-        $attachment->created_by=$user_id;
-        $attachment->save();
-        */
     }
 }
