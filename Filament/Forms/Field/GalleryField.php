@@ -125,7 +125,7 @@ class GalleryField extends Repeater
                     ->loadStateFromRelationshipsUsing(
                         function (SpatieMediaLibraryFileUpload $component, HasMedia $record) {
                             $callable = function ($file): array {
-                                Assert::isInstanceOf($file, Media::class);
+                                Assert::isInstanceOf($file, Media::class, '['.__LINE__.']['.__FILE__.']');
                                 $uuid = $file->getAttributeValue('uuid');
 
                                 return [$uuid => $uuid];

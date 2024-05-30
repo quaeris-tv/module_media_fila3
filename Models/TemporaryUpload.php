@@ -26,6 +26,7 @@ use Webmozart\Assert\Assert;
  * @property \Illuminate\Support\Carbon|null                                                      $updated_at
  * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
  * @property int|null                                                                             $media_count
+ *
  * @method static Builder|TemporaryUpload newModelQuery()
  * @method static Builder|TemporaryUpload newQuery()
  * @method static Builder|TemporaryUpload query()
@@ -33,6 +34,7 @@ use Webmozart\Assert\Assert;
  * @method static Builder|TemporaryUpload whereId($value)
  * @method static Builder|TemporaryUpload whereSessionId($value)
  * @method static Builder|TemporaryUpload whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class TemporaryUpload extends Model implements HasMedia
@@ -160,7 +162,7 @@ class TemporaryUpload extends Model implements HasMedia
         throw new \Exception('['.__LINE__.']['.__FILE__.']');
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         if (! config('media-library.generate_thumbnails_for_temporary_uploads')) {
             return;
@@ -186,7 +188,7 @@ class TemporaryUpload extends Model implements HasMedia
         // if (! $media instanceof \Spatie\MediaLibrary\MediaCollections\Models\Media) {
         //    throw new \Exception('['.__LINE__.']['.__FILE__.']');
         // }
-        Assert::isInstanceOf($media, Media::class);
+        Assert::isInstanceOf($media, Media::class, '['.__LINE__.']['.__FILE__.']');
 
         $temporaryUploadModel = $media->model;
         $uuid = $media->uuid;
