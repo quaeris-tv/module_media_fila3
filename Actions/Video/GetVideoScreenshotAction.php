@@ -6,11 +6,11 @@
 
 declare(strict_types=1);
 
-namespace Modules\Media\Actions;
+namespace Modules\Media\Actions\Video;
 
 use Spatie\QueueableAction\QueueableAction;
 
-class GetVideoDurationAction
+class GetVideoScreenshotAction
 {
     use QueueableAction;
 
