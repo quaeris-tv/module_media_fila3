@@ -10,9 +10,11 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
+use Modules\Media\Filament\Actions\Table\ConvertAction;
 use Modules\Media\Filament\Resources\MediaResource;
 use Modules\Xot\Filament\Traits\NavigationPageLabelTrait;
 use Webmozart\Assert\Assert;
@@ -50,6 +52,8 @@ class ListMedia extends ListRecords
 
             TextColumn::make('mime_type')
                 ->label(static::trans('fields.mime_type')),
+
+            // ImageColumn::make('name')->label('preview'),
 
             TextColumn::make('human_readable_size')
                 ->label(static::trans('fields.human_readable_size'))
@@ -93,6 +97,7 @@ class ListMedia extends ListRecords
                     static fn ($record) => response()->download($record->getPath(), $record->file_name)
                 ),
             // ]),
+            ConvertAction::make('convert'),
         ];
     }
 
