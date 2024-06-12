@@ -11,6 +11,7 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 use Modules\Media\Filament\Resources\MediaResource;
 use Modules\Xot\Filament\Traits\NavigationPageLabelTrait;
@@ -43,10 +44,17 @@ class ListMedia extends ListRecords
                 ->label(static::trans('fields.collection_name')),
 
             TextColumn::make('name')
-                ->label(static::trans('fields.filename')),
+                ->label(static::trans('fields.filename'))
+                ->searchable()
+                ->sortable(),
+
+            TextColumn::make('mime_type')
+                ->label(static::trans('fields.mime_type')),
 
             TextColumn::make('human_readable_size')
-                ->label(static::trans('fields.human_readable_size')),
+                ->label(static::trans('fields.human_readable_size'))
+            // ->sortable()
+            ,
 
             TextColumn::make('creator.name')
                 ->label(static::trans('fields.creator.name'))
@@ -103,6 +111,7 @@ class ListMedia extends ListRecords
             ->filters($this->getTableFilters())
             ->actions($this->getTableActions())
             ->bulkActions($this->getTableBulkActions())
+            ->actionsPosition(ActionsPosition::BeforeColumns)
             ->defaultSort(
                 column: 'created_at',
                 direction: 'DESC',

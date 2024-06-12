@@ -31,6 +31,7 @@ return [
             'name' => 'Creatore',
         ],
         'uploaded_at' => 'Caricato il',
+        'mime_type' => 'tipo',
     ],
     'actions' => [
         'import' => [
