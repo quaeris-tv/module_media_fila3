@@ -10,6 +10,7 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\ActionsPosition;
@@ -81,6 +82,8 @@ class ListMedia extends ListRecords
     {
         return [
             // ActionGroup::make([
+            ViewAction::make()
+                ->label(''),
             Action::make('view_attachment')
                 ->label('')
                 ->icon('heroicon-s-eye')
@@ -88,7 +91,9 @@ class ListMedia extends ListRecords
                 ->url(
                     static fn ($record): string => $record->getUrl()
                 )->openUrlInNewTab(true),
-            DeleteAction::make()->label('')->requiresConfirmation(),
+            DeleteAction::make()
+                ->label('')
+                ->requiresConfirmation(),
             Action::make('download_attachment')
                 ->label('')
                 ->icon('heroicon-o-arrow-down-tray')
@@ -97,7 +102,14 @@ class ListMedia extends ListRecords
                     static fn ($record) => response()->download($record->getPath(), $record->file_name)
                 ),
             // ]),
-            ConvertAction::make('convert'),
+            // ConvertAction::make('convert'),
+            Action::make('convert')
+               ->label('')
+               ->icon('convert01')
+               ->color('gray')
+               ->url(
+                   static fn ($record): string => static::$resource::getUrl('convert', ['record' => $record])
+               )->openUrlInNewTab(true),
         ];
     }
 

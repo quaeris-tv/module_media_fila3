@@ -10,9 +10,7 @@ use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Pages\PageRegistration;
-use Modules\Media\Filament\Resources\MediaResource\Pages\CreateMedia;
-use Modules\Media\Filament\Resources\MediaResource\Pages\EditMedia;
-use Modules\Media\Filament\Resources\MediaResource\Pages\ListMedia;
+use Modules\Media\Filament\Resources\MediaResource\Pages;
 use Modules\Media\Models\Media;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Webmozart\Assert\Assert;
@@ -38,25 +36,22 @@ class MediaResource extends XotBaseResource
      */
     public static function getFormSchema(bool $asset = true): array
     {
+        /*
         Assert::string($disk = $asset ? config('camping.asset.attachments.disk.driver') : config('camping.operation.attachments.disk.driver'));
         Assert::isArray($file_types = $asset ? config('camping.asset.attachments.allowed_file_types') : config('camping.operation.attachments.allowed_file_types'));
         Assert::integer($max_size = config('media-library.max_file_size'));
-
+        */
         return [
             FileUpload::make('file')
                 ->label(static::trans('fields.file'))
                 ->hint(static::trans('fields.file_hint'))
                 ->storeFileNamesIn('original_file_name')
-                ->disk(
-                    $disk
-                )
-                ->acceptedFileTypes(
-                    $file_types
-                )
+                /*
+                ->disk($disk)
+                ->acceptedFileTypes($file_types)
+                ->maxSize($max_size)
+                */
                 ->visibility('private')
-                ->maxSize(
-                    $max_size
-                )
                 ->required()
                 ->columnSpanFull(),
             /*-- usiamo enum con il casts sul modello
@@ -100,9 +95,11 @@ class MediaResource extends XotBaseResource
     public static function getPages(): array
     {
         return [
-            'index' => ListMedia::route('/'),
-            'create' => CreateMedia::route('/create'),
-            'edit' => EditMedia::route('/{record}/edit'),
+            'index' => Pages\ListMedia::route('/'),
+            'create' => Pages\CreateMedia::route('/create'),
+            'edit' => Pages\EditMedia::route('/{record}/edit'),
+            'view' => Pages\ViewMedia::route('/{record}'),
+            'convert' => Pages\ConvertMedia::route('/{record}/convert'),
         ];
     }
 }

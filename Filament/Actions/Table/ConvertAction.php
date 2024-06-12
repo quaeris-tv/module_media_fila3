@@ -26,11 +26,14 @@ class ConvertAction extends Action
             // ->icon('fas-file-excel')
             ->icon('convert01')
             ->form([
-                Radio::make('status')
+                Radio::make('format')
+                ->label('Format?')
                 ->options([
                     'webm01' => 'webm01',
                     'webm02' => 'webm02',
-                ]),
+                ])
+                ->inline()
+                ->inlineLabel(false),
             ])
             ->action(fn ($record) => dddx($record))
             // ->requiresConfirmation()
