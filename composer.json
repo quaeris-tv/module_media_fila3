@@ -21,10 +21,12 @@
     }],
     "require": {
         "php": "^8.2",
-        "laraxot/module_xot_fila3": "*",
         "thecodingmachine/safe": "^2.5",
         "pbmedia/laravel-ffmpeg": "^8.5",
         "awcodes/filament-curator": "^3.6"
+    },
+    "require_comment": {
+        "laraxot/module_xot_fila3": "*"
     },
     "require-dev": {
         "orchestra/testbench": "*",
