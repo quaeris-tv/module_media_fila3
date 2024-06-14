@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Modules\Media\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 
 class ConvertController extends Controller
 {
     /**
      * Show the profile for the given user.
      */
-    public function __invoke($id)
+    public function __invoke(string|int $id): View
     {
         $view = 'media::convert';
         $view_params = [];

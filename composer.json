@@ -22,13 +22,12 @@
     "require": {
         "php": "^8.2",
         "thecodingmachine/safe": "^2.5",
-        "pbmedia/laravel-ffmpeg": "^8.5",
-        "awcodes/filament-curator": "^3.6"
+        "pbmedia/laravel-ffmpeg": "^8.5"
     },
     "require_comment": {
         "laraxot/module_xot_fila3": "*"
     },
-    "require-dev": {
+    "require-dev_comment": {
         "orchestra/testbench": "*",
         "orchestra/pest-plugin-testbench": "*",
         "larastan/larastan": "^2.9",

@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace Modules\Media\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Modules\Media\Enums\AttachmentTypeEnum;
 use Modules\User\Models\User;
 use Modules\Xot\Traits\Updater;
@@ -160,11 +160,13 @@ class Media extends SpatieMedia
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Collection
+     * //EloquentCollection.
+     *
+     * @return Collection<int, Media>
      *
      * @psalm-return Collection<int, Media>
      */
-    public static function findWithTemporaryUploadInCurrentSession(array $uuids): EloquentCollection
+    public static function findWithTemporaryUploadInCurrentSession(array $uuids): Collection
     {
         // MediaLibraryPro::ensureInstalled();
 
