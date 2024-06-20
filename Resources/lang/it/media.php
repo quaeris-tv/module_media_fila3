@@ -15,14 +15,11 @@ return [
     ],
     'fields' => [
         'name' => 'Nome',
-<<<<<<< HEAD
         'guard_name' => 'Guard',
-=======
         'collection_name' => 'Collezione',
         'filename' => 'Nome File',
         'mime_type' => 'Tipo Mime',
         'human_readable_size' => 'size',
->>>>>>> e12fd656 (up)
         'permissions' => 'Permessi',
         'updated_at' => 'Aggiornato il',
         'first_name' => 'Nome',
@@ -31,20 +28,14 @@ return [
             'name' => 'Seleziona Tutti',
             'message' => '',
         ],
-<<<<<<< HEAD
         'collection_name' => 'Collezione',
         'filename' => 'Nome file',
         'human_readable_size' => 'Dimensione',
-=======
->>>>>>> e12fd656 (up)
         'creator' => [
             'name' => 'Creatore',
         ],
         'uploaded_at' => 'Caricato il',
-<<<<<<< HEAD
         'mime_type' => 'tipo',
-=======
->>>>>>> e12fd656 (up)
     ],
     'actions' => [
         'import' => [
