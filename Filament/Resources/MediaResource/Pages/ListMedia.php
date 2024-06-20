@@ -52,9 +52,13 @@ class ListMedia extends ListRecords
                 ->sortable(),
 
             TextColumn::make('mime_type')
-                ->label(static::trans('fields.mime_type')),
+                ->label(static::trans('fields.mime_type'))
+                ->sortable(),
 
-            // ImageColumn::make('name')->label('preview'),
+            ImageColumn::make('preview')
+                ->label('preview')
+                ->size(60)
+                ->defaultImageUrl(fn ($record) => $record->getUrl() ?? url('/images/placeholder.png')),
 
             TextColumn::make('human_readable_size')
                 ->label(static::trans('fields.human_readable_size'))
