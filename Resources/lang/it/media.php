@@ -18,8 +18,7 @@ return [
         'guard_name' => 'Guard',
         'collection_name' => 'Collezione',
         'filename' => 'Nome File',
-        'mime_type' => 'Tipo Mime',
-        'human_readable_size' => 'size',
+        'mime_type' => 'Tipo',
         'permissions' => 'Permessi',
         'updated_at' => 'Aggiornato il',
         'first_name' => 'Nome',
@@ -28,14 +27,11 @@ return [
             'name' => 'Seleziona Tutti',
             'message' => '',
         ],
-        'collection_name' => 'Collezione',
-        'filename' => 'Nome file',
         'human_readable_size' => 'Dimensione',
         'creator' => [
             'name' => 'Creatore',
         ],
         'uploaded_at' => 'Caricato il',
-        'mime_type' => 'tipo',
     ],
     'actions' => [
         'import' => [
