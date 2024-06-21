@@ -18,7 +18,12 @@ return [
         'guard_name' => 'Guard',
         'collection_name' => 'Collezione',
         'filename' => 'Nome File',
+<<<<<<< HEAD
         'mime_type' => 'Tipo',
+=======
+        'mime_type' => 'Tipo Mime',
+        'human_readable_size' => 'size',
+>>>>>>> 46d210b0 (up)
         'permissions' => 'Permessi',
         'updated_at' => 'Aggiornato il',
         'first_name' => 'Nome',
@@ -27,11 +32,20 @@ return [
             'name' => 'Seleziona Tutti',
             'message' => '',
         ],
+<<<<<<< HEAD
+=======
+        'collection_name' => 'Collezione',
+        'filename' => 'Nome file',
+>>>>>>> 46d210b0 (up)
         'human_readable_size' => 'Dimensione',
         'creator' => [
             'name' => 'Creatore',
         ],
         'uploaded_at' => 'Caricato il',
+<<<<<<< HEAD
+=======
+        'mime_type' => 'tipo',
+>>>>>>> 46d210b0 (up)
     ],
     'actions' => [
         'import' => [
