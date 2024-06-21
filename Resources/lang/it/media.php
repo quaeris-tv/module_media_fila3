@@ -18,16 +18,8 @@ return [
         'guard_name' => 'Guard',
         'collection_name' => 'Collezione',
         'filename' => 'Nome File',
-<<<<<<< HEAD
-<<<<<<< HEAD
-        'mime_type' => 'Tipo',
-=======
         'mime_type' => 'Tipo Mime',
         'human_readable_size' => 'size',
->>>>>>> 46d210b0 (up)
-=======
-        'mime_type' => 'Tipo',
->>>>>>> 8b38a678 (phpstan)
         'permissions' => 'Permessi',
         'updated_at' => 'Aggiornato il',
         'first_name' => 'Nome',
@@ -36,26 +28,14 @@ return [
             'name' => 'Seleziona Tutti',
             'message' => '',
         ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         'collection_name' => 'Collezione',
         'filename' => 'Nome file',
->>>>>>> 46d210b0 (up)
-=======
->>>>>>> 8b38a678 (phpstan)
         'human_readable_size' => 'Dimensione',
         'creator' => [
             'name' => 'Creatore',
         ],
         'uploaded_at' => 'Caricato il',
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         'mime_type' => 'tipo',
->>>>>>> 46d210b0 (up)
-=======
->>>>>>> 8b38a678 (phpstan)
     ],
     'actions' => [
         'import' => [
