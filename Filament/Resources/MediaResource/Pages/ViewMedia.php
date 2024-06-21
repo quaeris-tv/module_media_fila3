@@ -37,57 +37,62 @@ class ViewMedia extends ViewRecord
     {
         // dddx(get_class_methods(ImageEntry::class));
 
-        return $infolist
-            ->schema([
-                // ...
-                Split::make(
-                    [
-                        Section::make()->schema(
-                            [
-                                ImageEntry::make('src')
-                                    ->label('')
-                                    ->defaultImageUrl(fn ($record) => $record->getUrl())
-                                    ->size(500)
-                                    ->visible(fn ($record) => 'image' == $record->type),
+        $schema = [
+            // ...
+            Split::make(
+                [
+                    Section::make()->schema(
+                        [
+                            ImageEntry::make('src')
+                                ->label('')
+                                ->defaultImageUrl(fn ($record) => $record->getUrl())
+                                ->size(500)
+                                ->visible(fn ($record) => 'image' == $record->type),
 
-                                VideoEntry::make('src')
+                            VideoEntry::make('src')
+                                ->label('')
+                                ->defaultImageUrl(fn ($record) => $record->getUrl())
+                                ->size(500)
+                                ->visible(fn ($record) => 'video' == $record->type),
+                        ]
+                    ),
+                    Section::make()->schema(
+                        [
+                            Actions::make([
+                                Action::make('convert')
                                     ->label('')
-                                    ->defaultImageUrl(fn ($record) => $record->getUrl())
-                                    ->size(500)
-                                    ->visible(fn ($record) => 'video' == $record->type),
-                            ]
-                        ),
-                        Section::make()->schema(
-                            [
-                                Actions::make([
-                                    Action::make('convert')
-                                        ->label('')
-                                        ->tooltip('convert')
-                                        ->icon('heroicon-o-scale')
-                                        // ->requiresConfirmation()
-                                        ->form([
-                                            Radio::make('format')
-                                                ->label('Format?')
-                                                ->options([
-                                                    'webm01' => 'webm01',
-                                                    'webm02' => 'webm02',
-                                                ])
-                                                ->inline()
-                                                ->inlineLabel(false),
-                                        ])
-                                        ->action(function ($record, $data) {
-                                            dddx([$record, $data]);
-                                        }),
-                                ]),
-                                TextEntry::make('name'),
-                                TextEntry::make('collection_name'),
-                                TextEntry::make('mime_type'),
-                                TextEntry::make('human_readable_size'),
-                                TextEntry::make('created_at'),
-                            ]
-                        ),
-                    ]
-                ),
-            ])->columns(1);
+                                    ->tooltip('convert')
+                                    ->icon('heroicon-o-scale')
+                                    // ->requiresConfirmation()
+                                    ->form([
+                                        Radio::make('format')
+                                            ->label('Format?')
+                                            ->options([
+                                                'webm01' => 'webm01',
+                                                'webm02' => 'webm02',
+                                            ])
+                                            ->inline()
+                                            ->inlineLabel(false),
+                                    ])
+                                    ->action(function ($record, $data) {
+                                        dddx([$record, $data]);
+                                    }),
+                            ]),
+                            TextEntry::make('name'),
+                            TextEntry::make('collection_name'),
+                            TextEntry::make('mime_type'),
+                            TextEntry::make('human_readable_size'),
+                            TextEntry::make('created_at'),
+                        ]
+                    ),
+                ]
+            ),
+        ];
+
+        dddx($this->record);
+
+        return $infolist
+            ->schema($schema)
+            ->columns(1);
     }
 }
