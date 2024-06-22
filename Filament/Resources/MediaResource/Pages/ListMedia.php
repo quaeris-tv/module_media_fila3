@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace Modules\Media\Filament\Resources\MediaResource\Pages;
 
-use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\ActionsPosition;
+use Exception;
 use Filament\Tables\Table;
-use Modules\Media\Filament\Actions\Table\ConvertAction;
-use Modules\Media\Filament\Resources\MediaResource;
-use Modules\Xot\Filament\Traits\NavigationPageLabelTrait;
 use Webmozart\Assert\Assert;
+use Filament\Actions\CreateAction;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Resources\Pages\ListRecords;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Enums\ActionsPosition;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Modules\Media\Filament\Resources\MediaResource;
+use Modules\Media\Filament\Actions\Table\ConvertAction;
+use Modules\Xot\Filament\Traits\NavigationPageLabelTrait;
 
 class ListMedia extends ListRecords
 {
@@ -61,6 +62,10 @@ class ListMedia extends ListRecords
                 ->defaultImageUrl(function ($record) {
                     $url = $record->getUrl();
                     $info = pathinfo($url);
+                    if(!isset($info['dirname'])) {
+
+                        throw new Exception('['.__LINE__.']['.__FILE__.']');
+                    }
                     $thumb = $info['dirname'].'/conversions/'.$info['filename'].'-thumb.jpg';
 
                     return url($thumb);
