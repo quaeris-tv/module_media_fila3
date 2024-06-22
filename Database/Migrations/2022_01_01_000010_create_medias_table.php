@@ -25,7 +25,7 @@ class CreateMediasTable extends XotBaseMigration
             function (Blueprint $table): void {
                 $table->id();
                 //$table->bigIncrements('id');
-                // $table->morphs('model');
+                // $table->uuidMorphs('model');
                 $table->uuidMorphs('model');
                 $table->uuid('uuid')->nullable()->unique()->index();
                 $table->string('collection_name');
