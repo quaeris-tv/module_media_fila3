@@ -41,7 +41,7 @@ class VideoEntry extends Entry
 
     protected int|\Closure|null $overlap = null;
 
-    protected int|\Closure|null $ring = null;
+    protected int|string|\Closure|null $ring = null;
 
     protected int|\Closure|null $limit = null;
 
@@ -139,6 +139,9 @@ class VideoEntry extends Entry
     {
         if ((false !== filter_var($state, FILTER_VALIDATE_URL)) || str($state)->startsWith('data:')) {
             return $state;
+        }
+        if($state === null) {
+            return null;
         }
 
         /** @var FilesystemAdapter $storage */
@@ -250,7 +253,7 @@ class VideoEntry extends Entry
         return $this->evaluate($this->overlap);
     }
 
-    public function ring(string|\Closure|null $ring): static
+    public function ring(string|int|\Closure|null $ring): static
     {
         $this->ring = $ring;
 
