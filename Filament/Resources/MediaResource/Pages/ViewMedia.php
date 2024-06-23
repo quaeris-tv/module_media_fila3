@@ -9,6 +9,7 @@ use Filament\Forms\Components\Radio;
 use Filament\Infolists\Components\Actions;
 use Filament\Infolists\Components\Actions\Action;
 use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\Split;
 use Filament\Infolists\Components\TextEntry;
@@ -16,6 +17,7 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Pages\ViewRecord;
 use Modules\Media\Filament\Infolists\VideoEntry;
 use Modules\Media\Filament\Resources\MediaResource;
+use Modules\Media\Filament\Resources\MediaResource\Widgets\ConvertWidget;
 
 class ViewMedia extends ViewRecord
 {
@@ -33,23 +35,28 @@ class ViewMedia extends ViewRecord
         ];
     }
 
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            ConvertWidget::make(['record' => $this->record]),
+        ];
+    }
+
     public function infolist(Infolist $infolist): Infolist
     {
-        // dddx(get_class_methods(ImageEntry::class));
-
         $schema = [
             // ...
             Split::make(
                 [
                     Section::make()->schema(
                         [
-                            ImageEntry::make('src')
+                            ImageEntry::make('url')
                                 ->label('')
                                 ->defaultImageUrl(fn ($record) => $record->getUrl())
                                 ->size(500)
                                 ->visible(fn ($record) => 'image' == $record->type),
 
-                            VideoEntry::make('src')
+                            VideoEntry::make('url')
                                 ->label('')
                                 ->defaultImageUrl(fn ($record) => $record->getUrl())
                                 ->size(500)
@@ -68,8 +75,8 @@ class ViewMedia extends ViewRecord
                                         Radio::make('format')
                                             ->label('Format?')
                                             ->options([
-                                                'webm01' => 'webm01',
-                                                'webm02' => 'webm02',
+                                                'webm' => 'webm',
+                                                // 'webm02' => 'webm02',
                                             ])
                                             ->inline()
                                             ->inlineLabel(false),
@@ -89,9 +96,23 @@ class ViewMedia extends ViewRecord
             ),
         ];
 
-        dddx($this->record);
+        // $schema = [];
+
+        $schema[] = RepeatableEntry::make('entry_conversions')
+
+        ->schema([
+            TextEntry::make('name'),
+            TextEntry::make('src'),
+            ImageEntry::make('src'),
+            // TextEntry::make('title'),
+            // TextEntry::make('content')
+            //    ->columnSpan(2),
+        ])
+
+        ->columns(4);
 
         return $infolist
+
             ->schema($schema)
             ->columns(1);
     }
