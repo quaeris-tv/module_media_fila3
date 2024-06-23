@@ -191,4 +191,42 @@ class Media extends SpatieMedia
             'created_by',
         );
     }
+
+    public function getUrlConv(string $conv): string
+    {
+        $url = $this->getUrl();
+        $info = pathinfo($url);
+        if (! isset($info['dirname'])) {
+            throw new Exception('['.__LINE__.']['.__FILE__.']');
+        }
+        $url = '#';
+        switch ($conv) {
+            case 'thumb':
+                $url = $info['dirname'].'/conversions/'.$info['filename'].'-thumb.jpg';
+                break;
+            case '800':
+                $url = $info['dirname'].'/conversions/'.$info['filename'].'-800.jpg';
+                break;
+            case '400':
+                $url = $info['dirname'].'/conversions/'.$info['filename'].'-400.jpg';
+                break;
+        }
+
+        return url($url);
+    }
+
+    public function getEntryConversionsAttribute()
+    {
+        $conversions = [];
+        foreach ($this->getGeneratedConversions() as $conv => $state) {
+            $item = [
+                'name' => (string) $conv,
+                'generated' => $state,
+                'src' => $this->getUrlConv((string) $conv),
+            ];
+            $conversions[] = $item;
+        }
+
+        return $conversions;
+    }
 }

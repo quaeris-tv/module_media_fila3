@@ -37,6 +37,14 @@ class ConvertVideoAction
         $res = FFMpeg::fromDisk($disk_mp4)
             ->open($file_mp4)
             ->export()
+            // ->addFilter(function (VideoFilters $filters) {
+            //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
+            // })
+            // ->resize(640, 480)
+            // ->onProgress(function ($percentage, $remaining, $rate) {
+            //    echo "{$percentage}% transcoded";
+            //    echo "{$remaining} seconds left at rate: {$rate}";
+            // });
             ->toDisk($disk_mp4)
             ->inFormat($format)
             ->save($file_new);
