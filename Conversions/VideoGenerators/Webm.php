@@ -31,6 +31,7 @@ class Webm extends ImageGenerator
 
     public function requirementsAreInstalled(): bool
     {
+        /*
         if (! function_exists('imagecreatefromwebp')) {
             return false;
         }
@@ -42,17 +43,26 @@ class Webm extends ImageGenerator
         if (! function_exists('imagedestroy')) {
             return false;
         }
-
+        */
         return true;
     }
 
     public function supportedExtensions(): Collection
     {
-        return collect(['webm', 'mov', 'mp4']);
+        return collect([
+            // 'webm',
+            // 'mov',
+            'mp4',
+        ]);
     }
 
     public function supportedMimeTypes(): Collection
     {
-        return collect(['video/webm', 'video/mpeg', 'video/mp4', 'video/quicktime']);
+        return collect([
+            // 'video/webm',
+            'video/mpeg',
+            'video/mp4',
+            // 'video/quicktime'
+        ]);
     }
 }
