@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Modules\Media\Models;
 
-use Exception;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Media\Enums\AttachmentTypeEnum;
 use Modules\User\Models\User;
 use Modules\Xot\Traits\Updater;
-use Illuminate\Database\Eloquent\Builder;
-use Modules\Media\Enums\AttachmentTypeEnum;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as SpatieMedia;
 
 /**
@@ -193,12 +193,17 @@ class Media extends SpatieMedia
         );
     }
 
+    public function mediaConverts(): HasMany
+    {
+        return $this->hasMany(MediaConvert::class);
+    }
+
     public function getUrlConv(string $conv): string
     {
         $url = $this->getUrl();
         $info = pathinfo($url);
         if (! isset($info['dirname'])) {
-            throw new Exception('['.__LINE__.']['.__FILE__.']');
+            throw new \Exception('['.__LINE__.']['.__FILE__.']');
         }
         $url = '#';
         switch ($conv) {

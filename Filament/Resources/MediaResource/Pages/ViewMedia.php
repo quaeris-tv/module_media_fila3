@@ -118,7 +118,9 @@ class ViewMedia extends ViewRecord
                                         $data['disk'] = $record->disk;
                                         $data['file'] = $record->id.'/'.$record->file_name;
                                         $convert_data = ConvertData::from($data);
-                                        app(ConvertVideoByConvertDataAction::class)->execute($convert_data);
+                                        // app(ConvertVideoByConvertDataAction::class)->execute($convert_data);
+                                        // MediaConvert::create($convert_data->toArray());
+                                        $record->mediaConverts()->create($convert_data->toArray());
                                     }),
                             ]),
                             TextEntry::make('name'),

@@ -1,17 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Media\Filament\Resources;
 
-use Modules\Media\Filament\Resources\MediaConvertResource\Pages;
-use Modules\Media\Filament\Resources\MediaConvertResource\RelationManagers;
-use App\Models\MediaConvert;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Modules\Media\Filament\Resources\MediaConvertResource\Pages;
+use Modules\Media\Models\MediaConvert;
 
 class MediaConvertResource extends Resource
 {
@@ -23,7 +21,6 @@ class MediaConvertResource extends Resource
     {
         return $form
             ->schema([
-                //
             ]);
     }
 
@@ -31,10 +28,8 @@ class MediaConvertResource extends Resource
     {
         return $table
             ->columns([
-                //
             ])
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -49,7 +44,6 @@ class MediaConvertResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 
