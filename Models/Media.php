@@ -7,12 +7,13 @@ declare(strict_types=1);
 
 namespace Modules\Media\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Modules\Media\Enums\AttachmentTypeEnum;
+use Exception;
 use Modules\User\Models\User;
 use Modules\Xot\Traits\Updater;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Media\Enums\AttachmentTypeEnum;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as SpatieMedia;
 
 /**
