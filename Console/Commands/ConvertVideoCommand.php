@@ -8,8 +8,6 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
-use Spatie\QueueableAction\QueueableAction;
-
 
 class ConvertVideoCommand extends Command
 {
@@ -39,8 +37,9 @@ class ConvertVideoCommand extends Command
         // $this->error('');
         // $this->line('Display this on the screen');
         if (! Storage::disk($disk)->exists($file)) {
-            $this->error('['.$disk.'] file ['.$file.'] Not Exists');;
-            return ;
+            $this->error('['.$disk.'] file ['.$file.'] Not Exists');
+
+            return;
         }
         $format = new \FFMpeg\Format\Video\WebM();
         $extension = strtolower(class_basename($format));
