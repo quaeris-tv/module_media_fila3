@@ -45,6 +45,8 @@ class ConvertVideoAction
             //    echo "{$percentage}% transcoded";
             //    echo "{$remaining} seconds left at rate: {$rate}";
             // });
+            // ->addFilter('-preset', 'ultrafast')
+            // ->addFilter('-crf', 22)
             ->toDisk($disk_mp4)
             ->inFormat($format)
             ->save($file_new);
