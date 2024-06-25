@@ -1,10 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Media\Filament\Resources\MediaConvertResource\Pages;
 
-use Modules\Media\Filament\Resources\MediaConvertResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Modules\Media\Actions\Video\ConvertVideoByMediaConvertAction;
+use Modules\Media\Filament\Resources\MediaConvertResource;
+use Modules\Media\Models\MediaConvert;
 
 class ListMediaConverts extends ListRecords
 {
@@ -15,5 +22,58 @@ class ListMediaConverts extends ListRecords
         return [
             Actions\CreateAction::make(),
         ];
+    }
+
+    public function getTableColumns(): array
+    {
+        return [
+            TextColumn::make('id'),
+            TextColumn::make('media.file_name'),
+            TextColumn::make('format'),
+            TextColumn::make('codec_video'),
+            TextColumn::make('codec_audio'),
+            TextColumn::make('preset'),
+            TextColumn::make('bitrate'),
+            TextColumn::make('width'),
+            TextColumn::make('height'),
+            TextColumn::make('threads'),
+            TextColumn::make('speed'),
+            TextColumn::make('percentage'),
+            TextColumn::make('remaining'),
+            TextColumn::make('rate'),
+            TextColumn::make('execution_time'),
+        ];
+    }
+
+    public function getTableFilters(): array
+    {
+        return [];
+    }
+
+    public function getTableActions(): array
+    {
+        return [
+            Tables\Actions\EditAction::make(),
+            Tables\Actions\Action::make('convert')
+                ->action(fn (MediaConvert $record) => app(ConvertVideoByMediaConvertAction::class)->execute($record)),
+        ];
+    }
+
+    public function getTableBulkActions(): array
+    {
+        return [
+            // Tables\Actions\BulkActionGroup::make([
+            Tables\Actions\DeleteBulkAction::make(),
+            // ]);
+        ];
+    }
+
+    public function table(Table $table): Table
+    {
+        return $table
+            ->columns($this->getTableColumns())
+            ->filters($this->getTableFilters())
+            ->actions($this->getTableActions())
+            ->bulkActions($this->getTableBulkActions());
     }
 }

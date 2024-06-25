@@ -221,7 +221,7 @@ class Media extends SpatieMedia
         return url($url);
     }
 
-    public function getEntryConversionsAttribute()
+    public function getEntryConversionsAttribute(): array
     {
         $conversions = [];
         foreach ($this->getGeneratedConversions() as $conv => $state) {

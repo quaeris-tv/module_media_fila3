@@ -8,32 +8,27 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
+use Webmozart\Assert\Assert;
 
 class ConvertVideoCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
+    /** @var string */
     protected $signature = 'media:convert-video {disk} {file}';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
+    /** @var string */
     protected $description = 'Convert Video';
 
     /**
      * Execute the console command.
+     *
+     * @return void
      */
     public function handle()
     {
-        $disk = $this->argument('disk');
-        $file = $this->argument('file');
-        $this->info('disk: '.$disk);
-        $this->info('file: '.$file);
+        Assert::string($disk = $this->argument('disk'));
+        Assert::string($file = $this->argument('file'));
+        $this->info('disk: '.print_r($disk, true));
+        $this->info('file: '.print_r($file, true));
         // $this->error('');
         // $this->line('Display this on the screen');
         if (! Storage::disk($disk)->exists($file)) {

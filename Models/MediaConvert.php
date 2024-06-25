@@ -7,6 +7,8 @@ declare(strict_types=1);
 
 namespace Modules\Media\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 class MediaConvert extends BaseModel
 {
     protected $fillable = [
@@ -25,4 +27,9 @@ class MediaConvert extends BaseModel
         'rate',
         'execution_time',
     ];
+
+    public function media(): BelongsTo
+    {
+        return $this->belongsTo(Media::class);
+    }
 }

@@ -6,8 +6,6 @@ namespace Modules\Media\Filament\Resources;
 
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
 use Modules\Media\Filament\Resources\MediaConvertResource\Pages;
 use Modules\Media\Models\MediaConvert;
 
@@ -21,23 +19,6 @@ class MediaConvertResource extends Resource
     {
         return $form
             ->schema([
-            ]);
-    }
-
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-            ])
-            ->filters([
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 

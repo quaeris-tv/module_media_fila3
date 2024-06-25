@@ -11,18 +11,21 @@ namespace Modules\Media\Actions\Video;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Storage;
 use Modules\Media\Datas\ConvertData;
+use Modules\Media\Models\MediaConvert;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use Spatie\QueueableAction\QueueableAction;
 
-class ConvertVideoByConvertDataAction
+class ConvertVideoByMediaConvertAction
 {
     use QueueableAction;
 
     /**
      * Execute the action.
      */
-    public function execute(ConvertData $data): ?string
+    public function execute(MediaConvert $record): ?string
     {
+        $data = ConvertData::from($record);
+        dddx($data);
         if (! $data->exists()) {
             return '';
         }
@@ -36,7 +39,6 @@ class ConvertVideoByConvertDataAction
         /**
          * -preset ultrafast.
          */
-        // Call to an undefined method ProtoneMedia\LaravelFFMpeg\Drivers\PHPFFMpeg::toDisk().
         $res = FFMpeg::fromDisk($data->disk)
             ->open($data->file)
             ->export()

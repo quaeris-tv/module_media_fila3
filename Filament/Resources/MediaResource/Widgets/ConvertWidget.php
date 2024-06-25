@@ -20,9 +20,11 @@ class ConvertWidget extends Widget
     public Media $record;
 
     public string $time = '';
-
+    public string $start = '';
     public float $percentage = 0;
+    /** @var float */
     public $remaining;
+    /** @var float */
     public $rate;
 
     public function begin(): void

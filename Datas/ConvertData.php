@@ -42,7 +42,7 @@ class ConvertData extends Data implements Wireable
     public function getFFMpegFormat(): DefaultVideo
     {
         $format = new \FFMpeg\Format\Video\WebM($this->codec_audio, $this->codec_video);
-        $format = $format->setKiloBitrate($this->bitrate);
+        $format = $format->setKiloBitrate(intval($this->bitrate));
 
         return $format;
     }
