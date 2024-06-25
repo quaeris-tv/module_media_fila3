@@ -25,12 +25,14 @@ class ConvertVideoByMediaConvertAction
     public function execute(MediaConvert $record): ?string
     {
         $data = ConvertData::from($record);
-        dddx($data);
+        $starting_time = microtime(true);
         if (! $data->exists()) {
             return '';
         }
         $format = $data->getFFMpegFormat();
-        $file_new = $data->getConvertedFilename();
+        // $file_new = $data->getConvertedFilename();
+        $file_new = $record->converted_file;
+
         Notification::make()
         ->title('Start')
         ->success()
@@ -46,9 +48,16 @@ class ConvertVideoByMediaConvertAction
             //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
             // })
             // ->resize(640, 480)
-             ->onProgress(function ($percentage, $remaining, $rate) {
+             ->onProgress(function ($percentage, $remaining, $rate) use ($record) {
                  $msg = "{$percentage}% transcoded";
                  $msg .= "{$remaining} seconds left at rate: {$rate}";
+
+                 $record->update([
+                     'percentage' => $percentage,
+                     'remaining' => $remaining,
+                     'rate' => $rate,
+                 ]);
+
                  Notification::make()
                  ->title($msg)
                  ->success()
@@ -59,6 +68,12 @@ class ConvertVideoByMediaConvertAction
             ->toDisk($data->disk)
             ->inFormat($format)
             ->save($file_new);
+
+        $finished_time = microtime(true);
+
+        $record->update([
+            'execution_time' => $finished_time - $starting_time,
+        ]);
 
         return Storage::disk($data->disk)->url($file_new);
     }

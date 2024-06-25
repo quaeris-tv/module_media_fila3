@@ -32,4 +32,26 @@ class MediaConvert extends BaseModel
     {
         return $this->belongsTo(Media::class);
     }
+
+    public function getDiskAttribute(?string $value): ?string
+    {
+        return $this->media?->disk;
+    }
+
+    public function getFileAttribute(?string $value): ?string
+    {
+        return $this->media?->id.'/'.$this->media?->file_name;
+    }
+
+    public function getConvertedFileAttribute(?string $value): ?string
+    {
+        $info = pathinfo($this->media?->file_name);
+
+        // "dirname" => "."
+        // "basename" => "20600550-uhd_3840_2160_30fps.mp4"
+        // "extension" => "mp4"
+        // "filename" => "20600550-uhd_3840_2160_30fps"
+
+        return $this->media?->id.'/conversions/'.$info['filename'].'_'.$this->id.'.'.$this->format;
+    }
 }

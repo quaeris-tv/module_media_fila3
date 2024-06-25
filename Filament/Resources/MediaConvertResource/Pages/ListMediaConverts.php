@@ -8,6 +8,7 @@ use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 use Modules\Media\Actions\Video\ConvertVideoByMediaConvertAction;
 use Modules\Media\Filament\Resources\MediaConvertResource;
@@ -55,7 +56,12 @@ class ListMediaConverts extends ListRecords
         return [
             Tables\Actions\EditAction::make(),
             Tables\Actions\Action::make('convert')
-                ->action(fn (MediaConvert $record) => app(ConvertVideoByMediaConvertAction::class)->execute($record)),
+                ->action(function (MediaConvert $record) {
+                    $record->update(['percentage' => 0]);
+                    app(ConvertVideoByMediaConvertAction::class)
+                        ->onQueue()
+                        ->execute($record);
+                }),
         ];
     }
 
@@ -74,6 +80,7 @@ class ListMediaConverts extends ListRecords
             ->columns($this->getTableColumns())
             ->filters($this->getTableFilters())
             ->actions($this->getTableActions())
-            ->bulkActions($this->getTableBulkActions());
+            ->bulkActions($this->getTableBulkActions())
+            ->actionsPosition(ActionsPosition::BeforeColumns);
     }
 }
