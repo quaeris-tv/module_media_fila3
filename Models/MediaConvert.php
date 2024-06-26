@@ -9,8 +9,64 @@ namespace Modules\Media\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $media_id
+ * @property string|null $codec_video
+ * @property string|null $codec_audio
+ * @property string|null $preset
+ * @property string|null $bitrate
+ * @property int|null $width
+ * @property int|null $height
+ * @property int|null $threads
+ * @property int|null $speed
+ * @property string|null $percentage
+ * @property string|null $remaining
+ * @property string|null $rate
+ * @property string|null $execution_time
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string|null $deleted_by
+ * @property string|null $format
+ * @property-read string|null $converted_file
+ * @property-read string|null $disk
+ * @property-read string|null $file
+ * @property-read \Modules\Media\Models\Media|null $media
+ * @method static \Modules\Media\Database\Factories\MediaConvertFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert query()
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereBitrate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereCodecAudio($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereCodecVideo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereExecutionTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereHeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereMediaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert wherePercentage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert wherePreset($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereRate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereRemaining($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereSpeed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereThreads($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereUpdatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereWidth($value)
+ * @mixin \Eloquent
+ */
 class MediaConvert extends BaseModel
 {
+    /** @var array<int, string> */
     protected $fillable = [
         'media_id',
         'format',
@@ -45,7 +101,7 @@ class MediaConvert extends BaseModel
 
     public function getConvertedFileAttribute(?string $value): ?string
     {
-        $info = pathinfo($this->media?->file_name);
+        $info = pathinfo((string) $this->media?->file_name);
 
         // "dirname" => "."
         // "basename" => "20600550-uhd_3840_2160_30fps.mp4"

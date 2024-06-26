@@ -21,10 +21,11 @@
     }],
     "require": {
         "php": "^8.2",
-        "thecodingmachine/safe": "^2.5",
-        "pbmedia/laravel-ffmpeg": "^8.5"
+        "pbmedia/laravel-ffmpeg": "^8.5",
+        "intervention/image": "*"
     },
     "require_comment": {
+        "thecodingmachine/safe": "^2.5",
         "laraxot/module_xot_fila3": "*"
     },
     "require-dev_comment": {

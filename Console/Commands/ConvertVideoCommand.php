@@ -21,7 +21,7 @@ class ConvertVideoCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return string
      */
     public function handle()
     {

@@ -75,6 +75,6 @@ class ConvertVideoByMediaConvertAction
             'execution_time' => $finished_time - $starting_time,
         ]);
 
-        return Storage::disk($data->disk)->url($file_new);
+        return Storage::disk($data->disk)->url((string) $file_new);
     }
 }
