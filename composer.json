@@ -85,7 +85,6 @@
     
     "config": {
         "allow-plugins": {
-            "pestphp/pest-plugin": true,
             "wikimedia/composer-merge-plugin": true
         }
     }
