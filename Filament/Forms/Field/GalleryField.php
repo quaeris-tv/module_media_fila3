@@ -137,7 +137,7 @@ class GalleryField extends Repeater
                                 ->where('id', $component->getState())
                                 ->take(1)
                                 ->mapWithKeys($callable)
-                            ->toArray();
+                                ->toArray();
 
                             $component->state($files);
                         }

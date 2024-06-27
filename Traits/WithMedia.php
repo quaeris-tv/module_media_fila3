@@ -7,10 +7,8 @@ namespace Modules\Media\Traits;
 use Livewire\Component;
 
 /**
-*
- *
  * @mixin Component
-*/
+ */
 trait WithMedia
 {
     /**
@@ -55,7 +53,7 @@ trait WithMedia
     }
 
     /**
-     * @param array|null $mediaComponentNames
+     * @param  array|null  $mediaComponentNames
      */
     public function clearMedia($mediaComponentNames = null): void
     {

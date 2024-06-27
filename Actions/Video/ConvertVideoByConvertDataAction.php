@@ -29,9 +29,9 @@ class ConvertVideoByConvertDataAction
         $format = $data->getFFMpegFormat();
         $file_new = $data->getConvertedFilename();
         Notification::make()
-        ->title('Start')
-        ->success()
-        ->send();
+            ->title('Start')
+            ->success()
+            ->send();
 
         /**
          * -preset ultrafast.
@@ -44,14 +44,14 @@ class ConvertVideoByConvertDataAction
             //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
             // })
             // ->resize(640, 480)
-             ->onProgress(function ($percentage, $remaining, $rate) {
-                 $msg = "{$percentage}% transcoded";
-                 $msg .= "{$remaining} seconds left at rate: {$rate}";
-                 Notification::make()
-                 ->title($msg)
-                 ->success()
-                 ->send();
-             })
+            ->onProgress(function ($percentage, $remaining, $rate) {
+                $msg = "{$percentage}% transcoded";
+                $msg .= "{$remaining} seconds left at rate: {$rate}";
+                Notification::make()
+                    ->title($msg)
+                    ->success()
+                    ->send();
+            })
             ->addFilter('-preset', 'ultrafast')
             // ->addFilter('-crf', 22)
             ->toDisk($data->disk)

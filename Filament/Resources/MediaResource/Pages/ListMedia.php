@@ -122,12 +122,12 @@ class ListMedia extends ListRecords
             // ]),
             // ConvertAction::make('convert'),
             Action::make('convert')
-               ->label('')
-               ->icon('convert01')
-               ->color('gray')
-               ->url(
-                   static fn ($record): string => static::$resource::getUrl('convert', ['record' => $record])
-               )->openUrlInNewTab(true),
+                ->label('')
+                ->icon('convert01')
+                ->color('gray')
+                ->url(
+                    static fn ($record): string => static::$resource::getUrl('convert', ['record' => $record])
+                )->openUrlInNewTab(true),
         ];
     }
 

@@ -10,8 +10,6 @@ namespace Modules\Media\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * 
- *
  * @property int $id
  * @property int $media_id
  * @property string|null $codec_video
@@ -37,6 +35,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read string|null $disk
  * @property-read string|null $file
  * @property-read \Modules\Media\Models\Media|null $media
+ *
  * @method static \Modules\Media\Database\Factories\MediaConvertFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert newQuery()
@@ -62,6 +61,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereWidth($value)
+ *
  * @mixin \Eloquent
  */
 class MediaConvert extends BaseModel

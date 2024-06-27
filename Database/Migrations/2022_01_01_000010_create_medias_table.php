@@ -118,7 +118,7 @@ class CreateMediasTable extends XotBaseMigration
                     $table->longText('curations')->nullable();
                 }
                 */
-                $this->updateTimestamps($table,true);
+                $this->updateTimestamps($table, true);
             }
         );
     }

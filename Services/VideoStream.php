@@ -56,9 +56,9 @@ class VideoStream
         if (! $filesystem->exists($path)) {
             dddx(
                 [
-                'message' => 'file not exists',
-                'disk' => $disk,
-                'path' => $path,
+                    'message' => 'file not exists',
+                    'disk' => $disk,
+                    'path' => $path,
                 ]
             );
         }
@@ -188,10 +188,8 @@ class VideoStream
         set_time_limit(0);
         while (! feof($this->vars['stream']) && $i <= $this->end) {
             /**
-*
-             *
- * @var int<0, max> $bytesToRead
-*/
+             * @var int<0, max> $bytesToRead
+             */
             $bytesToRead = $this->buffer;
             if ($i + $bytesToRead > $this->end) {
                 $bytesToRead = $this->end - $i + 1;
@@ -199,10 +197,8 @@ class VideoStream
 
             // 169    Parameter #2 $length of function fread expects int<0, max>, int given.
             /**
-*
-             *
- * @var int<0, max>
-*/
+             * @var int<0, max>
+             */
             $length = $bytesToRead;
             $data = fread($this->vars['stream'], $length);
             echo $data;

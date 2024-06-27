@@ -9,9 +9,9 @@ declare(strict_types=1);
 namespace Modules\Media\Actions\Image;
 
 use Exception;
-use Intervention\Image\ImageManager;
-// use Intervention\Image\Facades\Image;
 use Intervention\Image\Drivers\Gd\Driver;
+// use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
 use Spatie\QueueableAction\QueueableAction;
 
 class Merge
@@ -36,7 +36,7 @@ class Merge
         foreach ($filenames as $filename) {
             // $img = Image::make(public_path($filename));
 
-            $manager = new ImageManager(new Driver());
+            $manager = new ImageManager(new Driver);
             $img = $manager->read(public_path($filename));
 
             $imgs[] = $img;
@@ -45,7 +45,7 @@ class Merge
         }
 
         if (! is_numeric($width) || ! is_numeric($height)) {
-            throw new Exception('[' . __LINE__ . '][' . class_basename(self::class) . ']');
+            throw new Exception('['.__LINE__.']['.class_basename(self::class).']');
         }
 
         $width = (int) $width;
@@ -62,6 +62,6 @@ class Merge
             $delta += $img->width();
         }
 
-        $img_canvas->save(public_path() . '/' . $filenameOut, 100);
+        $img_canvas->save(public_path().'/'.$filenameOut, 100);
     }
 }

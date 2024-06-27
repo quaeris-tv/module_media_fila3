@@ -27,16 +27,15 @@ class ConvertAction extends Action
             ->icon('convert01')
             ->form([
                 Radio::make('format')
-                ->label('Format?')
-                ->options([
-                    'webm01' => 'webm01',
-                    'webm02' => 'webm02',
-                ])
-                ->inline()
-                ->inlineLabel(false),
+                    ->label('Format?')
+                    ->options([
+                        'webm01' => 'webm01',
+                        'webm02' => 'webm02',
+                    ])
+                    ->inline()
+                    ->inlineLabel(false),
             ])
-            ->action(fn ($record) => dddx($record))
-            // ->requiresConfirmation()
-        ;
+            ->action(fn ($record) => dddx($record));
+        // ->requiresConfirmation()
     }
 }
