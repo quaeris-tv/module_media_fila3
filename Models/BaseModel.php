@@ -40,7 +40,7 @@ abstract class BaseModel extends Model
     protected $perPage = 30;
 
     /** @var string */
-    protected $connection = 'media'; // this will use the specified database connection
+    protected $connection = 'mysql'; // this will use the specified database connection
 
     /** @var array<int, string> */
     protected $fillable = [

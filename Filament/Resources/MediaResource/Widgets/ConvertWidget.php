@@ -15,15 +15,20 @@ use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 class ConvertWidget extends Widget
 {
     protected static string $view = 'media::filament.widgets.convert';
+
     protected static string $resource = MediaResource::class;
 
     public Media $record;
 
     public string $time = '';
+
     public string $start = '';
+
     public float $percentage = 0;
+
     /** @var float */
     public $remaining;
+
     /** @var float */
     public $rate;
 
@@ -40,7 +45,7 @@ class ConvertWidget extends Widget
 
         // dddx($file_mp4);
 
-        $format = new \FFMpeg\Format\Video\WebM();
+        $format = new \FFMpeg\Format\Video\WebM;
         $extension = strtolower(class_basename($format));
         $file_new = Str::of($file_mp4)
             ->replaceLast('.mp4', '.'.$extension)
@@ -63,9 +68,9 @@ class ConvertWidget extends Widget
                 $msg = "{$percentage}% transcoded";
                 $msg .= "{$remaining} seconds left at rate: {$rate}";
                 Notification::make()
-                ->title($msg)
-                ->success()
-                ->send();
+                    ->title($msg)
+                    ->success()
+                    ->send();
             })
             ->toDisk($disk_mp4)
             ->inFormat($format)
