@@ -8,6 +8,10 @@ declare(strict_types=1);
 
 namespace Modules\Media\Actions\Image;
 
+<<<<<<< HEAD
+=======
+use Exception;
+>>>>>>> 4bfbe508 (up)
 use Intervention\Image\Drivers\Gd\Driver;
 // use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageManager;
@@ -35,7 +39,11 @@ class Merge
         foreach ($filenames as $filename) {
             // $img = Image::make(public_path($filename));
 
+<<<<<<< HEAD
             $manager = new ImageManager(new Driver());
+=======
+            $manager = new ImageManager(new Driver);
+>>>>>>> 4bfbe508 (up)
             $img = $manager->read(public_path($filename));
 
             $imgs[] = $img;
@@ -44,7 +52,11 @@ class Merge
         }
 
         if (! is_numeric($width) || ! is_numeric($height)) {
+<<<<<<< HEAD
             throw new \Exception('['.__LINE__.']['.class_basename(self::class).']');
+=======
+            throw new Exception('['.__LINE__.']['.class_basename(self::class).']');
+>>>>>>> 4bfbe508 (up)
         }
 
         $width = (int) $width;

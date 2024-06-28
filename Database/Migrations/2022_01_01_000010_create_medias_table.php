@@ -24,7 +24,11 @@ class CreateMediasTable extends XotBaseMigration
         $this->tableCreate(
             function (Blueprint $table): void {
                 $table->id();
+<<<<<<< HEAD
                 // $table->bigIncrements('id');
+=======
+                //$table->bigIncrements('id');
+>>>>>>> 4bfbe508 (up)
                 // $table->uuidMorphs('model');
                 $table->uuidMorphs('model');
                 $table->uuid('uuid')->nullable()->unique()->index();
@@ -42,8 +46,13 @@ class CreateMediasTable extends XotBaseMigration
                 $table->unsignedInteger('order_column')->nullable()->index();
                 $table->nullableTimestamps();
                 // ----------------------------------------------------------
+<<<<<<< HEAD
                 // $table->string('created_by')->nullable();
                 // $table->string('updated_by')->nullable();
+=======
+                //$table->string('created_by')->nullable();
+                //$table->string('updated_by')->nullable();
+>>>>>>> 4bfbe508 (up)
             }
         );
         // -- UPDATE --
