@@ -1,10 +1,7 @@
 <?php
 
-<<<<<<< HEAD
 declare(strict_types=1);
 
-=======
->>>>>>> 4bfbe508 (up)
 namespace Modules\Media\Filament\Resources\MediaConvertResource\Pages;
 
 use Filament\Actions;

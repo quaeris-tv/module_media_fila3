@@ -117,11 +117,7 @@ class VideoEntry extends Entry
     {
         $height = $this->evaluate($this->height);
 
-<<<<<<< HEAD
         if (null === $height) {
-=======
-        if ($height === null) {
->>>>>>> 4bfbe508 (up)
             return null;
         }
 
@@ -141,17 +137,10 @@ class VideoEntry extends Entry
 
     public function getImageUrl(?string $state = null): ?string
     {
-<<<<<<< HEAD
         if ((false !== filter_var($state, FILTER_VALIDATE_URL)) || str($state)->startsWith('data:')) {
             return $state;
         }
         if (null === $state) {
-=======
-        if ((filter_var($state, FILTER_VALIDATE_URL) !== false) || str($state)->startsWith('data:')) {
-            return $state;
-        }
-        if ($state === null) {
->>>>>>> 4bfbe508 (up)
             return null;
         }
 
@@ -168,11 +157,7 @@ class VideoEntry extends Entry
             }
         }
 
-<<<<<<< HEAD
         if ('private' === $this->getVisibility()) {
-=======
-        if ($this->getVisibility() === 'private') {
->>>>>>> 4bfbe508 (up)
             try {
                 return $storage->temporaryUrl(
                     $state,
@@ -200,11 +185,7 @@ class VideoEntry extends Entry
     {
         $width = $this->evaluate($this->width);
 
-<<<<<<< HEAD
         if (null === $width) {
-=======
-        if ($width === null) {
->>>>>>> 4bfbe508 (up)
             return null;
         }
 
@@ -226,11 +207,7 @@ class VideoEntry extends Entry
     }
 
     /**
-<<<<<<< HEAD
      * @param array<mixed>|\Closure $attributes
-=======
-     * @param  array<mixed>|\Closure  $attributes
->>>>>>> 4bfbe508 (up)
      */
     public function extraImgAttributes(array|\Closure $attributes): static
     {

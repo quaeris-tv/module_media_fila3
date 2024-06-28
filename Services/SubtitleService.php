@@ -39,11 +39,7 @@ class SubtitleService
     public static function getInstance(): self
     {
         if (! self::$instance instanceof SubtitleService) {
-<<<<<<< HEAD
             self::$instance = new self();
-=======
-            self::$instance = new self;
->>>>>>> 4bfbe508 (up)
         }
 
         return self::$instance;
@@ -126,11 +122,7 @@ class SubtitleService
         // $path = Storage::path($this->file_path);
         // $path = realpath($path);
         $path = realpath($this->file_path);
-<<<<<<< HEAD
         if (false == $path) {
-=======
-        if ($path == false) {
->>>>>>> 4bfbe508 (up)
             return '';
             /*
             throw new Exception('path:['.$path.']'.PHP_EOL.'
@@ -161,11 +153,7 @@ class SubtitleService
                 $attributes = $item->attributes();
 
                 if (! $attributes instanceof \SimpleXMLElement) {
-<<<<<<< HEAD
                     throw new \Exception('['.__LINE__.']['.__FILE__.']');
-=======
-                    throw new Exception('['.__LINE__.']['.__FILE__.']');
->>>>>>> 4bfbe508 (up)
                 }
 
                 // 00:06:35,360
@@ -182,17 +170,10 @@ class SubtitleService
                     'text' => $item->__toString(),
                 ];
                 $data[] = $tmp;
-<<<<<<< HEAD
                 ++$item_i;
             }
 
             ++$sentence_i;
-=======
-                $item_i++;
-            }
-
-            $sentence_i++;
->>>>>>> 4bfbe508 (up)
         }
 
         return $data;
@@ -201,13 +182,8 @@ class SubtitleService
     /**
      * Undocumented function.
      *
-<<<<<<< HEAD
      * @param string $srtFile
      * @param string $webVttFile
-=======
-     * @param  string  $srtFile
-     * @param  string  $webVttFile
->>>>>>> 4bfbe508 (up)
      */
     public function srtToVtt($srtFile, $webVttFile): void
     {
@@ -227,13 +203,8 @@ class SubtitleService
         }
 
         $length = \count($lines);
-<<<<<<< HEAD
         for ($index = 1; $index < $length; ++$index) {
             if (1 === $index || '' === trim($lines[$index - 2])) {
-=======
-        for ($index = 1; $index < $length; $index++) {
-            if ($index === 1 || trim($lines[$index - 2]) === '') {
->>>>>>> 4bfbe508 (up)
                 $lines[$index] = str_replace(',', '.', $lines[$index]);
             }
         }

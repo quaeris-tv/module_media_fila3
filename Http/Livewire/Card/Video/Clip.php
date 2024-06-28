@@ -66,11 +66,7 @@ class Clip extends Component
      */
     public function updateDataFromModal(string $id, array $data): void
     {
-<<<<<<< HEAD
         if ('editClip' !== $id) {
-=======
-        if ($id !== 'editClip') {
->>>>>>> 4bfbe508 (up)
             return;
         }
 
