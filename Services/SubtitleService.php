@@ -39,7 +39,7 @@ class SubtitleService
     public static function getInstance(): self
     {
         if (! self::$instance instanceof SubtitleService) {
-            self::$instance = new self;
+            self::$instance = new self();
         }
 
         return self::$instance;
@@ -122,7 +122,7 @@ class SubtitleService
         // $path = Storage::path($this->file_path);
         // $path = realpath($path);
         $path = realpath($this->file_path);
-        if ($path == false) {
+        if (false == $path) {
             return '';
             /*
             throw new Exception('path:['.$path.']'.PHP_EOL.'
@@ -153,7 +153,7 @@ class SubtitleService
                 $attributes = $item->attributes();
 
                 if (! $attributes instanceof \SimpleXMLElement) {
-                    throw new Exception('['.__LINE__.']['.__FILE__.']');
+                    throw new \Exception('['.__LINE__.']['.__FILE__.']');
                 }
 
                 // 00:06:35,360
@@ -170,10 +170,10 @@ class SubtitleService
                     'text' => $item->__toString(),
                 ];
                 $data[] = $tmp;
-                $item_i++;
+                ++$item_i;
             }
 
-            $sentence_i++;
+            ++$sentence_i;
         }
 
         return $data;
@@ -182,8 +182,8 @@ class SubtitleService
     /**
      * Undocumented function.
      *
-     * @param  string  $srtFile
-     * @param  string  $webVttFile
+     * @param string $srtFile
+     * @param string $webVttFile
      */
     public function srtToVtt($srtFile, $webVttFile): void
     {
@@ -203,8 +203,8 @@ class SubtitleService
         }
 
         $length = \count($lines);
-        for ($index = 1; $index < $length; $index++) {
-            if ($index === 1 || trim($lines[$index - 2]) === '') {
+        for ($index = 1; $index < $length; ++$index) {
+            if (1 === $index || '' === trim($lines[$index - 2])) {
                 $lines[$index] = str_replace(',', '.', $lines[$index]);
             }
         }

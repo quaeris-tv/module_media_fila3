@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Media\Filament\Resources\MediaConvertResource\Pages;
 
 use Filament\Actions;

@@ -53,11 +53,11 @@ trait WithMedia
     }
 
     /**
-     * @param  array|null  $mediaComponentNames
+     * @param array|null $mediaComponentNames
      */
     public function clearMedia($mediaComponentNames = null): void
     {
-        if ($mediaComponentNames === null) {
+        if (null === $mediaComponentNames) {
             $mediaComponentNames = $this->getMediaComponentNames();
         }
 
