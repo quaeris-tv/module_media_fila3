@@ -34,7 +34,7 @@ class ConvertVideoCommand extends Command
         if (! Storage::disk($disk)->exists($file)) {
             $this->error('['.$disk.'] file ['.$file.'] Not Exists');
 
-            return;
+            return '';
         }
         $format = new \FFMpeg\Format\Video\WebM();
         $extension = strtolower(class_basename($format));
