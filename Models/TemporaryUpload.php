@@ -20,13 +20,12 @@ use Webmozart\Assert\Assert;
 /**
  * Modules\Media\Models\TemporaryUpload.
  *
- * @property int                                                                                  $id
- * @property string                                                                               $session_id
- * @property \Illuminate\Support\Carbon|null                                                      $created_at
- * @property \Illuminate\Support\Carbon|null                                                      $updated_at
+ * @property int $id
+ * @property string $session_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
- * @property int|null                                                                             $media_count
- *
+ * @property int|null $media_count
  * @method static Builder|TemporaryUpload newModelQuery()
  * @method static Builder|TemporaryUpload newQuery()
  * @method static Builder|TemporaryUpload query()
@@ -34,7 +33,6 @@ use Webmozart\Assert\Assert;
  * @method static Builder|TemporaryUpload whereId($value)
  * @method static Builder|TemporaryUpload whereSessionId($value)
  * @method static Builder|TemporaryUpload whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class TemporaryUpload extends Model implements HasMedia

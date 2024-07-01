@@ -36,7 +36,7 @@ class ConvertVideoCommand extends Command
 
             return '';
         }
-        $format = new \FFMpeg\Format\Video\WebM();
+        $format = new \FFMpeg\Format\Video\WebM;
         $extension = strtolower(class_basename($format));
         $file_new = Str::of($file)
             ->replaceLast('.mp4', '.'.$extension)
