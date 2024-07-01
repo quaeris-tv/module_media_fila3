@@ -57,13 +57,13 @@ class ViewMedia extends ViewRecord
                                 ->label('')
                                 ->defaultImageUrl(fn ($record) => $record->getUrl())
                                 ->size(500)
-                                ->visible(fn ($record) => 'image' == $record->type),
+                                ->visible(fn ($record) => $record->type == 'image'),
 
                             VideoEntry::make('url')
                                 ->label('')
                                 ->defaultImageUrl(fn ($record) => $record->getUrl())
                                 ->size(500)
-                                ->visible(fn ($record) => 'video' == $record->type),
+                                ->visible(fn ($record) => $record->type == 'video'),
                         ]
                     ),
                     Section::make()->schema(
