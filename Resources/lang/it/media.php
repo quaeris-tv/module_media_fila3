@@ -19,10 +19,7 @@ return [
         'collection_name' => 'Collezione',
         'filename' => 'Nome File',
         'mime_type' => 'Tipo',
-<<<<<<< HEAD
         'human_readable_size' => 'Dimensione',
-=======
->>>>>>> 8b38a678 (phpstan)
         'permissions' => 'Permessi',
         'updated_at' => 'Aggiornato il',
         'first_name' => 'Nome',
@@ -31,10 +28,6 @@ return [
             'name' => 'Seleziona Tutti',
             'message' => '',
         ],
-<<<<<<< HEAD
-=======
-        'human_readable_size' => 'Dimensione',
->>>>>>> 8b38a678 (phpstan)
         'creator' => [
             'name' => 'Creatore',
         ],
