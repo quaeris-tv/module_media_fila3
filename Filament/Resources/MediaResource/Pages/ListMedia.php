@@ -59,7 +59,6 @@ class ListMedia extends ListRecords
             ImageColumn::make('preview')
                 ->label('preview')
                 ->size(60)
-<<<<<<< HEAD
                 ->defaultImageUrl(function ($record) {
                     /*
                     $url = $record->getUrl();
@@ -74,9 +73,6 @@ class ListMedia extends ListRecords
                     */
                     return $record->getUrlConv('thumb');
                 }),
-=======
-                ->defaultImageUrl(fn ($record) => $record->getUrl() ?? url('/images/placeholder.png')),
->>>>>>> fd105982 (up)
 
             TextColumn::make('human_readable_size')
                 ->label(static::trans('fields.human_readable_size'))
