@@ -8,16 +8,23 @@ declare(strict_types=1);
 
 namespace Modules\Media\Actions\Video;
 
+use Illuminate\Support\Facades\Storage;
+use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use Spatie\QueueableAction\QueueableAction;
 
 class GetVideoDurationAction
 {
     use QueueableAction;
 
-    /**
-     * The number of seconds to wait before retrying the action.
-     *
-     * @var array<int>|int
-     */
-    public $backoff = 3;
+    public function execute(string $disk, string $file): ?int
+    {
+        if (! Storage::disk($disk)->exists($file)) {
+            return null;
+        }
+        $res = FFMpeg::fromDisk($disk)
+            ->open($file)
+            ->getDurationInSeconds(); // returns an int
+
+        return $res;
+    }
 }
