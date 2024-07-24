@@ -10,6 +10,8 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
+use Modules\Job\Filament\Widgets\ClockWidget;
+use Modules\Job\Filament\Widgets\QueueListenWidget;
 use Modules\Media\Actions\Video\ConvertVideoByMediaConvertAction;
 use Modules\Media\Filament\Resources\MediaConvertResource;
 use Modules\Media\Models\MediaConvert;
@@ -17,6 +19,14 @@ use Modules\Media\Models\MediaConvert;
 class ListMediaConverts extends ListRecords
 {
     protected static string $resource = MediaConvertResource::class;
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            // QueueListenWidget::make(),
+            ClockWidget::make(),
+        ];
+    }
 
     protected function getHeaderActions(): array
     {

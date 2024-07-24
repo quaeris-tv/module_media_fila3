@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Modules\Media\Filament\Resources\MediaResource\Pages;
 
 use Filament\Actions\DeleteAction;
-use Filament\Forms\Components\Radio;
-use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\Actions;
 use Filament\Infolists\Components\Actions\Action;
 use Filament\Infolists\Components\ImageEntry;
@@ -19,6 +17,7 @@ use Filament\Resources\Pages\ViewRecord;
 use Modules\Media\Actions\Video\ConvertVideoByConvertDataAction;
 use Modules\Media\Datas\ConvertData;
 use Modules\Media\Filament\Infolists\VideoEntry;
+use Modules\Media\Filament\Resources\MediaConvertResource;
 use Modules\Media\Filament\Resources\MediaResource;
 use Modules\Media\Filament\Resources\MediaResource\Widgets\ConvertWidget;
 
@@ -74,46 +73,7 @@ class ViewMedia extends ViewRecord
                                     ->tooltip('convert')
                                     ->icon('heroicon-o-scale')
                                     // ->requiresConfirmation()
-                                    ->form([
-                                        Radio::make('format')
-                                            ->label('Format?')
-                                            ->options([
-                                                'webm' => 'webm',
-                                                // 'webm02' => 'webm02',
-                                            ])
-                                            ->inline()
-                                            ->inlineLabel(false),
-                                        // -----------------------------------
-                                        Radio::make('codec_video')
-                                            // ->label('Format?')
-                                            ->options([
-                                                'libvpx-vp9' => 'libvpx-vp9',
-                                                'libvpx-vp8' => 'libvpx-vp8',
-                                            ])
-                                            ->inline()
-                                            ->inlineLabel(false),
-                                        Radio::make('codec_audio')
-                                            // ->label('Format?')
-                                            ->options([
-                                                'copy' => 'copy',
-                                                'libvorbis' => 'libvorbis',
-                                            ])
-                                            ->inline()
-                                            ->inlineLabel(false),
-                                        Radio::make('preset')
-                                            // ->label('Format?')
-                                            ->options([
-                                                'fast' => 'fast',
-                                                'ultrafast' => 'ultrafast',
-                                            ])
-                                            ->inline()
-                                            ->inlineLabel(false),
-                                        TextInput::make('bitrate'),
-                                        TextInput::make('width')->numeric(),
-                                        TextInput::make('height')->numeric(),
-                                        TextInput::make('threads'),
-                                        TextInput::make('speed'),
-                                    ])
+                                    ->form(MediaConvertResource::getFormSchema())
                                     ->action(function ($record, $data) {
                                         $data['disk'] = $record->disk;
                                         $data['file'] = $record->id.'/'.$record->file_name;
