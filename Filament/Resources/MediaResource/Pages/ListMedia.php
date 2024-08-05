@@ -18,6 +18,8 @@ use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
 use Modules\Media\Filament\Actions\Table\ConvertAction;
 use Modules\Media\Filament\Resources\MediaResource;
+use Modules\UI\Enums\TableLayoutEnum;
+use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 use Modules\Xot\Filament\Traits\NavigationPageLabelTrait;
 use Webmozart\Assert\Assert;
 
@@ -26,6 +28,15 @@ class ListMedia extends ListRecords
     use NavigationPageLabelTrait;
 
     protected static string $resource = MediaResource::class;
+
+    public TableLayoutEnum $layoutView = TableLayoutEnum::GRID;
+
+    protected function getTableHeaderActions(): array
+    {
+        return [
+            TableLayoutToggleTableAction::make(),
+        ];
+    }
 
     /**
      * @return CreateAction[]

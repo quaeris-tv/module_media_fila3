@@ -16,6 +16,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Media\Filament\Resources\AttachmentResource;
 use Modules\Media\Filament\Resources\HasMediaResource\Actions\AddAttachmentAction;
+use Modules\UI\Enums\TableLayoutEnum;
+use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 use Modules\Xot\Filament\Resources\XotBaseResource\RelationManager\XotBaseRelationManager;
 use Modules\Xot\Filament\Traits\NavigationLabelTrait;
 
@@ -26,6 +28,8 @@ class MediaRelationManager extends XotBaseRelationManager
     protected static string $relationship = 'media';
 
     protected static ?string $inverseRelationship = 'model';
+
+    public TableLayoutEnum $layoutView = TableLayoutEnum::GRID;
 
     public function form(Form $form): Form
     {
@@ -81,6 +85,7 @@ class MediaRelationManager extends XotBaseRelationManager
                     fn (RelationManager $livewire, array $data) => AttachmentResource::formHandlerCallback($livewire, $data),
                 ),
             */
+            TableLayoutToggleTableAction::make(),
         ];
     }
 
