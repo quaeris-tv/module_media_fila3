@@ -13,6 +13,7 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Table;
@@ -50,7 +51,60 @@ class ListMedia extends ListRecords
         ];
     }
 
-    public function getTableColumns(): array
+    public function getGridTableColumns(): array
+    {
+        Assert::string($date_format = config('app.date_format'));
+
+        return [
+            Stack::make([
+                TextColumn::make('collection_name')
+                    ->label(static::trans('fields.collection_name')),
+
+                TextColumn::make('name')
+                    ->label(static::trans('fields.filename'))
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('mime_type')
+                    ->label(static::trans('fields.mime_type'))
+                    ->sortable(),
+
+                ImageColumn::make('preview')
+                    ->label('preview')
+                    ->size(60)
+                    ->defaultImageUrl(function ($record) {
+                        /*
+                    $url = $record->getUrl();
+                    $info = pathinfo($url);
+                    if(!isset($info['dirname'])) {
+
+                        throw new Exception('['.__LINE__.']['.__FILE__.']');
+                    }
+                    $thumb = $info['dirname'].'/conversions/'.$info['filename'].'-thumb.jpg';
+
+                    return url($thumb);
+                    */
+                        return $record->getUrlConv('thumb');
+                    }),
+
+                TextColumn::make('human_readable_size')
+                    ->label(static::trans('fields.human_readable_size'))
+                // ->sortable()
+                ,
+
+                TextColumn::make('creator.name')
+                    ->label(static::trans('fields.creator.name'))
+                    ->toggleable(),
+
+                TextColumn::make('created_at')
+                    ->label(static::trans('fields.uploaded_at'))
+                    ->dateTime($date_format)
+                    ->toggleable(),
+            ]),
+        ];
+    }
+
+    public function getListTableColumns(): array
     {
         Assert::string($date_format = config('app.date_format'));
 
@@ -153,7 +207,11 @@ class ListMedia extends ListRecords
     public function table(Table $table): Table
     {
         return $table
-            ->columns($this->getTableColumns())
+            // ->columns($this->getTableColumns())
+            ->columns($this->layoutView->getTableColumns())
+            ->contentGrid($this->layoutView->getTableContentGrid())
+            ->headerActions($this->getTableHeaderActions())
+
             ->filters($this->getTableFilters())
             ->actions($this->getTableActions())
             ->bulkActions($this->getTableBulkActions())
