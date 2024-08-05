@@ -41,7 +41,15 @@ class MediaRelationManager extends XotBaseRelationManager
     /**
      * @return array<Column|ColumnLayoutComponent>
      */
-    protected function getTableColumns(): array
+    public function getGridTableColumns(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<Column|ColumnLayoutComponent>
+     */
+    public function getListTableColumns(): array
     {
         return [];
     }
@@ -92,6 +100,8 @@ class MediaRelationManager extends XotBaseRelationManager
     public function table(Table $table): Table
     {
         $table = AttachmentResource::table($table)
+            ->columns($this->layoutView->getTableColumns())
+            ->contentGrid($this->layoutView->getTableContentGrid())
             ->headerActions($this->getTableHeaderActions());
 
         return $table;
