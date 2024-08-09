@@ -9,18 +9,18 @@ export default defineConfig(
             manifest: true,
         },
         plugins: [
-        laravel(
-            {
-                publicDirectory: '../../public',
-                buildDirectory: 'build-media',
-                input: [
-                __dirname + '/resources/assets/sass/app.scss',
-                __dirname + '/resources/assets/js/app.js'
-                ],
-                refresh: true,
-            }
-        ),
-    ],
+            laravel(
+                {
+                    publicDirectory: '../../public',
+                    buildDirectory: 'build-media',
+                    input: [
+                        __dirname + '/resources/assets/sass/app.scss',
+                        __dirname + '/resources/assets/js/app.js'
+                    ],
+                    refresh: true,
+                }
+            ),
+        ],
     }
 );
 
