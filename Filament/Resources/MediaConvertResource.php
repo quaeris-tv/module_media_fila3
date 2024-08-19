@@ -21,13 +21,13 @@ class MediaConvertResource extends Resource
     {
         return [
             Radio::make('format')
-            ->label('Format?')
-            ->options([
-                'webm' => 'webm',
-                // 'webm02' => 'webm02',
-            ])
-            ->inline()
-            ->inlineLabel(false),
+                ->label('Format?')
+                ->options([
+                    'webm' => 'webm',
+                    // 'webm02' => 'webm02',
+                ])
+                ->inline()
+                ->inlineLabel(false),
             // -----------------------------------
             Radio::make('codec_video')
                 // ->label('Format?')
