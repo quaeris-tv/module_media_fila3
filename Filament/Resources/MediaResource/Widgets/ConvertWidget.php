@@ -45,7 +45,7 @@ class ConvertWidget extends Widget
 
         // dddx($file_mp4);
 
-        $format = new \FFMpeg\Format\Video\WebM();
+        $format = new \FFMpeg\Format\Video\WebM;
         $extension = strtolower(class_basename($format));
         $file_new = Str::of($file_mp4)
             ->replaceLast('.mp4', '.'.$extension)
