@@ -35,7 +35,7 @@ class Merge
         foreach ($filenames as $filename) {
             // $img = Image::make(public_path($filename));
 
-            $manager = new ImageManager(new Driver);
+            $manager = new ImageManager(new Driver());
             $img = $manager->read(public_path($filename));
 
             $imgs[] = $img;
