@@ -62,8 +62,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MediaConvert whereWidth($value)
  *
- * @property-read \Modules\Fixcity\Models\Profile|null $creator
- * @property-read \Modules\Fixcity\Models\Profile|null $updater
+ * @property-read \Modules\Xot\Contracts\ProfileContract|null $creator
+ * @property-read \Modules\Xot\Contracts\ProfileContract|null $updater
  *
  * @mixin \Eloquent
  */
