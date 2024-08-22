@@ -10,8 +10,7 @@ use Modules\Xot\Database\Migrations\XotBaseMigration;
 /**
  * Class CreateInvitationsTable.
  */
-class CreateTemporaryUploadsTable extends XotBaseMigration
-{
+return new class () extends XotBaseMigration {
     /**
      * Run the migrations.
      */
@@ -26,4 +25,4 @@ class CreateTemporaryUploadsTable extends XotBaseMigration
             }
         );
     }
-}
+};
