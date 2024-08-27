@@ -68,7 +68,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class MediaConvert extends BaseModel
 {
-    /** @var array<int, string> */
+    /** @var list<string> */
     protected $fillable = [
         'media_id',
         'format',
