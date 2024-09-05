@@ -26,7 +26,7 @@ class ConvertVideoAction
             return '';
         }
         $format = new \FFMpeg\Format\Video\WebM;
-        $extension = strtolower(class_basename($format));
+        $extension = mb_strtolower(class_basename($format));
         $file_new = Str::of($file_mp4)
             ->replaceLast('.mp4', '.'.$extension)
             ->toString();
@@ -34,7 +34,7 @@ class ConvertVideoAction
         /**
          * -preset ultrafast.
          */
-        $res = FFMpeg::fromDisk($disk_mp4)
+        FFMpeg::fromDisk($disk_mp4)
             ->open($file_mp4)
             ->export()
             // ->addFilter(function (VideoFilters $filters) {

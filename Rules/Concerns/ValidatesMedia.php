@@ -10,6 +10,8 @@ use Modules\Media\Rules\GroupRules\MinTotalSizeInKbRule;
 use Modules\Media\Rules\ItemRules\AttributeRule;
 use Modules\Media\Rules\UploadedMediaRules;
 
+use function is_string;
+
 /**
  * @var FormRequest $this
  */
@@ -58,14 +60,14 @@ trait ValidatesMedia
         foreach ($allAttributeRules as $attribute => $attributeRules) {
             $remainingRules[$attribute] = [];
 
-            if (\is_string($attributeRules)) {
+            if (is_string($attributeRules)) {
                 $remainingRules[$attribute] = $allAttributeRules;
 
                 continue;
             }
 
             foreach ($attributeRules as $attributeRule) {
-                if (\is_string($attributeRule)) {
+                if (is_string($attributeRule)) {
                     $remainingRules[$attribute][] = $attributeRule;
                 } elseif ($attributeRule instanceof UploadedMediaRules) {
                     foreach ($attributeRule->groupRules as $groupRule) {
@@ -87,7 +89,7 @@ trait ValidatesMedia
 
                 $minimumRuleUsed = collect($remainingRules[$attribute])->contains(
                     function ($attributeRule): bool {
-                        if (\is_string($attributeRule)) {
+                        if (is_string($attributeRule)) {
                             return false;
                         }
                         if ($attributeRule instanceof MinItemsRule && $attributeRule->getMinItemCount()) {

@@ -37,7 +37,7 @@ class ConvertVideoCommand extends Command
             return '';
         }
         $format = new \FFMpeg\Format\Video\WebM;
-        $extension = strtolower(class_basename($format));
+        $extension = mb_strtolower(class_basename($format));
         $file_new = Str::of($file)
             ->replaceLast('.mp4', '.'.$extension)
             ->toString();
@@ -45,14 +45,14 @@ class ConvertVideoCommand extends Command
         /**
          * -preset ultrafast.
          */
-        $res = FFMpeg::fromDisk($disk)
+        FFMpeg::fromDisk($disk)
             ->open($file)
             ->export()
             // ->addFilter(function (VideoFilters $filters) {
             //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
             // })
             // ->resize(640, 480)
-            ->onProgress(function ($percentage, $remaining, $rate) {
+            ->onProgress(function ($percentage, $remaining, $rate): void {
                 $this->info("{$percentage}% transcoded");
                 $this->info("{$remaining} seconds left at rate: {$rate}");
             })

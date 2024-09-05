@@ -31,11 +31,6 @@ enum AttachmentTypeEnum: string implements HasLabel
         return $originalCases;
     }
 
-    protected static function translateBaseUniquePath(): string
-    {
-        return 'media::attachments.types';
-    }
-
     public function getTypeNote(): ?string
     {
         $translationKey = sprintf('media::attachments.type_notes.%s', $this->value);
@@ -50,4 +45,9 @@ enum AttachmentTypeEnum: string implements HasLabel
     {
         return trans('media::attachments.types.'.$this->value);
     }
+
+    // private static function translateBaseUniquePath(): string
+    // {
+    //    return 'media::attachments.types';
+    // }
 }

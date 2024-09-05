@@ -65,29 +65,25 @@ class GalleryField extends Repeater
                     ->addActionLabel('Adicionar novo grupo de fotos')
                     ->grid(2)
                     ->schema(
-                        function () {
-                            return [
-                                SpatieMediaLibraryFileUpload::make('fotos')
-                                    ->multiple()
-                                    ->image()
-                                    ->minFiles(1)
-                                    ->maxFiles(4)
-                                    ->helperText('Máximo de 4 imagens por grupo')
-                                    ->panelLayout(null)
-                                    ->previewable()
-                                    ->columns(2)
-                                    ->openable()
-                                    ->collection(
-                                        function (Get $get) {
-                                            return 'grupo_'.$get('id_for_media');
-                                        }
-                                    ),
-                                Forms\Components\Hidden::make('id_for_media')->default(Str::uuid()->toString()),
-                                Forms\Components\TextInput::make('descricao')
-                                    ->label('Descrição')
-                                    ->required(),
-                            ];
-                        }
+                        fn(): array => [
+                            SpatieMediaLibraryFileUpload::make('fotos')
+                                ->multiple()
+                                ->image()
+                                ->minFiles(1)
+                                ->maxFiles(4)
+                                ->helperText('Máximo de 4 imagens por grupo')
+                                ->panelLayout(null)
+                                ->previewable()
+                                ->columns(2)
+                                ->openable()
+                                ->collection(
+                                    fn(Get $get): string => 'grupo_'.$get('id_for_media')
+                                ),
+                            Forms\Components\Hidden::make('id_for_media')->default(Str::uuid()->toString()),
+                            Forms\Components\TextInput::make('descricao')
+                                ->label('Descrição')
+                                ->required(),
+                        ]
                     ),
             ]
         );
@@ -123,7 +119,7 @@ class GalleryField extends Repeater
                     ->visibility('private')
                     ->conversion('thumb')
                     ->loadStateFromRelationshipsUsing(
-                        function (SpatieMediaLibraryFileUpload $component, HasMedia $record) {
+                        function (SpatieMediaLibraryFileUpload $component, HasMedia $record): void {
                             $callable = function ($file): array {
                                 Assert::isInstanceOf($file, Media::class, '['.__LINE__.']['.__FILE__.']');
                                 $uuid = $file->getAttributeValue('uuid');
@@ -148,7 +144,7 @@ class GalleryField extends Repeater
                 Textarea::make('value')->rows(3),
             ]
         )->afterStateUpdated(
-            function ($state, callable $set, callable $get, $component, ?HasMedia $record) {
+            function ($state, callable $set, callable $get, $component, ?HasMedia $record): void {
                 // dddx(['state' => $state]);
                 /*
                 "state" => array:1 [▼

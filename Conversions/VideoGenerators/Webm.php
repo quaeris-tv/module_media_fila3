@@ -15,7 +15,7 @@ class Webm extends ImageGenerator
         $pathToImageFile = pathinfo($file, PATHINFO_DIRNAME).'/'.pathinfo($file, PATHINFO_FILENAME).'.webmXXX';
         dddx([
             'file' => $file,
-            '$pathToImageFile' => $$pathToImageFile,
+            '$pathToImageFile' => ${$pathToImageFile},
             'conversion' => $conversion,
         ]);
 

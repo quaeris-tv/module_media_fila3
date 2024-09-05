@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Media\Models;
 
+use Closure;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +18,8 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Webmozart\Assert\Assert;
+
+use function is_string;
 
 /**
  * Modules\Media\Models\TemporaryUpload.
@@ -40,7 +44,7 @@ class TemporaryUpload extends Model implements HasMedia
     use InteractsWithMedia;
     use MassPrunable;
 
-    public static ?\Closure $manipulatePreview = null;
+    public static ?Closure $manipulatePreview = null;
 
     public static ?string $disk = null;
 
@@ -151,15 +155,6 @@ class TemporaryUpload extends Model implements HasMedia
         return $temporaryUpload;
     }
 
-    protected static function getDiskName(): string
-    {
-        $res = static::$disk ?? config('media-library.disk_name');
-        if (\is_string($res)) {
-            return $res;
-        }
-        throw new \Exception('['.__LINE__.']['.__FILE__.']');
-    }
-
     public function registerMediaConversions(?Media $media = null): void
     {
         if (! config('media-library.generate_thumbnails_for_temporary_uploads')) {
@@ -200,12 +195,21 @@ class TemporaryUpload extends Model implements HasMedia
         return $newMedia;
     }
 
+    protected static function getDiskName(): string
+    {
+        $res = static::$disk ?? config('media-library.disk_name');
+        if (is_string($res)) {
+            return $res;
+        }
+        throw new Exception('['.__LINE__.']['.__FILE__.']');
+    }
+
     // public function prunable(): Builder
     // { Call to an undefined method Illuminate\Database\Eloquent\Builder<Modules\Media\Models\TemporaryUpload>::old().
     //    return self::query()->old();
     // }
 
-    protected function getPreviewManipulation(): \Closure
+    protected function getPreviewManipulation(): Closure
     {
         return static::$manipulatePreview ?? function (Conversion $conversion): void {
             $conversion->fit(Fit::Crop, 300, 300);

@@ -25,25 +25,6 @@ class ViewMedia extends ViewRecord
 {
     protected static string $resource = MediaResource::class;
 
-    /**
-     * @return DeleteAction[]
-     *
-     * @psalm-return list{DeleteAction}
-     */
-    protected function getHeaderActions(): array
-    {
-        return [
-            DeleteAction::make(),
-        ];
-    }
-
-    protected function getHeaderWidgets(): array
-    {
-        return [
-            ConvertWidget::make(['record' => $this->record]),
-        ];
-    }
-
     public function infolist(Infolist $infolist): Infolist
     {
         $schema = [
@@ -56,13 +37,13 @@ class ViewMedia extends ViewRecord
                                 ->label('')
                                 ->defaultImageUrl(fn ($record) => $record->getUrl())
                                 ->size(500)
-                                ->visible(fn ($record) => $record->type == 'image'),
+                                ->visible(fn ($record): bool => $record->type === 'image'),
 
                             VideoEntry::make('url')
                                 ->label('')
                                 ->defaultImageUrl(fn ($record) => $record->getUrl())
                                 ->size(500)
-                                ->visible(fn ($record) => $record->type == 'video'),
+                                ->visible(fn ($record): bool => $record->type === 'video'),
                         ]
                     ),
                     Section::make()->schema(
@@ -74,7 +55,7 @@ class ViewMedia extends ViewRecord
                                     ->icon('heroicon-o-scale')
                                     // ->requiresConfirmation()
                                     ->form(MediaConvertResource::getFormSchema())
-                                    ->action(function ($record, $data) {
+                                    ->action(function ($record, array $data): void {
                                         $data['disk'] = $record->disk;
                                         $data['file'] = $record->id.'/'.$record->file_name;
                                         $convert_data = ConvertData::from($data);
@@ -111,5 +92,24 @@ class ViewMedia extends ViewRecord
 
             ->schema($schema)
             ->columns(1);
+    }
+
+    /**
+     * @return DeleteAction[]
+     *
+     * @psalm-return list{DeleteAction}
+     */
+    protected function getHeaderActions(): array
+    {
+        return [
+            DeleteAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            ConvertWidget::make(['record' => $this->record]),
+        ];
     }
 }

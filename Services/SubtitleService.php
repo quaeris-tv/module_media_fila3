@@ -19,27 +19,26 @@ use function Safe\simplexml_load_string;
  */
 class SubtitleService
 {
-    private static ?self $instance = null;
-
     public string $disk = 'media';
 
     // nome che usa storage
     public string $file_path;
 
-    // siamo in subtitle, percio' il file e' dei subtitle
     public string $field_name = 'txt';
 
     public array $subtitles = [];
 
     public Model $model;
 
+    private static ?self $instance = null;
+
     /**
      * ---.
      */
     public static function getInstance(): self
     {
-        if (! self::$instance instanceof SubtitleService) {
-            self::$instance = new self;
+        if (! self::$instance instanceof self) {
+            self::$instance = new self();
         }
 
         return self::$instance;
@@ -122,7 +121,7 @@ class SubtitleService
         // $path = Storage::path($this->file_path);
         // $path = realpath($path);
         $path = realpath($this->file_path);
-        if ($path == false) {
+        if (false == $path) {
             return '';
             /*
             throw new Exception('path:['.$path.']'.PHP_EOL.'
@@ -170,10 +169,10 @@ class SubtitleService
                     'text' => $item->__toString(),
                 ];
                 $data[] = $tmp;
-                $item_i++;
+                ++$item_i;
             }
 
-            $sentence_i++;
+            ++$sentence_i;
         }
 
         return $data;
@@ -182,8 +181,8 @@ class SubtitleService
     /**
      * Undocumented function.
      *
-     * @param  string  $srtFile
-     * @param  string  $webVttFile
+     * @param string $srtFile
+     * @param string $webVttFile
      */
     public function srtToVtt($srtFile, $webVttFile): void
     {
@@ -203,8 +202,8 @@ class SubtitleService
         }
 
         $length = \count($lines);
-        for ($index = 1; $index < $length; $index++) {
-            if ($index === 1 || trim($lines[$index - 2]) === '') {
+        for ($index = 1; $index < $length; ++$index) {
+            if (1 === $index || '' === trim($lines[$index - 2])) {
                 $lines[$index] = str_replace(',', '.', $lines[$index]);
             }
         }

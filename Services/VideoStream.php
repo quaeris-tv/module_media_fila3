@@ -18,6 +18,7 @@ namespace Modules\Media\Services;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 
+use function is_string;
 use function Safe\fclose;
 use function Safe\fread;
 use function Safe\set_time_limit;
@@ -66,8 +67,8 @@ class VideoStream
         $this->vars['stream'] = $filesystem->readStream($path);
         $mime = $filesystem->mimeType($path);
 
-        if (! \is_string($mime)) {
-            throw new \Exception('['.__LINE__.']['.__FILE__.']');
+        if (! is_string($mime)) {
+            throw new Exception('['.__LINE__.']['.__FILE__.']');
         }
 
         $this->mime = $mime;
@@ -142,7 +143,7 @@ class VideoStream
                 exit;
             }
             if ($range === '-') {
-                $c_start = $this->size - (int) substr($range, 1);
+                $c_start = $this->size - (int) mb_substr($range, 1);
             } else {
                 $range = explode('-', $range);
                 $c_start = $range[0];

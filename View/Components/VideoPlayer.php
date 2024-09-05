@@ -7,6 +7,7 @@ namespace Modules\Media\View\Components;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Modules\Xot\Actions\GetViewAction;
+use Modules\Xot\Datas\XotData;
 use Webmozart\Assert\Assert;
 
 /**
@@ -23,7 +24,8 @@ class VideoPlayer extends Component
      */
     public function __construct(public string $mp4Src, public int $currentTime, ?string $driver = null)
     {
-        Assert::string($driver ??= config('xra.video.player'));
+        $xot = XotData::make();
+        Assert::string($driver ??= $xot->video_player);
 
         $this->driver = $driver;
     }
@@ -38,7 +40,6 @@ class VideoPlayer extends Component
         /**
          * @phpstan-var view-string
          */
-        // $view = 'media::components.video-player.'.$this->driver;
         $view = app(GetViewAction::class)->execute($this->driver);
 
         $view_params = [

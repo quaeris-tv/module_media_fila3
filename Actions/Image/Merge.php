@@ -8,8 +8,9 @@ declare(strict_types=1);
 
 namespace Modules\Media\Actions\Image;
 
-use Intervention\Image\Drivers\Gd\Driver;
+use Exception;
 // use Intervention\Image\Facades\Image;
+use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 use Spatie\QueueableAction\QueueableAction;
 
@@ -43,11 +44,9 @@ class Merge
             $height = max($height, $img->height());
         }
 
-        if (! is_numeric($width) || ! is_numeric($height)) {
-            throw new \Exception('['.__LINE__.']['.class_basename(self::class).']');
+        if (! is_numeric($height)) {
+            throw new Exception('['.__LINE__.']['.class_basename(self::class).']');
         }
-
-        $width = (int) $width;
         $height = (int) $height;
         // $img_canvas = Image::canvas($width, $height);
 

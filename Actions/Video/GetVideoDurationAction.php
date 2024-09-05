@@ -20,11 +20,10 @@ class GetVideoDurationAction
     {
         if (! Storage::disk($disk)->exists($file)) {
             return null;
-        }
-        $res = FFMpeg::fromDisk($disk)
-            ->open($file)
-            ->getDurationInSeconds(); // returns an int
+        } // returns an int
 
-        return $res;
+        return FFMpeg::fromDisk($disk)
+            ->open($file)
+            ->getDurationInSeconds();
     }
 }

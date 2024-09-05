@@ -38,14 +38,14 @@ class ConvertVideoByConvertDataAction
          */
         // Call to an undefined method ProtoneMedia\LaravelFFMpeg\Drivers\PHPFFMpeg::toDisk().
         // @phpstan-ignore-next-line
-        $res = FFMpeg::fromDisk($data->disk)
+        FFMpeg::fromDisk($data->disk)
             ->open($data->file)
             ->export()
             // ->addFilter(function (VideoFilters $filters) {
             //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
             // })
             // ->resize(640, 480)
-            ->onProgress(function ($percentage, $remaining, $rate) {
+            ->onProgress(function ($percentage, $remaining, $rate): void {
                 $msg = "{$percentage}% transcoded";
                 $msg .= "{$remaining} seconds left at rate: {$rate}";
                 Notification::make()

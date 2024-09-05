@@ -25,11 +25,16 @@ class MediaRelationManager extends XotBaseRelationManager
 {
     use NavigationLabelTrait;
 
+    public TableLayoutEnum $layoutView = TableLayoutEnum::GRID;
+
     protected static string $relationship = 'media';
 
     protected static ?string $inverseRelationship = 'model';
 
-    public TableLayoutEnum $layoutView = TableLayoutEnum::GRID;
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return trans('media::actions.add_attachment.title');
+    }
 
     public function form(Form $form): Form
     {
@@ -52,6 +57,16 @@ class MediaRelationManager extends XotBaseRelationManager
     public function getListTableColumns(): array
     {
         return [];
+    }
+
+    public function table(Table $table): Table
+    {
+        $table = AttachmentResource::table($table)
+            ->columns($this->layoutView->getTableColumns())
+            ->contentGrid($this->layoutView->getTableContentGrid())
+            ->headerActions($this->getTableHeaderActions());
+
+        return $table;
     }
 
     /**
@@ -95,20 +110,5 @@ class MediaRelationManager extends XotBaseRelationManager
             */
             TableLayoutToggleTableAction::make(),
         ];
-    }
-
-    public function table(Table $table): Table
-    {
-        $table = AttachmentResource::table($table)
-            ->columns($this->layoutView->getTableColumns())
-            ->contentGrid($this->layoutView->getTableContentGrid())
-            ->headerActions($this->getTableHeaderActions());
-
-        return $table;
-    }
-
-    public static function getTitle(Model $ownerRecord, string $pageClass): string
-    {
-        return trans('media::actions.add_attachment.title');
     }
 }

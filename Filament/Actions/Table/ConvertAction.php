@@ -35,7 +35,7 @@ class ConvertAction extends Action
                     ->inline()
                     ->inlineLabel(false),
             ])
-            ->action(fn ($record) => dddx($record));
+            ->action(fn ($record): string => dddx($record));
         // ->requiresConfirmation()
     }
 }

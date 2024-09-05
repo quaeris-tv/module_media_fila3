@@ -28,28 +28,9 @@ class ListMedia extends ListRecords
 {
     use NavigationPageLabelTrait;
 
-    protected static string $resource = MediaResource::class;
-
     public TableLayoutEnum $layoutView = TableLayoutEnum::GRID;
 
-    protected function getTableHeaderActions(): array
-    {
-        return [
-            TableLayoutToggleTableAction::make(),
-        ];
-    }
-
-    /**
-     * @return CreateAction[]
-     *
-     * @psalm-return list{CreateAction}
-     */
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
-        ];
-    }
+    protected static string $resource = MediaResource::class;
 
     public function getGridTableColumns(): array
     {
@@ -72,7 +53,7 @@ class ListMedia extends ListRecords
                 ImageColumn::make('preview')
                     ->label('preview')
                     ->size(60)
-                    ->defaultImageUrl(function ($record) {
+                    ->defaultImageUrl(fn($record) =>
                         /*
                     $url = $record->getUrl();
                     $info = pathinfo($url);
@@ -84,8 +65,7 @@ class ListMedia extends ListRecords
 
                     return url($thumb);
                     */
-                        return $record->getUrlConv('thumb');
-                    }),
+                        $record->getUrlConv('thumb')),
 
                 TextColumn::make('human_readable_size')
                     ->label(static::trans('fields.human_readable_size'))
@@ -124,7 +104,7 @@ class ListMedia extends ListRecords
             ImageColumn::make('preview')
                 ->label('preview')
                 ->size(60)
-                ->defaultImageUrl(function ($record) {
+                ->defaultImageUrl(fn($record) =>
                     /*
                     $url = $record->getUrl();
                     $info = pathinfo($url);
@@ -136,8 +116,7 @@ class ListMedia extends ListRecords
 
                     return url($thumb);
                     */
-                    return $record->getUrlConv('thumb');
-                }),
+                    $record->getUrlConv('thumb')),
 
             TextColumn::make('human_readable_size')
                 ->label(static::trans('fields.human_readable_size'))
@@ -220,5 +199,24 @@ class ListMedia extends ListRecords
                 column: 'created_at',
                 direction: 'DESC',
             );
+    }
+
+    protected function getTableHeaderActions(): array
+    {
+        return [
+            TableLayoutToggleTableAction::make(),
+        ];
+    }
+
+    /**
+     * @return CreateAction[]
+     *
+     * @psalm-return list{CreateAction}
+     */
+    protected function getHeaderActions(): array
+    {
+        return [
+            CreateAction::make(),
+        ];
     }
 }

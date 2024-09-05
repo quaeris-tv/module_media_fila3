@@ -14,10 +14,6 @@ use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 
 class ConvertWidget extends Widget
 {
-    protected static string $view = 'media::filament.widgets.convert';
-
-    protected static string $resource = MediaResource::class;
-
     public Media $record;
 
     public string $time = '';
@@ -32,11 +28,12 @@ class ConvertWidget extends Widget
     /** @var float */
     public $rate;
 
+    protected static string $view = 'media::filament.widgets.convert';
+
+    protected static string $resource = MediaResource::class;
+
     public function begin(): void
     {
-        // while ($this->start >= 0) {
-        $cond = true;
-
         $disk_mp4 = $this->record->disk;
         $file_mp4 = $this->record->getPath();
 
@@ -46,7 +43,7 @@ class ConvertWidget extends Widget
         // dddx($file_mp4);
 
         $format = new \FFMpeg\Format\Video\WebM;
-        $extension = strtolower(class_basename($format));
+        $extension = mb_strtolower(class_basename($format));
         $file_new = Str::of($file_mp4)
             ->replaceLast('.mp4', '.'.$extension)
             ->toString();
@@ -54,14 +51,14 @@ class ConvertWidget extends Widget
         /**
          * -preset ultrafast.
          */
-        $res = FFMpeg::fromDisk($disk_mp4)
+        FFMpeg::fromDisk($disk_mp4)
             ->open($file_mp4)
             ->export()
             // ->addFilter(function (VideoFilters $filters) {
             //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
             // })
             // ->resize(640, 480)
-            ->onProgress(function ($percentage, $remaining, $rate) {
+            ->onProgress(function ($percentage, $remaining, $rate): void {
                 $this->percentage = $percentage;
                 $this->remaining = $remaining;
                 $this->rate = $rate;

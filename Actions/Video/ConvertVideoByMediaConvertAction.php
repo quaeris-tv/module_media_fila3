@@ -42,14 +42,14 @@ class ConvertVideoByMediaConvertAction
          * -preset ultrafast.
          */
         // @phpstan-ignore-next-line
-        $res = FFMpeg::fromDisk($data->disk)
+        FFMpeg::fromDisk($data->disk)
             ->open($data->file)
             ->export()
             // ->addFilter(function (VideoFilters $filters) {
             //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
             // })
             // ->resize(640, 480)
-            ->onProgress(function ($percentage, $remaining, $rate) use ($record) {
+            ->onProgress(function ($percentage, $remaining, $rate) use ($record): void {
                 $msg = "{$percentage}% transcoded";
                 $msg .= "{$remaining} seconds left at rate: {$rate}";
 

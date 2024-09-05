@@ -7,12 +7,13 @@ declare(strict_types=1);
 
 namespace Modules\Media\Models;
 
+use Eloquent;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Media\Enums\AttachmentTypeEnum;
-
 use Modules\Xot\Traits\Updater;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as SpatieMedia;
 
@@ -53,7 +54,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media as SpatieMedia;
  * @property string|null $exif
  * @property string|null $curations
  * @property \Modules\Xot\Contracts\UserContract|null $creator
- * @property \Illuminate\Database\Eloquent\Model|\Eloquent $model
+ * @property \Illuminate\Database\Eloquent\Model|Eloquent $model
  * @property TemporaryUpload|null $temporaryUpload
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
@@ -191,6 +192,15 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media as SpatieMedia;
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
  * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
  * @mixin \Eloquent
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> all($columns = ['*'])
+ * @method static \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, static> get($columns = ['*'])
+ * @mixin Eloquent
  */
 class Media extends SpatieMedia
 {
@@ -198,26 +208,6 @@ class Media extends SpatieMedia
 
     /** @var string */
     protected $connection = 'media';
-
-    /** @return array<string, string> */
-    protected function casts(): array
-    {
-        return [
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
-            'deleted_at' => 'datetime',
-
-            'updated_by' => 'string',
-            'created_by' => 'string',
-            'deleted_by' => 'string',
-
-            // 'attachment_type' => AttachmentTypeEnum::class,
-            'manipulations' => 'array',
-            'custom_properties' => 'array',
-            'generated_conversions' => 'array',
-            'responsive_images' => 'array',
-        ];
-    }
 
     /**
      * //EloquentCollection.
@@ -263,7 +253,7 @@ class Media extends SpatieMedia
         $url = $this->getUrl();
         $info = pathinfo($url);
         if (! isset($info['dirname'])) {
-            throw new \Exception('['.__LINE__.']['.__FILE__.']');
+            throw new Exception('['.__LINE__.']['.__FILE__.']');
         }
         $url = '#';
         switch ($conv) {
@@ -294,5 +284,25 @@ class Media extends SpatieMedia
         }
 
         return $conversions;
+    }
+
+    /** @return array<string, string> */
+    protected function casts(): array
+    {
+        return [
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
+
+            'updated_by' => 'string',
+            'created_by' => 'string',
+            'deleted_by' => 'string',
+
+            // 'attachment_type' => AttachmentTypeEnum::class,
+            'manipulations' => 'array',
+            'custom_properties' => 'array',
+            'generated_conversions' => 'array',
+            'responsive_images' => 'array',
+        ];
     }
 }

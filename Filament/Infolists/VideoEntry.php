@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Media\Filament\Infolists;
 
+use Closure;
 use Filament\Infolists\Components\Entry;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\ComponentAttributeBag;
 use League\Flysystem\UnableToCheckFileExistence;
+use Throwable;
 
 class VideoEntry extends Entry
 {
@@ -18,70 +20,70 @@ class VideoEntry extends Entry
      */
     protected string $view = 'media::filament.infolists.video-entry';
 
-    protected string|\Closure|null $disk = null;
+    protected string|Closure|null $disk = null;
 
-    protected int|string|\Closure|null $height = null;
+    protected int|string|Closure|null $height = null;
 
-    protected bool|\Closure $isCircular = false;
+    protected bool|Closure $isCircular = false;
 
-    protected bool|\Closure $isSquare = false;
+    protected bool|Closure $isSquare = false;
 
-    protected string|\Closure $visibility = 'public';
+    protected string|Closure $visibility = 'public';
 
-    protected int|string|\Closure|null $width = null;
+    protected int|string|Closure|null $width = null;
 
     /**
-     * @var array<mixed>|\Closure
+     * @var array<mixed>|Closure
      */
-    protected array|\Closure $extraImgAttributes = [];
+    protected array|Closure $extraImgAttributes = [];
 
-    protected string|\Closure|null $defaultImageUrl = null;
+    protected string|Closure|null $defaultImageUrl = null;
 
-    protected bool|\Closure $isStacked = false;
+    protected bool|Closure $isStacked = false;
 
-    protected int|\Closure|null $overlap = null;
+    protected int|Closure|null $overlap = null;
 
-    protected int|string|\Closure|null $ring = null;
+    protected int|string|Closure|null $ring = null;
 
-    protected int|\Closure|null $limit = null;
+    protected int|Closure|null $limit = null;
 
-    protected bool|\Closure $hasLimitedRemainingText = false;
+    protected bool|Closure $hasLimitedRemainingText = false;
 
-    protected bool|\Closure $isLimitedRemainingTextSeparate = false;
+    protected bool|Closure $isLimitedRemainingTextSeparate = false;
 
-    protected string|\Closure|null $limitedRemainingTextSize = null;
+    protected string|Closure|null $limitedRemainingTextSize = null;
 
-    protected bool|\Closure $shouldCheckFileExistence = true;
+    protected bool|Closure $shouldCheckFileExistence = true;
 
-    public function disk(string|\Closure|null $disk): static
+    public function disk(string|Closure|null $disk): static
     {
         $this->disk = $disk;
 
         return $this;
     }
 
-    public function height(int|string|\Closure|null $height): static
+    public function height(int|string|Closure|null $height): static
     {
         $this->height = $height;
 
         return $this;
     }
 
-    public function circular(bool|\Closure $condition = true): static
+    public function circular(bool|Closure $condition = true): static
     {
         $this->isCircular = $condition;
 
         return $this;
     }
 
-    public function square(bool|\Closure $condition = true): static
+    public function square(bool|Closure $condition = true): static
     {
         $this->isSquare = $condition;
 
         return $this;
     }
 
-    public function size(int|string|\Closure $size): static
+    public function size(int|string|Closure $size): static
     {
         $this->width($size);
         $this->height($size);
@@ -89,14 +91,14 @@ class VideoEntry extends Entry
         return $this;
     }
 
-    public function visibility(string|\Closure $visibility): static
+    public function visibility(string|Closure $visibility): static
     {
         $this->visibility = $visibility;
 
         return $this;
     }
 
-    public function width(int|string|\Closure|null $width): static
+    public function width(int|string|Closure|null $width): static
     {
         $this->width = $width;
 
@@ -128,7 +130,7 @@ class VideoEntry extends Entry
         return $height;
     }
 
-    public function defaultImageUrl(string|\Closure|null $url): static
+    public function defaultImageUrl(string|Closure|null $url): static
     {
         $this->defaultImageUrl = $url;
 
@@ -152,7 +154,7 @@ class VideoEntry extends Entry
                 if (! $storage->exists($state)) {
                     return null;
                 }
-            } catch (UnableToCheckFileExistence $exception) {
+            } catch (UnableToCheckFileExistence) {
                 return null;
             }
         }
@@ -163,7 +165,7 @@ class VideoEntry extends Entry
                     $state,
                     now()->addMinutes(5),
                 );
-            } catch (\Throwable $exception) {
+            } catch (Throwable) {
                 // This driver does not support creating temporary URLs.
             }
         }
@@ -207,9 +209,9 @@ class VideoEntry extends Entry
     }
 
     /**
-     * @param  array<mixed>|\Closure  $attributes
+     * @param  array<mixed>|Closure  $attributes
      */
-    public function extraImgAttributes(array|\Closure $attributes): static
+    public function extraImgAttributes(array|Closure $attributes): static
     {
         $this->extraImgAttributes = $attributes;
 
@@ -229,7 +231,7 @@ class VideoEntry extends Entry
         return new ComponentAttributeBag($this->getExtraImgAttributes());
     }
 
-    public function stacked(bool|\Closure $condition = true): static
+    public function stacked(bool|Closure $condition = true): static
     {
         $this->isStacked = $condition;
 
@@ -241,7 +243,7 @@ class VideoEntry extends Entry
         return (bool) $this->evaluate($this->isStacked);
     }
 
-    public function overlap(int|\Closure|null $overlap): static
+    public function overlap(int|Closure|null $overlap): static
     {
         $this->overlap = $overlap;
 
@@ -253,7 +255,7 @@ class VideoEntry extends Entry
         return $this->evaluate($this->overlap);
     }
 
-    public function ring(string|int|\Closure|null $ring): static
+    public function ring(string|int|Closure|null $ring): static
     {
         $this->ring = $ring;
 
@@ -265,7 +267,7 @@ class VideoEntry extends Entry
         return $this->evaluate($this->ring);
     }
 
-    public function limit(int|\Closure|null $limit = 3): static
+    public function limit(int|Closure|null $limit = 3): static
     {
         $this->limit = $limit;
 
@@ -277,7 +279,7 @@ class VideoEntry extends Entry
         return $this->evaluate($this->limit);
     }
 
-    public function limitedRemainingText(bool|\Closure $condition = true, bool|\Closure $isSeparate = false, string|\Closure|null $size = null): static
+    public function limitedRemainingText(bool|Closure $condition = true, bool|Closure $isSeparate = false, string|Closure|null $size = null): static
     {
         $this->hasLimitedRemainingText = $condition;
         $this->limitedRemainingTextSeparate($isSeparate);
@@ -286,7 +288,7 @@ class VideoEntry extends Entry
         return $this;
     }
 
-    public function limitedRemainingTextSeparate(bool|\Closure $condition = true): static
+    public function limitedRemainingTextSeparate(bool|Closure $condition = true): static
     {
         $this->isLimitedRemainingTextSeparate = $condition;
 
@@ -303,7 +305,7 @@ class VideoEntry extends Entry
         return (bool) $this->evaluate($this->isLimitedRemainingTextSeparate);
     }
 
-    public function limitedRemainingTextSize(string|\Closure|null $size): static
+    public function limitedRemainingTextSize(string|Closure|null $size): static
     {
         $this->limitedRemainingTextSize = $size;
 
@@ -315,7 +317,7 @@ class VideoEntry extends Entry
         return $this->evaluate($this->limitedRemainingTextSize);
     }
 
-    public function checkFileExistence(bool|\Closure $condition = true): static
+    public function checkFileExistence(bool|Closure $condition = true): static
     {
         $this->shouldCheckFileExistence = $condition;
 

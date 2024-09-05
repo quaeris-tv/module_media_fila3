@@ -20,31 +20,9 @@ use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 
 class ListMediaConverts extends ListRecords
 {
-    protected static string $resource = MediaConvertResource::class;
-
     public TableLayoutEnum $layoutView = TableLayoutEnum::GRID;
 
-    protected function getTableHeaderActions(): array
-    {
-        return [
-            TableLayoutToggleTableAction::make(),
-        ];
-    }
-
-    protected function getHeaderWidgets(): array
-    {
-        return [
-            // QueueListenWidget::make(),
-            ClockWidget::make(),
-        ];
-    }
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\CreateAction::make(),
-        ];
-    }
+    protected static string $resource = MediaConvertResource::class;
 
     public function getTableColumns(): array
     {
@@ -77,7 +55,7 @@ class ListMediaConverts extends ListRecords
         return [
             Tables\Actions\EditAction::make(),
             Tables\Actions\Action::make('convert')
-                ->action(function (MediaConvert $record) {
+                ->action(function (MediaConvert $record): void {
                     $record->update(['percentage' => 0]);
                     app(ConvertVideoByMediaConvertAction::class)
                         ->onQueue()
@@ -103,5 +81,27 @@ class ListMediaConverts extends ListRecords
             ->actions($this->getTableActions())
             ->bulkActions($this->getTableBulkActions())
             ->actionsPosition(ActionsPosition::BeforeColumns);
+    }
+
+    protected function getTableHeaderActions(): array
+    {
+        return [
+            TableLayoutToggleTableAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            // QueueListenWidget::make(),
+            ClockWidget::make(),
+        ];
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make(),
+        ];
     }
 }

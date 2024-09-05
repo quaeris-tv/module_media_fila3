@@ -81,7 +81,7 @@ class AttachmentResource extends XotBaseResource
                                 ->color('primary')
                                 ->action(
                                     // File extension obtained by substringing
-                                    static fn ($record) => response()->download($record->getPath(), $record->name.substr((string) strrchr((string) $record->file_name, '.'), 0))
+                                    static fn ($record) => response()->download($record->getPath(), $record->name.mb_substr((string) mb_strrchr((string) $record->file_name, '.'), 0))
                                 ),
                         ]
                     ),

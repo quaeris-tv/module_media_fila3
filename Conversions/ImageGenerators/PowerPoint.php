@@ -18,15 +18,13 @@ class PowerPoint extends ImageGenerator
      */
     public function convert(string $file, ?Conversion $conversion = null): string
     {
-        $pathToImageFile = pathinfo($file, PATHINFO_DIRNAME).'/'.pathinfo($file, PATHINFO_FILENAME).'.jpg';
-
         // Here you should convert the file to an image and return generated conversion path.
         // EXAMPLE
         // EXAMPLE
         // EXAMPLE
         // \PowerPoint::convertFileToImage($file)->store($pathToImageFile);
 
-        return $pathToImageFile;
+        return pathinfo($file, PATHINFO_DIRNAME).'/'.pathinfo($file, PATHINFO_FILENAME).'.jpg';
     }
 
     public function requirementsAreInstalled(): bool
