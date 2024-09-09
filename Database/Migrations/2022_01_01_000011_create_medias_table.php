@@ -10,11 +10,10 @@ use Illuminate\Database\Schema\Blueprint;
 // ----- models -----
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
-/**
+/*
  * Class CreateImagesTable.
  */
-return new class() extends XotBaseMigration
-{
+return new class() extends XotBaseMigration {
     /**
      * i don't write table name, it take from Model, model is singular of this class wit.
      */
@@ -118,6 +117,10 @@ return new class() extends XotBaseMigration
                     $table->longText('curations')->nullable();
                 }
                 */
+                // -- Change
+                if ($this->hasColumn('model_id')) {
+                    $table->string('model_id', 36)->index()->nullable()->change();
+                }
                 $this->updateTimestamps($table, true);
             }
         );
