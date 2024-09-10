@@ -68,7 +68,7 @@ class VideoStream
         $mime = $filesystem->mimeType($path);
 
         if (! is_string($mime)) {
-            throw new Exception('['.__LINE__.']['.__FILE__.']');
+            throw new Exception('['.__LINE__.']['.class_basename($this).']');
         }
 
         $this->mime = $mime;
@@ -115,7 +115,7 @@ class VideoStream
         /*
         $time=@filemtime($this->path);
         if($time==false){
-            throw new Exception('['.__LINE__.']['.__FILE__.']');
+            throw new Exception('['.__LINE__.']['.class_basename($this).']');
         }
         header('Last-Modified: '.gmdate('D, d M Y H:i:s', $time).' GMT');
         */
@@ -125,7 +125,7 @@ class VideoStream
         /*
         $size=filesize($this->path);
         if($size==false){
-            throw new Exception('['.__LINE__.']['.__FILE__.']');
+            throw new Exception('['.__LINE__.']['.class_basename($this).']');
         }
         $this->size = $size;
         */

@@ -34,7 +34,7 @@ class AddAttachmentAction extends Action
 
     public static function trans(string $key): string
     {
-        Assert::string($ris = trans('media::add_attachment_action.'.$key), '['.$key.']['.__LINE__.']['.__FILE__.']');
+        Assert::string($ris = trans('media::add_attachment_action.'.$key), '['.$key.']['.__LINE__.']['.class_basename(__CLASS__).']');
 
         return $ris;
     }

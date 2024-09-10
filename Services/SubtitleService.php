@@ -126,7 +126,7 @@ class SubtitleService
             /*
             throw new Exception('path:['.$path.']'.PHP_EOL.'
                 file_path:['.$this->file_path.']'.PHP_EOL.'
-                ['.__LINE__.']['.__FILE__.']'.PHP_EOL);
+                ['.__LINE__.']['.class_basename($this).']'.PHP_EOL);
             */
         }
 
@@ -152,7 +152,7 @@ class SubtitleService
                 $attributes = $item->attributes();
 
                 if (! $attributes instanceof \SimpleXMLElement) {
-                    throw new \Exception('['.__LINE__.']['.__FILE__.']');
+                    throw new \Exception('['.__LINE__.']['.class_basename($this).']');
                 }
 
                 // 00:06:35,360

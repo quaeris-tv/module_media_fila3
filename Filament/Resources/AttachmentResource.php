@@ -34,7 +34,7 @@ class AttachmentResource extends XotBaseResource
 
     public static function table(Table $table): Table
     {
-        Assert::string($date_format = config('app.date_format'), '['.__LINE__.']['.__FILE__.']');
+        Assert::string($date_format = config('app.date_format'), '['.__LINE__.']['.class_basename(__CLASS__).']');
 
         return $table
             ->columns(

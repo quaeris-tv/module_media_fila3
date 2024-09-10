@@ -253,7 +253,7 @@ class Media extends SpatieMedia
         $url = $this->getUrl();
         $info = pathinfo($url);
         if (! isset($info['dirname'])) {
-            throw new Exception('['.__LINE__.']['.__FILE__.']');
+            throw new Exception('['.__LINE__.']['.class_basename($this).']');
         }
         $url = '#';
         switch ($conv) {

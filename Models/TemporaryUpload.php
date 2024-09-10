@@ -179,9 +179,9 @@ class TemporaryUpload extends Model implements HasMedia
         $media = $this->getFirstMedia();
 
         // if (! $media instanceof \Spatie\MediaLibrary\MediaCollections\Models\Media) {
-        //    throw new \Exception('['.__LINE__.']['.__FILE__.']');
+        //    throw new \Exception('['.__LINE__.']['.class_basename($this).']');
         // }
-        Assert::isInstanceOf($media, Media::class, '['.__LINE__.']['.__FILE__.']');
+        Assert::isInstanceOf($media, Media::class, '['.__LINE__.']['.class_basename($this).']');
 
         $temporaryUploadModel = $media->model;
         $uuid = $media->uuid;
@@ -201,7 +201,7 @@ class TemporaryUpload extends Model implements HasMedia
         if (is_string($res)) {
             return $res;
         }
-        throw new Exception('['.__LINE__.']['.__FILE__.']');
+        throw new Exception('['.__LINE__.']['.class_basename(__CLASS__).']');
     }
 
     // public function prunable(): Builder

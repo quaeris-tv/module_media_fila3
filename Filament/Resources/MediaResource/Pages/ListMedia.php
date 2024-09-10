@@ -59,7 +59,7 @@ class ListMedia extends ListRecords
                     $info = pathinfo($url);
                     if(!isset($info['dirname'])) {
 
-                        throw new Exception('['.__LINE__.']['.__FILE__.']');
+                        throw new Exception('['.__LINE__.']['.class_basename($this).']');
                     }
                     $thumb = $info['dirname'].'/conversions/'.$info['filename'].'-thumb.jpg';
 
@@ -110,7 +110,7 @@ class ListMedia extends ListRecords
                     $info = pathinfo($url);
                     if(!isset($info['dirname'])) {
 
-                        throw new Exception('['.__LINE__.']['.__FILE__.']');
+                        throw new Exception('['.__LINE__.']['.class_basename($this).']');
                     }
                     $thumb = $info['dirname'].'/conversions/'.$info['filename'].'-thumb.jpg';
 
