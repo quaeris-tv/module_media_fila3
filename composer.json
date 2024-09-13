@@ -29,7 +29,7 @@
         "laraxot/module_xot_fila3": "*"
     },
     "require-dev_comment": {
-        "orchestra/testbench": "*",
+        "orchestra/testbench": "^9.4",
         "orchestra/pest-plugin-testbench": "*",
         "larastan/larastan": "^2.9",
         "thecodingmachine/phpstan-safe-rule": "^1.2",
