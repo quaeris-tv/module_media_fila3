@@ -65,7 +65,7 @@ class GalleryField extends Repeater
                     ->addActionLabel('Adicionar novo grupo de fotos')
                     ->grid(2)
                     ->schema(
-                        fn(): array => [
+                        fn (): array => [
                             SpatieMediaLibraryFileUpload::make('fotos')
                                 ->multiple()
                                 ->image()
@@ -77,7 +77,7 @@ class GalleryField extends Repeater
                                 ->columns(2)
                                 ->openable()
                                 ->collection(
-                                    fn(Get $get): string => 'grupo_'.$get('id_for_media')
+                                    fn (Get $get): string => 'grupo_'.$get('id_for_media')
                                 ),
                             Forms\Components\Hidden::make('id_for_media')->default(Str::uuid()->toString()),
                             Forms\Components\TextInput::make('descricao')

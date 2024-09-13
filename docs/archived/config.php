@@ -13,10 +13,10 @@ return [
 
     'collections' => [
         'posts' => [
-            'path' => fn($page): string => $page->lang.'/posts/'.Str::slug($page->getFilename()),
+            'path' => fn ($page): string => $page->lang.'/posts/'.Str::slug($page->getFilename()),
         ],
         'docs' => [
-            'path' => fn($page): string => $page->lang.'/docs/'.Str::slug($page->getFilename()),
+            'path' => fn ($page): string => $page->lang.'/docs/'.Str::slug($page->getFilename()),
         ],
     ],
 
@@ -25,14 +25,14 @@ return [
     'docsearchIndexName' => env('DOCSEARCH_INDEX'),
 
     // navigation menu
-    'navigation' => require_once (__DIR__ . '/navigation.php'),
+    'navigation' => require_once (__DIR__.'/navigation.php'),
 
     // helpers
-    'isActive' => fn($page, $path) => Str::endsWith(trimPath($page->getPath()), trimPath($path)),
-    'isItemActive' => fn($page, $item) => Str::endsWith(trimPath($page->getPath()), trimPath($item->getPath())),
+    'isActive' => fn ($page, $path) => Str::endsWith(trimPath($page->getPath()), trimPath($path)),
+    'isItemActive' => fn ($page, $item) => Str::endsWith(trimPath($page->getPath()), trimPath($item->getPath())),
     'isActiveParent' => function ($page, $menuItem) {
         if (is_object($menuItem) && $menuItem->children) {
-            return $menuItem->children->contains(fn($child): bool => trimPath($page->getPath()) === trimPath($child));
+            return $menuItem->children->contains(fn ($child): bool => trimPath($page->getPath()) === trimPath($child));
         }
     },
     'url' => function ($page, $path) {
@@ -44,7 +44,7 @@ return [
         return url('/'.$page->lang.'/'.trimPath($path));
     },
 
-    'children' => fn($page, $docs): array =>
+    'children' => fn ($page, $docs): array =>
         // return $docs->where('parent_id', $page->id);
         [],
 ];

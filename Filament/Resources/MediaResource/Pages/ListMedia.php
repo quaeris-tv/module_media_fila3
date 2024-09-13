@@ -53,7 +53,7 @@ class ListMedia extends ListRecords
                 ImageColumn::make('preview')
                     ->label('preview')
                     ->size(60)
-                    ->defaultImageUrl(fn($record) =>
+                    ->defaultImageUrl(fn ($record) =>
                         /*
                     $url = $record->getUrl();
                     $info = pathinfo($url);
@@ -104,7 +104,7 @@ class ListMedia extends ListRecords
             ImageColumn::make('preview')
                 ->label('preview')
                 ->size(60)
-                ->defaultImageUrl(fn($record) =>
+                ->defaultImageUrl(fn ($record) =>
                     /*
                     $url = $record->getUrl();
                     $info = pathinfo($url);

@@ -10,7 +10,7 @@ use Modules\Xot\Database\Migrations\XotBaseMigration;
 /**
  * Class CreateInvitationsTable.
  */
-return new class() extends XotBaseMigration
+return new class extends XotBaseMigration
 {
     /**
      * Run the migrations.
