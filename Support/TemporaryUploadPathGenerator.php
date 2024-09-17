@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Media\Support;
 
 use Modules\Media\Models\Media;
+use Webmozart\Assert\Assert;
 
 // use Spatie\MediaLibrary\MediaCollections\Models\Media;
 // use Spatie\MediaLibrary\Support\PathGenerator\PathGenerator;
@@ -34,10 +35,10 @@ class TemporaryUploadPathGenerator // implements PathGenerator
     */
     protected function getBasePath(Media $media): string
     {
-        $prefix = config('media-library.prefix', '');
-
+        Assert::string($prefix = config('media-library.prefix', ''));
+        Assert::string($id = $media->getKey());
         /* @phpstan-ignore-line */
-        $key = md5($media->uuid.$media->getKey());
+        $key = md5($media->uuid.$id);
 
         if ('' !== $prefix) {
             return $prefix.'/'.$key;
