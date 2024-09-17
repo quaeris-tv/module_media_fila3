@@ -77,6 +77,7 @@ class GalleryField extends Repeater
                                 ->columns(2)
                                 ->openable()
                                 ->collection(
+                                    /* @phpstan-ignore-line */
                                     fn (Get $get): string => 'grupo_'.$get('id_for_media')
                                 ),
                             Forms\Components\Hidden::make('id_for_media')->default(Str::uuid()->toString()),
