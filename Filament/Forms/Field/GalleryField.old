@@ -123,7 +123,7 @@ class GalleryField extends Repeater
                         function (SpatieMediaLibraryFileUpload $component, HasMedia $record): void {
                             $callable = function ($file): array {
                                 Assert::isInstanceOf($file, Media::class, '['.__LINE__.']['.class_basename($this).']');
-                                $uuid = $file->getAttributeValue('uuid');
+                                $uuid = $file->uuid;
 
                                 return [$uuid => $uuid];
                             };
