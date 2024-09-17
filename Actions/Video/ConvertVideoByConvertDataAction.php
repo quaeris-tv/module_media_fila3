@@ -37,7 +37,7 @@ class ConvertVideoByConvertDataAction
          * -preset ultrafast.
          */
         // Call to an undefined method ProtoneMedia\LaravelFFMpeg\Drivers\PHPFFMpeg::toDisk().
-        // @phpstan-ignore-next-line
+        // @phpstan-ignore method.notFound
         FFMpeg::fromDisk($data->disk)
             ->open($data->file)
             ->export()

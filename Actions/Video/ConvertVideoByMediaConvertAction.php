@@ -41,7 +41,7 @@ class ConvertVideoByMediaConvertAction
         /**
          * -preset ultrafast.
          */
-        // @phpstan-ignore-next-line
+        // @phpstan-ignore method.notFound
         FFMpeg::fromDisk($data->disk)
             ->open($data->file)
             ->export()
