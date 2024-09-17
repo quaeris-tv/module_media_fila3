@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Modules\Media\Services;
 
 use Exception;
+use Webmozart\Assert\Assert;
+
 use Illuminate\Support\Facades\Storage;
 
 use function is_string;
-use function Safe\fclose;
 use function Safe\fread;
+use function Safe\fclose;
 use function Safe\set_time_limit;
+use function Safe\ob_end_clean;
 
 /**
  * Handles video streaming from a given path.
@@ -40,8 +43,9 @@ class VideoStream
             throw new Exception("File does not exist at path: {$path}");
         }
 
+        Assert::string($mime = $filesystem->mimeType($path));
         $this->stream = $filesystem->readStream($path);
-        $this->mime = $filesystem->mimeType($path);
+        $this->mime = $mime;
         $this->fileModifiedTime = $filesystem->lastModified($path);
         $this->size = $filesystem->size($path);
 
