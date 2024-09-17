@@ -82,7 +82,7 @@ class VideoStream
         $this->end = $this->size - 1;
         header('Accept-Ranges: bytes');
 
-        $rangeHeader = $_SERVER['HTTP_RANGE'] ?? null;
+        Assert::nullOrString($rangeHeader = $_SERVER['HTTP_RANGE'] ?? null);
         if ($rangeHeader !== null) {
             $this->processRangeHeader($rangeHeader);
         } else {
@@ -134,6 +134,10 @@ class VideoStream
     {
         set_time_limit(0); // Disable time limit for streaming
 
+        if (!is_resource($this->stream)) {
+            throw new Exception('Stream resource is not valid.');
+        }
+
         fseek($this->stream, $this->start);
         while (!feof($this->stream) && $this->start <= $this->end) {
             $bytesToRead = min($this->bufferSize, $this->end - $this->start + 1);
@@ -151,7 +155,10 @@ class VideoStream
      */
     private function closeStream(): void
     {
-        fclose($this->stream);
+        if (is_resource($this->stream)) {
+            fclose($this->stream);
+        }
+
         exit;
     }
 }
