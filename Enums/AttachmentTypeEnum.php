@@ -23,6 +23,7 @@ enum AttachmentTypeEnum: string implements HasLabel
             ->toArray();
     }
 
+    /* Method Modules\Media\Enums\AttachmentTypeEnum::operationCases() never returns null so it can be removed from the return type
     public static function operationCases(): ?array
     {
         $originalCases = self::cases();
@@ -30,6 +31,7 @@ enum AttachmentTypeEnum: string implements HasLabel
 
         return $originalCases;
     }
+        */
 
     public function getTypeNote(): ?string
     {
@@ -41,7 +43,7 @@ enum AttachmentTypeEnum: string implements HasLabel
         return null;
     }
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return trans('media::attachments.types.'.$this->value);
     }

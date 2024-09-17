@@ -1,4 +1,7 @@
 <?php
+/**
+ * Trait Modules\Media\Rules\Concerns\ValidatesMedia is used zero times
+ */
 
 declare(strict_types=1);
 
@@ -111,11 +114,11 @@ trait ValidatesMedia
 
     protected function validateSingleMedia(): UploadedMediaRules
     {
-        return (new UploadedMediaRules)->maxItems(1);
+        return (new UploadedMediaRules())->maxItems(1);
     }
 
     protected function validateMultipleMedia(): UploadedMediaRules
     {
-        return new UploadedMediaRules;
+        return new UploadedMediaRules();
     }
 }

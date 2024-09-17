@@ -2,17 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Description of VideoStream.
- *
- * @author Rana
- *
- * @see http://codesamplez.com/programming/php-html5-video-streaming-tutorial
- * @see https://code-pocket.info/20200624304/
- */
-
-// declare(strict_types=1);
-
 namespace Modules\Media\Services;
 
 use Exception;
@@ -24,187 +13,141 @@ use function Safe\fread;
 use function Safe\set_time_limit;
 
 /**
- * Undocumented class.
+ * Handles video streaming from a given path.
  */
 class VideoStream
 {
-    // private $stream = "";
-
-    // private string $path = "";
-    private int $buffer = 102400;
-
-    private int $start = -1;
-
-    private int $end = -1;
-
-    private int $size = 0;
-
-    private array $vars = [];
-
-    private ?string $mime = null;
-
-    private ?int $filemtime = null;
+    private int $bufferSize = 102400; // Buffer size for streaming
+    private int $start = 0; // Start position for streaming
+    private int $end = 0; // End position for streaming
+    private int $size = 0; // Total size of the video
+    private ?string $mime = null; // MIME type of the video
+    private ?int $fileModifiedTime = null; // Last modified time of the video file
+    private mixed $stream; // File stream resource
 
     /**
-     * Undocumented function.
+     * Initialize the video stream.
      *
-     * @return void
+     * @param string $disk The disk storage name
+     * @param string $path The path to the video file
+     * @throws Exception If the file does not exist or other errors
      */
     public function __construct(string $disk, string $path)
     {
-        // $this->path = $path;
         $filesystem = Storage::disk($disk);
-        if (! $filesystem->exists($path)) {
-            dddx(
-                [
-                    'message' => 'file not exists',
-                    'disk' => $disk,
-                    'path' => $path,
-                ]
-            );
+
+        if (!$filesystem->exists($path)) {
+            throw new Exception("File does not exist at path: {$path}");
         }
 
-        $this->vars['stream'] = $filesystem->readStream($path);
-        $mime = $filesystem->mimeType($path);
-
-        if (! is_string($mime)) {
-            throw new Exception('['.__LINE__.']['.class_basename($this).']');
-        }
-
-        $this->mime = $mime;
-
-        // dddx([$path, $storage->lastModified($path)]);
-
-        $this->filemtime = $filesystem->lastModified($path);
+        $this->stream = $filesystem->readStream($path);
+        $this->mime = $filesystem->mimeType($path);
+        $this->fileModifiedTime = $filesystem->lastModified($path);
         $this->size = $filesystem->size($path);
-    }
 
-    /**
-     * Start streaming video content.
-     */
-    public function start(): never
-    {
-        // $this->open();
-        $this->setHeader();
-        $this->stream();
-        $this->end();
-    }
-
-    /**
-     * Open stream.
-     */
-    // private function open() {
-    /*
-    if (!($this->vars['stream'] = fopen($this->path, 'rb'))) {
-        die('Could not open stream for reading');
-    }
-    */
-    // }
-    /**
-     * Set proper header to serve the video content.
-     */
-    private function setHeader(): void
-    {
-        ob_get_clean();
-        // header("Content-Type: video/mp4");
-
-        header('Content-Type: '.$this->mime);
-
-        header('Cache-Control: max-age=2592000, public');
-        header('Expires: '.gmdate('D, d M Y H:i:s', time() + 2_592_000).' GMT');
-        /*
-        $time=@filemtime($this->path);
-        if($time==false){
-            throw new Exception('['.__LINE__.']['.class_basename($this).']');
+        if (!is_string($this->mime)) {
+            throw new Exception('Unable to determine MIME type.');
         }
-        header('Last-Modified: '.gmdate('D, d M Y H:i:s', $time).' GMT');
-        */
+    }
 
-        header('Last-Modified: '.gmdate('D, d M Y H:i:s', $this->filemtime).' GMT');
-        $this->start = 0;
-        /*
-        $size=filesize($this->path);
-        if($size==false){
-            throw new Exception('['.__LINE__.']['.class_basename($this).']');
-        }
-        $this->size = $size;
-        */
+    /**
+     * Start streaming the video.
+     *
+     * @return void
+     */
+    public function start(): void
+    {
+        $this->setHeaders();
+        $this->streamContent();
+        $this->closeStream();
+    }
+
+    /**
+     * Set HTTP headers for video streaming.
+     *
+     * @return void
+     */
+    private function setHeaders(): void
+    {
+        ob_end_clean(); // Clean any previous output
+        header('Content-Type: ' . $this->mime);
+        header('Cache-Control: max-age=2592000, public'); // 30 days cache
+        header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 2592000) . ' GMT'); // 30 days in the future
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $this->fileModifiedTime) . ' GMT');
+
         $this->end = $this->size - 1;
+        header('Accept-Ranges: bytes');
 
-        header('Accept-Ranges: 0-'.$this->end);
-
-        if (isset($_SERVER['HTTP_RANGE'])) {
-            $c_end = $this->end;
-
-            [, $range] = explode('=', (string) $_SERVER['HTTP_RANGE'], 2);
-            if (str_contains($range, ',')) {
-                header('HTTP/1.1 416 Requested Range Not Satisfiable');
-                header(sprintf('Content-Range: bytes %d-%d/%d', $this->start, $this->end, $this->size));
-                exit;
-            }
-            if ($range === '-') {
-                $c_start = $this->size - (int) mb_substr($range, 1);
-            } else {
-                $range = explode('-', $range);
-                $c_start = $range[0];
-
-                $c_end = isset($range[1]) && is_numeric($range[1]) ? $range[1] : $c_end;
-            }
-
-            $c_end = $c_end > $this->end ? $this->end : $c_end;
-            if ($c_start > $c_end || $c_start > $this->size - 1 || $c_end >= $this->size) {
-                header('HTTP/1.1 416 Requested Range Not Satisfiable');
-                header(sprintf('Content-Range: bytes %d-%d/%d', $this->start, $this->end, $this->size));
-                exit;
-            }
-
-            $this->start = (int) $c_start;
-            $this->end = (int) $c_end;
-            $length = $this->end - $this->start + 1;
-            fseek($this->vars['stream'], $this->start);
-            header('HTTP/1.1 206 Partial Content');
-
-            header('Content-Length: '.$length);
-            header(sprintf('Content-Range: bytes %d-%d/', $this->start, $this->end).$this->size);
+        $rangeHeader = $_SERVER['HTTP_RANGE'] ?? null;
+        if ($rangeHeader !== null) {
+            $this->processRangeHeader($rangeHeader);
         } else {
-            header('Content-Length: '.$this->size);
+            header('Content-Length: ' . $this->size);
         }
     }
 
     /**
-     * close curretly opened stream.
+     * Process the range header for partial content requests.
+     *
+     * @param string $rangeHeader
+     * @return void
      */
-    private function end(): never
+    private function processRangeHeader(string $rangeHeader): void
     {
-        fclose($this->vars['stream']);
-        exit;
+        [$unit, $range] = explode('=', $rangeHeader, 2);
+
+        if ($unit !== 'bytes') {
+            header('HTTP/1.1 416 Requested Range Not Satisfiable');
+            header(sprintf('Content-Range: bytes %d-%d/%d', $this->start, $this->end, $this->size));
+            exit;
+        }
+
+        $rangeParts = explode('-', $range);
+        $start = (int) $rangeParts[0];
+        $end = isset($rangeParts[1]) ? (int) $rangeParts[1] : $this->end;
+
+        if ($start > $end || $start >= $this->size || $end >= $this->size) {
+            header('HTTP/1.1 416 Requested Range Not Satisfiable');
+            header(sprintf('Content-Range: bytes %d-%d/%d', $this->start, $this->end, $this->size));
+            exit;
+        }
+
+        $this->start = $start;
+        $this->end = $end;
+
+        $length = $this->end - $this->start + 1;
+        header('HTTP/1.1 206 Partial Content');
+        header('Content-Length: ' . $length);
+        header(sprintf('Content-Range: bytes %d-%d/%d', $this->start, $this->end, $this->size));
     }
 
     /**
-     * perform the streaming of calculated range.
+     * Stream the video content to the client.
+     *
+     * @return void
      */
-    private function stream(): void
+    private function streamContent(): void
     {
-        $i = $this->start;
-        set_time_limit(0);
-        while (! feof($this->vars['stream']) && $i <= $this->end) {
-            /**
-             * @var int<0, max> $bytesToRead
-             */
-            $bytesToRead = $this->buffer;
-            if ($i + $bytesToRead > $this->end) {
-                $bytesToRead = $this->end - $i + 1;
-            }
+        set_time_limit(0); // Disable time limit for streaming
 
-            // 169    Parameter #2 $length of function fread expects int<0, max>, int given.
-            /**
-             * @var int<0, max>
-             */
-            $length = $bytesToRead;
-            $data = fread($this->vars['stream'], $length);
+        fseek($this->stream, $this->start);
+        while (!feof($this->stream) && $this->start <= $this->end) {
+            $bytesToRead = min($this->bufferSize, $this->end - $this->start + 1);
+            $data = fread($this->stream, $bytesToRead);
             echo $data;
             flush();
-            $i += $bytesToRead;
+            $this->start += $bytesToRead;
         }
+    }
+
+    /**
+     * Close the file stream and terminate the script.
+     *
+     * @return void
+     */
+    private function closeStream(): void
+    {
+        fclose($this->stream);
+        exit;
     }
 }

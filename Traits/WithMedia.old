@@ -1,4 +1,7 @@
 <?php
+/**
+ * Trait Modules\Media\Traits\WithMedia is used zero times
+ */
 
 declare(strict_types=1);
 
