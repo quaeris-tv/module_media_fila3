@@ -12,7 +12,7 @@ use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 
 class ListTemporaryUploads extends ListRecords
 {
-    public TableLayoutEnum $layoutView = TableLayoutEnum::GRID;
+    public TableLayoutEnum $layoutView = TableLayoutEnum::LIST;
 
     protected static string $resource = TemporaryUploadResource::class;
 

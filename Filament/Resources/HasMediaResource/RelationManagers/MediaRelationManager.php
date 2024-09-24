@@ -25,7 +25,7 @@ class MediaRelationManager extends XotBaseRelationManager
 {
     use NavigationLabelTrait;
 
-    public TableLayoutEnum $layoutView = TableLayoutEnum::GRID;
+    public TableLayoutEnum $layoutView = TableLayoutEnum::LIST;
 
     protected static string $relationship = 'media';
 

@@ -28,7 +28,7 @@ class ListMedia extends ListRecords
 {
     use NavigationPageLabelTrait;
 
-    public TableLayoutEnum $layoutView = TableLayoutEnum::GRID;
+    public TableLayoutEnum $layoutView = TableLayoutEnum::LIST;
 
     protected static string $resource = MediaResource::class;
 
