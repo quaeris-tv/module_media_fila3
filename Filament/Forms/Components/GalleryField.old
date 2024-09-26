@@ -5,7 +5,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Media\Filament\Forms\Field;
+namespace Modules\Media\Filament\Forms\Components;
 
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;

@@ -13,8 +13,7 @@ use Modules\Xot\Database\Migrations\XotBaseMigration;
 /*
  * Class CreateImagesTable.
  */
-return new class extends XotBaseMigration
-{
+return new class() extends XotBaseMigration {
     /**
      * i don't write table name, it take from Model, model is singular of this class wit.
      */
@@ -49,78 +48,9 @@ return new class extends XotBaseMigration
         // -- UPDATE --
         $this->tableUpdate(
             function (Blueprint $table): void {
-                /*
-                if (! $this->hasColumn('user_id')) {
-                    $table->integer('user_id');
-                }
-
-                if (! $this->hasColumn('order_column')) {
-                    $table->unsignedInteger('order_column')->nullable()->index();
-                }
-
-                if (! $this->hasColumn('disk')) {
-                    $table->string('disk')->default('public');
-                }
-
-                if (! $this->hasColumn('directory')) {
-                    $table->string('directory')->default('media');
-                }
-
-                if (! $this->hasColumn('name')) {
-                    $table->string('name')->nullable();
-                }
-
-                if (! $this->hasColumn('path')) {
-                    $table->string('path')->nullable();
-                }
-
-                if (! $this->hasColumn('width')) {
-                    $table->unsignedInteger('width')->nullable();
-                }
-
-                if (! $this->hasColumn('height')) {
-                    $table->unsignedInteger('height')->nullable();
-                }
-
-                if (! $this->hasColumn('size')) {
-                    $table->unsignedInteger('size')->nullable();
-                }
-
-                if (! $this->hasColumn('type')) {
-                    $table->string('type')->default('image')->nullable();
-                }
-
-                if (! $this->hasColumn('ext')) {
-                    $table->string('ext')->nullable();
-                }
-
-                if (! $this->hasColumn('alt')) {
-                    $table->string('alt')->nullable();
-                }
-
-                if (! $this->hasColumn('title')) {
-                    $table->string('title')->nullable();
-                }
-
-                if (! $this->hasColumn('description')) {
-                    $table->text('description')->nullable();
-                }
-
-                if (! $this->hasColumn('caption')) {
-                    $table->text('caption')->nullable();
-                }
-
-                if (! $this->hasColumn('exif')) {
-                    $table->text('exif')->nullable();
-                }
-
-                if (! $this->hasColumn('curations')) {
-                    $table->longText('curations')->nullable();
-                }
-                */
                 // -- Change
                 if ($this->hasColumn('model_id')) {
-                    $table->string('model_id', 36)->index()->nullable()->change();
+                    $table->string('model_id', 36)->nullable()->change();
                 }
                 $this->updateTimestamps($table, true);
             }
