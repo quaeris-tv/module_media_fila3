@@ -30,13 +30,13 @@ use function is_string;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
  * @property int|null $media_count
- * @method static Builder|TemporaryUpload newModelQuery()
- * @method static Builder|TemporaryUpload newQuery()
- * @method static Builder|TemporaryUpload query()
- * @method static Builder|TemporaryUpload whereCreatedAt($value)
- * @method static Builder|TemporaryUpload whereId($value)
- * @method static Builder|TemporaryUpload whereSessionId($value)
- * @method static Builder|TemporaryUpload whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload query()
+ * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload whereSessionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class TemporaryUpload extends Model implements HasMedia
