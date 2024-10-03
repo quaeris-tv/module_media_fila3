@@ -12,11 +12,12 @@ use Webmozart\Assert\Assert;
 // use Modules\Media\Contracts\PathGenerator;
 
 class TemporaryUploadPathGenerator // implements PathGenerator
-{public function getPath(Media $media): string
 {
-    /* @phpstan-ignore-line */
-    return $this->getBasePath($media).'/'.md5($media->id.$media->uuid.'original').'/';
-}
+    public function getPath(Media $media): string
+    {
+        /* @phpstan-ignore-line */
+        return $this->getBasePath($media).'/'.md5($media->id.$media->uuid.'original').'/';
+    }
 
     public function getPathForConversions(Media $media): string
     {
@@ -40,7 +41,7 @@ class TemporaryUploadPathGenerator // implements PathGenerator
         /* @phpstan-ignore-line */
         $key = md5($media->uuid.$id);
 
-        if ('' !== $prefix) {
+        if ($prefix !== '') {
             return $prefix.'/'.$key;
         }
 

@@ -8,7 +8,9 @@ use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use SimpleXMLElement;
 
+use function count;
 use function Safe\file_put_contents;
 use function Safe\fopen;
 use function Safe\realpath;
@@ -121,7 +123,7 @@ class SubtitleService
         // $path = Storage::path($this->file_path);
         // $path = realpath($path);
         $path = realpath($this->file_path);
-        if ($path == false) {
+        if ($path === false) {
             return '';
             /*
             throw new Exception('path:['.$path.']'.PHP_EOL.'
@@ -151,8 +153,8 @@ class SubtitleService
             foreach ($sentence->item as $item) {
                 $attributes = $item->attributes();
 
-                if (! $attributes instanceof \SimpleXMLElement) {
-                    throw new \Exception('['.__LINE__.']['.class_basename($this).']');
+                if (! $attributes instanceof SimpleXMLElement) {
+                    throw new Exception('['.__LINE__.']['.class_basename($this).']');
                 }
 
                 // 00:06:35,360
@@ -201,7 +203,7 @@ class SubtitleService
             // ($fileHandle);
         }
 
-        $length = \count($lines);
+        $length = count($lines);
         for ($index = 1; $index < $length; $index++) {
             if ($index === 1 || trim($lines[$index - 2]) === '') {
                 $lines[$index] = str_replace(',', '.', $lines[$index]);

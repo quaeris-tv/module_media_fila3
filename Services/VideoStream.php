@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Modules\Media\Services;
 
 use Exception;
+use Illuminate\Support\Facades\Storage;
 use Webmozart\Assert\Assert;
 
-use Illuminate\Support\Facades\Storage;
-
 use function is_string;
-use function Safe\fread;
 use function Safe\fclose;
-use function Safe\set_time_limit;
+use function Safe\fread;
 use function Safe\ob_end_clean;
+use function Safe\set_time_limit;
 
 /**
  * Handles video streaming from a given path.
@@ -21,25 +20,32 @@ use function Safe\ob_end_clean;
 class VideoStream
 {
     private int $bufferSize = 102400; // Buffer size for streaming
+
     private int $start = 0; // Start position for streaming
+
     private int $end = 0; // End position for streaming
+
     private int $size = 0; // Total size of the video
+
     private ?string $mime = null; // MIME type of the video
+
     private ?int $fileModifiedTime = null; // Last modified time of the video file
+
     private mixed $stream; // File stream resource
 
     /**
      * Initialize the video stream.
      *
-     * @param string $disk The disk storage name
-     * @param string $path The path to the video file
+     * @param  string  $disk  The disk storage name
+     * @param  string  $path  The path to the video file
+     *
      * @throws Exception If the file does not exist or other errors
      */
     public function __construct(string $disk, string $path)
     {
         $filesystem = Storage::disk($disk);
 
-        if (!$filesystem->exists($path)) {
+        if (! $filesystem->exists($path)) {
             throw new Exception("File does not exist at path: {$path}");
         }
 
@@ -49,15 +55,13 @@ class VideoStream
         $this->fileModifiedTime = $filesystem->lastModified($path);
         $this->size = $filesystem->size($path);
 
-        if (!is_string($this->mime)) {
+        if (! is_string($this->mime)) {
             throw new Exception('Unable to determine MIME type.');
         }
     }
 
     /**
      * Start streaming the video.
-     *
-     * @return void
      */
     public function start(): void
     {
@@ -68,16 +72,14 @@ class VideoStream
 
     /**
      * Set HTTP headers for video streaming.
-     *
-     * @return void
      */
     private function setHeaders(): void
     {
         ob_end_clean(); // Clean any previous output
-        header('Content-Type: ' . $this->mime);
+        header('Content-Type: '.$this->mime);
         header('Cache-Control: max-age=2592000, public'); // 30 days cache
-        header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 2592000) . ' GMT'); // 30 days in the future
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $this->fileModifiedTime) . ' GMT');
+        header('Expires: '.gmdate('D, d M Y H:i:s', time() + 2592000).' GMT'); // 30 days in the future
+        header('Last-Modified: '.gmdate('D, d M Y H:i:s', $this->fileModifiedTime).' GMT');
 
         $this->end = $this->size - 1;
         header('Accept-Ranges: bytes');
@@ -86,15 +88,12 @@ class VideoStream
         if ($rangeHeader !== null) {
             $this->processRangeHeader($rangeHeader);
         } else {
-            header('Content-Length: ' . $this->size);
+            header('Content-Length: '.$this->size);
         }
     }
 
     /**
      * Process the range header for partial content requests.
-     *
-     * @param string $rangeHeader
-     * @return void
      */
     private function processRangeHeader(string $rangeHeader): void
     {
@@ -121,25 +120,23 @@ class VideoStream
 
         $length = $this->end - $this->start + 1;
         header('HTTP/1.1 206 Partial Content');
-        header('Content-Length: ' . $length);
+        header('Content-Length: '.$length);
         header(sprintf('Content-Range: bytes %d-%d/%d', $this->start, $this->end, $this->size));
     }
 
     /**
      * Stream the video content to the client.
-     *
-     * @return void
      */
     private function streamContent(): void
     {
         set_time_limit(0); // Disable time limit for streaming
 
-        if (!is_resource($this->stream)) {
+        if (! is_resource($this->stream)) {
             throw new Exception('Stream resource is not valid.');
         }
 
         fseek($this->stream, $this->start);
-        while (!feof($this->stream) && $this->start <= $this->end) {
+        while (! feof($this->stream) && $this->start <= $this->end) {
             $bytesToRead = min($this->bufferSize, $this->end - $this->start + 1);
             $data = fread($this->stream, $bytesToRead);
             echo $data;
@@ -150,8 +147,6 @@ class VideoStream
 
     /**
      * Close the file stream and terminate the script.
-     *
-     * @return void
      */
     private function closeStream(): void
     {
