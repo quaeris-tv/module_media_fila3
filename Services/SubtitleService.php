@@ -123,7 +123,7 @@ class SubtitleService
         // $path = Storage::path($this->file_path);
         // $path = realpath($path);
         $path = realpath($this->file_path);
-        if ($path === false) {
+        if ($path == false) {
             return '';
             /*
             throw new Exception('path:['.$path.']'.PHP_EOL.'
