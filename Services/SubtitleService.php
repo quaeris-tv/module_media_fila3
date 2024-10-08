@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Media\Services;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use SimpleXMLElement;
 
+use function count;
 use function Safe\file_put_contents;
 use function Safe\fopen;
 use function Safe\realpath;
@@ -139,8 +142,8 @@ class SubtitleService
             foreach ($sentence->item as $item) {
                 $attributes = $item->attributes();
 
-                if (! $attributes instanceof \SimpleXMLElement) {
-                    throw new \Exception('['.__LINE__.']['.class_basename($this).']');
+                if (! $attributes instanceof SimpleXMLElement) {
+                    throw new Exception('['.__LINE__.']['.class_basename($this).']');
                 }
 
                 // 00:06:35,360
@@ -157,10 +160,10 @@ class SubtitleService
                     'text' => $item->__toString(),
                 ];
                 $data[] = $tmp;
-                ++$item_i;
+                $item_i++;
             }
 
-            ++$sentence_i;
+            $sentence_i++;
         }
 
         return $data;
@@ -169,8 +172,8 @@ class SubtitleService
     /**
      * Undocumented function.
      *
-     * @param string $srtFile
-     * @param string $webVttFile
+     * @param  string  $srtFile
+     * @param  string  $webVttFile
      */
     public function srtToVtt($srtFile, $webVttFile): void
     {
@@ -189,9 +192,9 @@ class SubtitleService
             // ($fileHandle);
         }
 
-        $length = \count($lines);
-        for ($index = 1; $index < $length; ++$index) {
-            if (1 === $index || '' === trim($lines[$index - 2])) {
+        $length = count($lines);
+        for ($index = 1; $index < $length; $index++) {
+            if ($index === 1 || trim($lines[$index - 2]) === '') {
                 $lines[$index] = str_replace(',', '.', $lines[$index]);
             }
         }
