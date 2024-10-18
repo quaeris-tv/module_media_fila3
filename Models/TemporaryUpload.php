@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Media\Models;
 
+use Closure;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
@@ -17,15 +19,17 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Webmozart\Assert\Assert;
 
+use function is_string;
+
 /**
  * Modules\Media\Models\TemporaryUpload.
  *
- * @property int                                                                                  $id
- * @property string                                                                               $session_id
- * @property \Illuminate\Support\Carbon|null                                                      $created_at
- * @property \Illuminate\Support\Carbon|null                                                      $updated_at
+ * @property int $id
+ * @property string $session_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
- * @property int|null                                                                             $media_count
+ * @property int|null $media_count
  *
  * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload newQuery()
@@ -42,7 +46,7 @@ class TemporaryUpload extends Model implements HasMedia
     use InteractsWithMedia;
     use MassPrunable;
 
-    public static ?\Closure $manipulatePreview = null;
+    public static ?Closure $manipulatePreview = null;
 
     public static ?string $disk = null;
 
@@ -196,10 +200,10 @@ class TemporaryUpload extends Model implements HasMedia
     protected static function getDiskName(): string
     {
         $res = static::$disk ?? config('media-library.disk_name');
-        if (\is_string($res)) {
+        if (is_string($res)) {
             return $res;
         }
-        throw new \Exception('['.__LINE__.']['.class_basename(__CLASS__).']');
+        throw new Exception('['.__LINE__.']['.class_basename(__CLASS__).']');
     }
 
     // public function prunable(): Builder
@@ -207,7 +211,7 @@ class TemporaryUpload extends Model implements HasMedia
     //    return self::query()->old();
     // }
 
-    protected function getPreviewManipulation(): \Closure
+    protected function getPreviewManipulation(): Closure
     {
         return static::$manipulatePreview ?? function (Conversion $conversion): void {
             $conversion->fit(Fit::Crop, 300, 300);
