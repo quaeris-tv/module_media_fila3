@@ -263,9 +263,9 @@ class Media extends SpatieMedia
     }
 
     /**
-     * @return BelongsTo<TemporaryUpload,Media>
+     * return BelongsTo<TemporaryUpload,self|$this>.
      *
-     * @psalm-return BelongsTo<TemporaryUpload,Media>
+     * @return BelongsTo<TemporaryUpload,covariant Media>
      */
     public function temporaryUpload(): BelongsTo
     {
