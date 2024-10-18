@@ -24,17 +24,6 @@
         "pbmedia/laravel-ffmpeg": "^8.5",
         "intervention/image": "*"
     },
-    "require_comment": {
-        "thecodingmachine/safe": "^2.5",
-        "laraxot/module_xot_fila3": "*"
-    },
-    "require-dev_comment": {
-        "orchestra/testbench": "^9.4",
-        "orchestra/pest-plugin-testbench": "*",
-        "larastan/larastan": "^2.9",
-        "thecodingmachine/phpstan-safe-rule": "^1.2",
-        "rector/rector": "*"
-    },
     "repositories": [
         {
             "type": "path",
