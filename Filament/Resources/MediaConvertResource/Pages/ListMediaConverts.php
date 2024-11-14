@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Modules\Media\Filament\Resources\MediaConvertResource\Pages;
 
-use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\ActionsPosition;
+use Filament\Actions;
 use Filament\Tables\Table;
-use Modules\Job\Filament\Widgets\ClockWidget;
-use Modules\Job\Filament\Widgets\QueueListenWidget;
-use Modules\Media\Actions\Video\ConvertVideoByMediaConvertAction;
-use Modules\Media\Filament\Resources\MediaConvertResource;
-use Modules\Media\Models\MediaConvert;
 use Modules\UI\Enums\TableLayoutEnum;
+use Modules\Media\Models\MediaConvert;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Resources\Pages\ListRecords;
+use Filament\Tables\Enums\ActionsPosition;
+use Modules\Job\Filament\Widgets\ClockWidget;
+use Modules\Xot\Filament\Pages\XotBaseListRecords;
+use Modules\Job\Filament\Widgets\QueueListenWidget;
+use Modules\Media\Filament\Resources\MediaConvertResource;
+use Modules\Media\Actions\Video\ConvertVideoByMediaConvertAction;
 use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 
-class ListMediaConverts extends ListRecords
+class ListMediaConverts extends XotBaseListRecords
 {
-    public TableLayoutEnum $layoutView = TableLayoutEnum::LIST;
-
+    
     protected static string $resource = MediaConvertResource::class;
 
     public function getTableColumns(): array
