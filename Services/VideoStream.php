@@ -76,10 +76,10 @@ class VideoStream
     private function setHeaders(): void
     {
         ob_end_clean(); // Clean any previous output
-        header('Content-Type: '.$this->mime);
+        header('Content-Type: ' . $this->mime);
         header('Cache-Control: max-age=2592000, public'); // 30 days cache
-        header('Expires: '.gmdate('D, d M Y H:i:s', time() + 2592000).' GMT'); // 30 days in the future
-        header('Last-Modified: '.gmdate('D, d M Y H:i:s', $this->fileModifiedTime).' GMT');
+        header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 2592000) . ' GMT'); // 30 days in the future
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $this->fileModifiedTime) . ' GMT');
 
         $this->end = $this->size - 1;
         header('Accept-Ranges: bytes');
@@ -88,7 +88,7 @@ class VideoStream
         if ($rangeHeader !== null) {
             $this->processRangeHeader($rangeHeader);
         } else {
-            header('Content-Length: '.$this->size);
+            header('Content-Length: ' . $this->size);
         }
     }
 
@@ -120,7 +120,7 @@ class VideoStream
 
         $length = $this->end - $this->start + 1;
         header('HTTP/1.1 206 Partial Content');
-        header('Content-Length: '.$length);
+        header('Content-Length: ' . $length);
         header(sprintf('Content-Range: bytes %d-%d/%d', $this->start, $this->end, $this->size));
     }
 

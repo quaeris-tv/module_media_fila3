@@ -36,7 +36,7 @@ class Merge
         foreach ($filenames as $filename) {
             // $img = Image::make(public_path($filename));
 
-            $manager = new ImageManager(new Driver);
+            $manager = new ImageManager(new Driver());
             $img = $manager->read(public_path($filename));
 
             $imgs[] = $img;
@@ -45,7 +45,7 @@ class Merge
         }
 
         if (! is_numeric($height)) {
-            throw new Exception('['.__LINE__.']['.class_basename(self::class).']');
+            throw new Exception('[' . __LINE__ . '][' . class_basename(self::class) . ']');
         }
         $height = (int) $height;
         // $img_canvas = Image::canvas($width, $height);
@@ -60,6 +60,6 @@ class Merge
             $delta += $img->width();
         }
 
-        $img_canvas->save(public_path().'/'.$filenameOut, 100);
+        $img_canvas->save(public_path() . '/' . $filenameOut, 100);
     }
 }

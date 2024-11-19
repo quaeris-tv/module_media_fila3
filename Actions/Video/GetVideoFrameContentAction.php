@@ -32,7 +32,7 @@ class GetVideoFrameContentAction
 
         $seconds = 3600;
 
-        $cache_key = Str::slug($disk_mp4.' '.$file_mp4.' '.$time.' 1');
+        $cache_key = Str::slug($disk_mp4 . ' ' . $file_mp4 . ' ' . $time . ' 1');
 
         return Cache::store('file')->remember(
             $cache_key,

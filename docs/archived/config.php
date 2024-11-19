@@ -13,10 +13,10 @@ return [
 
     'collections' => [
         'posts' => [
-            'path' => fn ($page): string => $page->lang.'/posts/'.Str::slug($page->getFilename()),
+            'path' => fn ($page): string => $page->lang . '/posts/' . Str::slug($page->getFilename()),
         ],
         'docs' => [
-            'path' => fn ($page): string => $page->lang.'/docs/'.Str::slug($page->getFilename()),
+            'path' => fn ($page): string => $page->lang . '/docs/' . Str::slug($page->getFilename()),
         ],
     ],
 
@@ -25,7 +25,7 @@ return [
     'docsearchIndexName' => env('DOCSEARCH_INDEX'),
 
     // navigation menu
-    'navigation' => require_once (__DIR__.'/navigation.php'),
+    'navigation' => require_once(__DIR__ . '/navigation.php'),
 
     // helpers
     'isActive' => fn ($page, $path) => Str::endsWith(trimPath($page->getPath()), trimPath($path)),
@@ -41,7 +41,7 @@ return [
         }
 
         // return Str::startsWith($path, 'http') ? $path : '/' . trimPath($path);
-        return url('/'.$page->lang.'/'.trimPath($path));
+        return url('/' . $page->lang . '/' . trimPath($path));
     },
 
     'children' => fn ($page, $docs): array =>
