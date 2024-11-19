@@ -7,11 +7,10 @@ use Illuminate\Database\Schema\Blueprint;
 
 use Modules\Xot\Database\Migrations\XotBaseMigration;
 
-/**
+/*
  * Class CreateInvitationsTable.
  */
-return new class extends XotBaseMigration
-{
+return new class() extends XotBaseMigration {
     /**
      * Run the migrations.
      */
@@ -22,7 +21,12 @@ return new class extends XotBaseMigration
             function (Blueprint $table): void {
                 $table->uuid('id')->primary();
                 $table->string('session_id');
-                $table->timestamps();
+            }
+        );
+        // -- UPDATE --
+        $this->tableUpdate(
+            function (Blueprint $table): void {
+                $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }
         );
     }
