@@ -13,8 +13,7 @@ use Modules\Xot\Database\Migrations\XotBaseMigration;
 /*
  * Class CreateImagesTable.
  */
-return new class() extends XotBaseMigration
-{
+return new class() extends XotBaseMigration {
     /**
      * i don't write table name, it take from Model, model is singular of this class wit.
      */
@@ -40,10 +39,6 @@ return new class() extends XotBaseMigration
                 $table->json('generated_conversions');
                 $table->json('responsive_images');
                 $table->unsignedInteger('order_column')->nullable()->index();
-                $table->nullableTimestamps();
-                // ----------------------------------------------------------
-                // $table->string('created_by')->nullable();
-                // $table->string('updated_by')->nullable();
             }
         );
         // -- UPDATE --
