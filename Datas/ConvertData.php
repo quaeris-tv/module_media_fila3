@@ -62,7 +62,7 @@ class ConvertData extends Data implements Wireable
         $extension = mb_strtolower(class_basename($format));
 
         return Str::of($this->file)
-            ->replaceLast('.mp4', '.'.$extension)
+            ->replaceLast('.mp4', '.' . $extension)
             ->toString();
     }
 }
