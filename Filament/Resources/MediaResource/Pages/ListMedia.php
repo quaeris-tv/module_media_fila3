@@ -199,12 +199,7 @@ class ListMedia extends XotBaseListRecords
             );
     }
 
-    protected function getTableHeaderActions(): array
-    {
-        return [
-            TableLayoutToggleTableAction::make(),
-        ];
-    }
+    
 
     /**
      * @return CreateAction[]
