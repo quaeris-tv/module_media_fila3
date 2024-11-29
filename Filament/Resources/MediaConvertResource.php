@@ -21,7 +21,7 @@ class MediaConvertResource extends Resource
     {
         return [
             Radio::make('format')
-                ->label('Format?')
+
                 ->options([
                     'webm' => 'webm',
                     // 'webm02' => 'webm02',
@@ -30,7 +30,7 @@ class MediaConvertResource extends Resource
                 ->inlineLabel(false),
             // -----------------------------------
             Radio::make('codec_video')
-                // ->label('Format?')
+
                 ->options([
                     'libvpx-vp9' => 'libvpx-vp9',
                     'libvpx-vp8' => 'libvpx-vp8',
@@ -38,7 +38,7 @@ class MediaConvertResource extends Resource
                 ->inline()
                 ->inlineLabel(false),
             Radio::make('codec_audio')
-                // ->label('Format?')
+
                 ->options([
                     'copy' => 'copy',
                     'libvorbis' => 'libvorbis',
@@ -46,7 +46,7 @@ class MediaConvertResource extends Resource
                 ->inline()
                 ->inlineLabel(false),
             Radio::make('preset')
-                // ->label('Format?')
+
                 ->options([
                     'fast' => 'fast',
                     'ultrafast' => 'ultrafast',
