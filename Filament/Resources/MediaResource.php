@@ -43,7 +43,6 @@ class MediaResource extends XotBaseResource
         */
         return [
             FileUpload::make('file')
-                ->label(static::trans('fields.file'))
                 ->hint(static::trans('fields.file_hint'))
                 ->storeFileNamesIn('original_file_name')
                 /*
@@ -70,7 +69,6 @@ class MediaResource extends XotBaseResource
             Radio::make('attachment_type'),
             TextInput::make('name')
                 ->translateLabel()
-                ->label(static::trans('fields.name.field_name'))
                 ->hint(static::trans('fields.name.hint'))
                 ->autocomplete(false)
                 ->maxLength(255)

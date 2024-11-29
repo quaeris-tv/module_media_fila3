@@ -5,29 +5,24 @@ declare(strict_types=1);
 namespace Modules\Media\Filament\Resources\MediaResource\Pages;
 
 use Exception;
-use Filament\Tables\Table;
-use Webmozart\Assert\Assert;
 use Filament\Actions\CreateAction;
 use Filament\Tables\Actions\Action;
-use Modules\UI\Enums\TableLayoutEnum;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Resources\Pages\ListRecords;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Columns\Layout\Stack;
-use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Modules\Xot\Filament\Pages\XotBaseListRecords;
-use Modules\Media\Filament\Resources\MediaResource;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\Layout\Stack;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\ActionsPosition;
+use Filament\Tables\Table;
 use Modules\Media\Filament\Actions\Table\ConvertAction;
-use Modules\Xot\Filament\Traits\NavigationPageLabelTrait;
-use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
+use Modules\Media\Filament\Resources\MediaResource;
+use Modules\Xot\Filament\Pages\XotBaseListRecords;
+use Webmozart\Assert\Assert;
 
 class ListMedia extends XotBaseListRecords
 {
-    
     protected static string $resource = MediaResource::class;
 
     public function getGridTableColumns(): array
@@ -36,20 +31,14 @@ class ListMedia extends XotBaseListRecords
 
         return [
             Stack::make([
-                TextColumn::make('collection_name')
-                    ->label(static::trans('fields.collection_name')),
-
+                TextColumn::make('collection_name'),
                 TextColumn::make('name')
-                    ->label(static::trans('fields.filename'))
                     ->searchable()
                     ->sortable(),
-
                 TextColumn::make('mime_type')
-                    ->label(static::trans('fields.mime_type'))
                     ->sortable(),
-
                 ImageColumn::make('preview')
-                    ->label('preview')
+
                     ->size(60)
                     ->defaultImageUrl(fn ($record) =>
                         /*
@@ -66,16 +55,13 @@ class ListMedia extends XotBaseListRecords
                         $record->getUrlConv('thumb')),
 
                 TextColumn::make('human_readable_size')
-                    ->label(static::trans('fields.human_readable_size'))
                 // ->sortable()
                 ,
 
                 TextColumn::make('creator.name')
-                    ->label(static::trans('fields.creator.name'))
                     ->toggleable(),
 
                 TextColumn::make('created_at')
-                    ->label(static::trans('fields.uploaded_at'))
                     ->dateTime($date_format)
                     ->toggleable(),
             ]),
@@ -87,20 +73,16 @@ class ListMedia extends XotBaseListRecords
         Assert::string($date_format = config('app.date_format'));
 
         return [
-            TextColumn::make('collection_name')
-                ->label(static::trans('fields.collection_name')),
-
+            TextColumn::make('collection_name'),
             TextColumn::make('name')
-                ->label(static::trans('fields.filename'))
                 ->searchable()
                 ->sortable(),
 
             TextColumn::make('mime_type')
-                ->label(static::trans('fields.mime_type'))
                 ->sortable(),
 
             ImageColumn::make('preview')
-                ->label('preview')
+
                 ->size(60)
                 ->defaultImageUrl(fn ($record) =>
                     /*
@@ -117,16 +99,13 @@ class ListMedia extends XotBaseListRecords
                     $record->getUrlConv('thumb')),
 
             TextColumn::make('human_readable_size')
-                ->label(static::trans('fields.human_readable_size'))
             // ->sortable()
             ,
 
             TextColumn::make('creator.name')
-                ->label(static::trans('fields.creator.name'))
                 ->toggleable(),
 
             TextColumn::make('created_at')
-                ->label(static::trans('fields.uploaded_at'))
                 ->dateTime($date_format)
                 ->toggleable(),
         ];
@@ -198,8 +177,6 @@ class ListMedia extends XotBaseListRecords
                 direction: 'DESC',
             );
     }
-
-    
 
     /**
      * @return CreateAction[]

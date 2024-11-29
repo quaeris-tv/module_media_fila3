@@ -20,7 +20,7 @@ class AddAttachmentAction extends Action
     {
         parent::setUp();
         $this->translateLabel()
-            ->label(static::trans('label'))
+            )
             ->icon('heroicon-o-plus')
             ->color('success')
             ->button()
@@ -56,7 +56,7 @@ class AddAttachmentAction extends Action
         return [
             FileUpload::make('file')
 
-                ->label(static::trans('fields.file'))
+                )
                 ->hint(static::trans('fields.file_hint'))
                 ->storeFileNamesIn('original_file_name')
                 ->disk($disk)
@@ -81,7 +81,7 @@ class AddAttachmentAction extends Action
             // Radio::make('attachment_type')->columnSpanFull(),
             TextInput::make('name')
                 ->translateLabel()
-                ->label(static::trans('fields.name'))
+                )
                 ->hint(static::trans('fields.name_hint'))
                 ->autocomplete(false)
                 ->maxLength(255)
