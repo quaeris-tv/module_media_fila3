@@ -24,6 +24,9 @@
         "pbmedia/laravel-ffmpeg": "^8.5",
         "intervention/image": "*"
     },
+    "require-dev": {
+        
+    },
     "repositories": [
         {
             "type": "path",
@@ -66,7 +69,7 @@
         }
     },
     "scripts": {
-        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "post-autoload-dump1": "@php ./vendor/bin/testbench package:discover --ansi",
         "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
