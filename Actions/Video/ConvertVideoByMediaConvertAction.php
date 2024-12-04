@@ -38,7 +38,7 @@ class ConvertVideoByMediaConvertAction
             ->success()
             ->send();
 
-        /**
+        /*
          * -preset ultrafast.
          */
         // @phpstan-ignore method.notFound
@@ -49,7 +49,7 @@ class ConvertVideoByMediaConvertAction
             //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
             // })
             // ->resize(640, 480)
-            ->onProgress(function ($percentage, $remaining, $rate) use ($record): void {
+            ->onProgress(function (float $percentage, float $remaining, float $rate) use ($record): void {
                 $msg = "{$percentage}% transcoded";
                 $msg .= "{$remaining} seconds left at rate: {$rate}";
 
