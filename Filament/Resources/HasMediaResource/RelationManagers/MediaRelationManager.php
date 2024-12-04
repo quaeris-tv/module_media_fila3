@@ -97,7 +97,7 @@ class MediaRelationManager extends XotBaseRelationManager
             /*
             Action::make('add_attachment')
                 ->translateLabel()
-                ->label('media::actions.add_attachment.label')
+                
                 ->icon('heroicon-o-plus')
                 ->color('success')
                 ->button()
