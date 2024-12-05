@@ -17,12 +17,7 @@ class ListTemporaryUploads extends XotBaseListRecords
 
     protected static string $resource = TemporaryUploadResource::class;
 
-    protected function getTableHeaderActions(): array
-    {
-        return [
-            TableLayoutToggleTableAction::make(),
-        ];
-    }
+    
 
     /**
      * @return CreateAction[]

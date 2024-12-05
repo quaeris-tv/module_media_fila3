@@ -83,12 +83,7 @@ class ListMediaConverts extends XotBaseListRecords
             ->actionsPosition(ActionsPosition::BeforeColumns);
     }
 
-    protected function getTableHeaderActions(): array
-    {
-        return [
-            TableLayoutToggleTableAction::make(),
-        ];
-    }
+    
 
     protected function getHeaderWidgets(): array
     {
