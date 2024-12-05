@@ -26,11 +26,16 @@ use Webmozart\Assert\Assert;
  * @property \Illuminate\Support\Carbon|null                                                      $updated_at
  * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @property int|null                                                                             $media_count
  *
 =======
  * @property int|null $media_count
 >>>>>>> origin/dev
+=======
+ * @property int|null                                                                             $media_count
+ *
+>>>>>>> origin/v0.2.10
  * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload query()
@@ -39,26 +44,36 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload whereSessionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload whereUpdatedAt($value)
 <<<<<<< HEAD
+<<<<<<< HEAD
  *
 =======
 >>>>>>> origin/dev
+=======
+ *
+>>>>>>> origin/v0.2.10
  * @property string|null $updated_by
  * @property string|null $created_by
  * @property string|null $deleted_at
  * @property string|null $deleted_by
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/v0.2.10
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereUpdatedBy($value)
  *
+<<<<<<< HEAD
 =======
  * @method static Builder<static>|TemporaryUpload whereCreatedBy($value)
  * @method static Builder<static>|TemporaryUpload whereDeletedAt($value)
  * @method static Builder<static>|TemporaryUpload whereDeletedBy($value)
  * @method static Builder<static>|TemporaryUpload whereUpdatedBy($value)
 >>>>>>> origin/dev
+=======
+>>>>>>> origin/v0.2.10
  * @mixin \Eloquent
  */
 class TemporaryUpload extends Model implements HasMedia
