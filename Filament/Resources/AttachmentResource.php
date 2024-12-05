@@ -39,6 +39,7 @@ class AttachmentResource extends XotBaseResource
         return $table
             ->columns(
                 [
+<<<<<<< HEAD
                     TextColumn::make('collection_name')
                         ,
 
@@ -55,6 +56,15 @@ class AttachmentResource extends XotBaseResource
 
                     TextColumn::make('created_at')
                         
+=======
+                    TextColumn::make('collection_name'),
+                    TextColumn::make('name'),
+                    TextColumn::make('human_readable_size'),
+                    TextColumn::make('creator.full_name')
+                        ->toggleable(),
+
+                    TextColumn::make('created_at')
+>>>>>>> origin/v0.2.10
                         ->dateTime($date_format)
                         ->toggleable(),
                 ]
@@ -68,7 +78,10 @@ class AttachmentResource extends XotBaseResource
                     ActionGroup::make(
                         [
                             Action::make('view_attachment')
+<<<<<<< HEAD
                                 
+=======
+>>>>>>> origin/v0.2.10
                                 ->icon('heroicon-s-eye')
                                 ->color('gray')
                                 ->url(
@@ -76,7 +89,10 @@ class AttachmentResource extends XotBaseResource
                                 )->openUrlInNewTab(true),
                             DeleteAction::make()->requiresConfirmation(),
                             Action::make('download_attachment')
+<<<<<<< HEAD
                                 
+=======
+>>>>>>> origin/v0.2.10
                                 ->icon('heroicon-o-arrow-down-tray')
                                 ->color('primary')
                                 ->action(
@@ -112,8 +128,11 @@ class AttachmentResource extends XotBaseResource
 
         return [
             FileUpload::make('file')
+<<<<<<< HEAD
 
                 
+=======
+>>>>>>> origin/v0.2.10
                 ->hint(static::trans('fields.file_hint'))
                 ->storeFileNamesIn('original_file_name')
                 ->disk($disk)
@@ -138,7 +157,10 @@ class AttachmentResource extends XotBaseResource
             // Radio::make('attachment_type')->columnSpanFull(),
             TextInput::make('name')
                 ->translateLabel()
+<<<<<<< HEAD
                 
+=======
+>>>>>>> origin/v0.2.10
                 ->hint(static::trans('fields.name_hint'))
                 ->autocomplete(false)
                 ->maxLength(255)
