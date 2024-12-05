@@ -16,6 +16,7 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Modules\Media\Enums\AttachmentTypeEnum;
+use Modules\Media\Models\Media;
 use Modules\Sam\Filament\Resources\AssetResource\Actions\AttachmentDownloadBulkAction;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Webmozart\Assert\Assert;
@@ -40,21 +41,24 @@ class AttachmentResource extends XotBaseResource
             ->columns(
                 [
 <<<<<<< HEAD
+<<<<<<< HEAD
                     TextColumn::make('collection_name')
                         ,
+=======
+                    TextColumn::make('collection_name'),
+>>>>>>> origin/dev
 
-                    TextColumn::make('name')
-                        ,
+                    TextColumn::make('name'),
 
-                    TextColumn::make('human_readable_size')
-                        ,
+                    TextColumn::make('human_readable_size'),
 
                     TextColumn::make('creator.full_name')
-                        
+
                         // ->default(fn($record)=>dddx($record))
                         ->toggleable(),
 
                     TextColumn::make('created_at')
+<<<<<<< HEAD
                         
 =======
                     TextColumn::make('collection_name'),
@@ -65,6 +69,9 @@ class AttachmentResource extends XotBaseResource
 
                     TextColumn::make('created_at')
 >>>>>>> origin/v0.2.10
+=======
+
+>>>>>>> origin/dev
                         ->dateTime($date_format)
                         ->toggleable(),
                 ]
@@ -79,20 +86,28 @@ class AttachmentResource extends XotBaseResource
                         [
                             Action::make('view_attachment')
 <<<<<<< HEAD
-                                
-=======
->>>>>>> origin/v0.2.10
-                                ->icon('heroicon-s-eye')
-                                ->color('gray')
-                                ->url(
-                                    static fn ($record): string => $record->getUrl()
-                                )->openUrlInNewTab(true),
-                            DeleteAction::make()->requiresConfirmation(),
-                            Action::make('download_attachment')
 <<<<<<< HEAD
                                 
 =======
 >>>>>>> origin/v0.2.10
+=======
+
+>>>>>>> origin/dev
+                                ->icon('heroicon-s-eye')
+                                ->color('gray')
+                                ->url(
+                                    static fn (Media $record): string => $record->getUrl()
+                                )->openUrlInNewTab(true),
+                            DeleteAction::make()->requiresConfirmation(),
+                            Action::make('download_attachment')
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                
+=======
+>>>>>>> origin/v0.2.10
+=======
+
+>>>>>>> origin/dev
                                 ->icon('heroicon-o-arrow-down-tray')
                                 ->color('primary')
                                 ->action(
@@ -130,9 +145,12 @@ class AttachmentResource extends XotBaseResource
             FileUpload::make('file')
 <<<<<<< HEAD
 
+<<<<<<< HEAD
                 
 =======
 >>>>>>> origin/v0.2.10
+=======
+>>>>>>> origin/dev
                 ->hint(static::trans('fields.file_hint'))
                 ->storeFileNamesIn('original_file_name')
                 ->disk($disk)
@@ -158,9 +176,13 @@ class AttachmentResource extends XotBaseResource
             TextInput::make('name')
                 ->translateLabel()
 <<<<<<< HEAD
+<<<<<<< HEAD
                 
 =======
 >>>>>>> origin/v0.2.10
+=======
+
+>>>>>>> origin/dev
                 ->hint(static::trans('fields.name_hint'))
                 ->autocomplete(false)
                 ->maxLength(255)
