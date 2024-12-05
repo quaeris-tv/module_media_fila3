@@ -33,19 +33,35 @@ class ListMedia extends XotBaseListRecords
 
         return [
             Stack::make([
+<<<<<<< HEAD
                 TextColumn::make('collection_name'),
 
                 TextColumn::make('name')
 
+=======
+                TextColumn::make('collection_name')
+                    ,
+
+                TextColumn::make('name')
+                    
+>>>>>>> origin/dev
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('mime_type')
+<<<<<<< HEAD
 
                     ->sortable(),
 
                 ImageColumn::make('preview')
 
+=======
+                    
+                    ->sortable(),
+
+                ImageColumn::make('preview')
+                    
+>>>>>>> origin/dev
                     ->size(60)
                     ->defaultImageUrl(fn ($record) =>
                         /*
@@ -62,16 +78,28 @@ class ListMedia extends XotBaseListRecords
                         $record->getUrlConv('thumb')),
 
                 TextColumn::make('human_readable_size')
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> origin/dev
                 // ->sortable()
                 ,
 
                 TextColumn::make('creator.name')
+<<<<<<< HEAD
 
                     ->toggleable(),
 
                 TextColumn::make('created_at')
 
+=======
+                    
+                    ->toggleable(),
+
+                TextColumn::make('created_at')
+                    
+>>>>>>> origin/dev
                     ->dateTime($date_format)
                     ->toggleable(),
             ]),
@@ -83,19 +111,35 @@ class ListMedia extends XotBaseListRecords
         Assert::string($date_format = config('app.date_format'));
 
         return [
+<<<<<<< HEAD
             TextColumn::make('collection_name'),
 
             TextColumn::make('name')
 
+=======
+            TextColumn::make('collection_name')
+                ,
+
+            TextColumn::make('name')
+                
+>>>>>>> origin/dev
                 ->searchable()
                 ->sortable(),
 
             TextColumn::make('mime_type')
+<<<<<<< HEAD
 
                 ->sortable(),
 
             ImageColumn::make('preview')
 
+=======
+                
+                ->sortable(),
+
+            ImageColumn::make('preview')
+                
+>>>>>>> origin/dev
                 ->size(60)
                 ->defaultImageUrl(fn ($record) =>
                     /*
@@ -112,16 +156,28 @@ class ListMedia extends XotBaseListRecords
                     $record->getUrlConv('thumb')),
 
             TextColumn::make('human_readable_size')
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> origin/dev
             // ->sortable()
             ,
 
             TextColumn::make('creator.name')
+<<<<<<< HEAD
 
                 ->toggleable(),
 
             TextColumn::make('created_at')
 
+=======
+                
+                ->toggleable(),
+
+            TextColumn::make('created_at')
+                
+>>>>>>> origin/dev
                 ->dateTime($date_format)
                 ->toggleable(),
         ];
