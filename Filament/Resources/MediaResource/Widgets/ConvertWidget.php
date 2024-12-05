@@ -42,13 +42,13 @@ class ConvertWidget extends Widget
 
         // dddx($file_mp4);
 
-        $format = new \FFMpeg\Format\Video\WebM;
+        $format = new \FFMpeg\Format\Video\WebM();
         $extension = mb_strtolower(class_basename($format));
         $file_new = Str::of($file_mp4)
             ->replaceLast('.mp4', '.'.$extension)
             ->toString();
 
-        /**
+        /*
          * -preset ultrafast.
          */
         FFMpeg::fromDisk($disk_mp4)
@@ -58,7 +58,7 @@ class ConvertWidget extends Widget
             //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
             // })
             // ->resize(640, 480)
-            ->onProgress(function ($percentage, $remaining, $rate): void {
+            ->onProgress(function (float $percentage, float $remaining, float $rate): void {
                 $this->percentage = $percentage;
                 $this->remaining = $remaining;
                 $this->rate = $rate;
