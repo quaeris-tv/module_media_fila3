@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Media\Filament\Resources\HasMediaResource\Actions;
 
-use Exception;
 use Filament\Forms\Components\BaseFileUpload;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
@@ -19,8 +18,7 @@ class AddAttachmentAction extends Action
     protected function setUp(): void
     {
         parent::setUp();
-        $this->translateLabel()
-            
+        $this
             ->icon('heroicon-o-plus')
             ->color('success')
             ->button()
@@ -55,8 +53,6 @@ class AddAttachmentAction extends Action
 
         return [
             FileUpload::make('file')
-
-                
                 ->hint(static::trans('fields.file_hint'))
                 ->storeFileNamesIn('original_file_name')
                 ->disk($disk)
@@ -80,8 +76,6 @@ class AddAttachmentAction extends Action
             */
             // Radio::make('attachment_type')->columnSpanFull(),
             TextInput::make('name')
-                ->translateLabel()
-                
                 ->hint(static::trans('fields.name_hint'))
                 ->autocomplete(false)
                 ->maxLength(255)
@@ -96,7 +90,7 @@ class AddAttachmentAction extends Action
         // $mediaCollection = 'default';
 
         if (! method_exists($ownerRecord, 'addMediaFromDisk')) {
-            throw new Exception('wip');
+            throw new \Exception('wip');
         }
 
         $attachment = $ownerRecord
