@@ -1,4 +1,5 @@
-<?php return array (
+<?php 
+return array (
   'actions' => 
   array (
     'create' => 
@@ -13,7 +14,7 @@
       'label' => 'collection_name',
     ),
     'name' => 
-    array (
+    ar'label' => 'Nome'
       'label' => 'name',
     ),
     'mime_type' => 
@@ -40,4 +41,4 @@
       'label' => 'created_at',
     ),
   ),
-);
+);
