@@ -18,12 +18,7 @@ class AddAttachmentAction extends Action
     protected function setUp(): void
     {
         parent::setUp();
-<<<<<<< HEAD
-        $this->translateLabel()
-            
-=======
         $this
->>>>>>> origin/v0.2.10
             ->icon('heroicon-o-plus')
             ->color('success')
             ->button()
@@ -58,11 +53,6 @@ class AddAttachmentAction extends Action
 
         return [
             FileUpload::make('file')
-<<<<<<< HEAD
-
-                
-=======
->>>>>>> origin/v0.2.10
                 ->hint(static::trans('fields.file_hint'))
                 ->storeFileNamesIn('original_file_name')
                 ->disk($disk)
@@ -86,11 +76,6 @@ class AddAttachmentAction extends Action
             */
             // Radio::make('attachment_type')->columnSpanFull(),
             TextInput::make('name')
-<<<<<<< HEAD
-                ->translateLabel()
-                
-=======
->>>>>>> origin/v0.2.10
                 ->hint(static::trans('fields.name_hint'))
                 ->autocomplete(false)
                 ->maxLength(255)
