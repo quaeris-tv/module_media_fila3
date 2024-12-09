@@ -11,7 +11,7 @@ use Filament\Resources\Resource;
 use Modules\Media\Filament\Resources\MediaConvertResource\Pages;
 use Modules\Media\Models\MediaConvert;
 
-class MediaConvertResource extends Resource
+class MediaConvertResource extends \Modules\Xot\Filament\Resources\XotBaseResource
 {
     protected static ?string $model = MediaConvert::class;
 
@@ -21,7 +21,7 @@ class MediaConvertResource extends Resource
     {
         return [
             Radio::make('format')
-                
+
                 ->options([
                     'webm' => 'webm',
                     // 'webm02' => 'webm02',
@@ -30,7 +30,7 @@ class MediaConvertResource extends Resource
                 ->inlineLabel(false),
             // -----------------------------------
             Radio::make('codec_video')
-                // 
+                //
                 ->options([
                     'libvpx-vp9' => 'libvpx-vp9',
                     'libvpx-vp8' => 'libvpx-vp8',
@@ -38,7 +38,7 @@ class MediaConvertResource extends Resource
                 ->inline()
                 ->inlineLabel(false),
             Radio::make('codec_audio')
-                // 
+                //
                 ->options([
                     'copy' => 'copy',
                     'libvorbis' => 'libvorbis',
@@ -46,7 +46,7 @@ class MediaConvertResource extends Resource
                 ->inline()
                 ->inlineLabel(false),
             Radio::make('preset')
-                // 
+                //
                 ->options([
                     'fast' => 'fast',
                     'ultrafast' => 'ultrafast',
