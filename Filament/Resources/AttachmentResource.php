@@ -16,6 +16,7 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Modules\Media\Enums\AttachmentTypeEnum;
+use Modules\Media\Models\Media;
 use Modules\Sam\Filament\Resources\AssetResource\Actions\AttachmentDownloadBulkAction;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Webmozart\Assert\Assert;
@@ -39,22 +40,19 @@ class AttachmentResource extends XotBaseResource
         return $table
             ->columns(
                 [
-                    TextColumn::make('collection_name')
-                        ,
+                    TextColumn::make('collection_name'),
 
-                    TextColumn::make('name')
-                        ,
+                    TextColumn::make('name'),
 
-                    TextColumn::make('human_readable_size')
-                        ,
+                    TextColumn::make('human_readable_size'),
 
                     TextColumn::make('creator.full_name')
-                        
+
                         // ->default(fn($record)=>dddx($record))
                         ->toggleable(),
 
                     TextColumn::make('created_at')
-                        
+
                         ->dateTime($date_format)
                         ->toggleable(),
                 ]
@@ -68,15 +66,15 @@ class AttachmentResource extends XotBaseResource
                     ActionGroup::make(
                         [
                             Action::make('view_attachment')
-                                
+
                                 ->icon('heroicon-s-eye')
                                 ->color('gray')
                                 ->url(
-                                    static fn ($record): string => $record->getUrl()
+                                    static fn (Media $record): string => $record->getUrl()
                                 )->openUrlInNewTab(true),
                             DeleteAction::make()->requiresConfirmation(),
                             Action::make('download_attachment')
-                                
+
                                 ->icon('heroicon-o-arrow-down-tray')
                                 ->color('primary')
                                 ->action(
@@ -113,7 +111,6 @@ class AttachmentResource extends XotBaseResource
         return [
             FileUpload::make('file')
 
-                
                 ->hint(static::trans('fields.file_hint'))
                 ->storeFileNamesIn('original_file_name')
                 ->disk($disk)
@@ -138,7 +135,7 @@ class AttachmentResource extends XotBaseResource
             // Radio::make('attachment_type')->columnSpanFull(),
             TextInput::make('name')
                 ->translateLabel()
-                
+
                 ->hint(static::trans('fields.name_hint'))
                 ->autocomplete(false)
                 ->maxLength(255)

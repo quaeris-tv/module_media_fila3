@@ -30,7 +30,6 @@ class MediaConvertResource extends \Modules\Xot\Filament\Resources\XotBaseResour
                 ->inlineLabel(false),
             // -----------------------------------
             Radio::make('codec_video')
-                //
                 ->options([
                     'libvpx-vp9' => 'libvpx-vp9',
                     'libvpx-vp8' => 'libvpx-vp8',
@@ -38,7 +37,6 @@ class MediaConvertResource extends \Modules\Xot\Filament\Resources\XotBaseResour
                 ->inline()
                 ->inlineLabel(false),
             Radio::make('codec_audio')
-                //
                 ->options([
                     'copy' => 'copy',
                     'libvorbis' => 'libvorbis',
@@ -46,7 +44,6 @@ class MediaConvertResource extends \Modules\Xot\Filament\Resources\XotBaseResour
                 ->inline()
                 ->inlineLabel(false),
             Radio::make('preset')
-                //
                 ->options([
                     'fast' => 'fast',
                     'ultrafast' => 'ultrafast',
