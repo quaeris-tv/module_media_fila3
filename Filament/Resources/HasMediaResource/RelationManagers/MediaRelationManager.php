@@ -59,15 +59,7 @@ class MediaRelationManager extends XotBaseRelationManager
         return [];
     }
 
-    public function table(Table $table): Table
-    {
-        $table = AttachmentResource::table($table)
-            ->columns($this->layoutView->getTableColumns())
-            ->contentGrid($this->layoutView->getTableContentGrid())
-            ->headerActions($this->getTableHeaderActions());
 
-        return $table;
-    }
 
     /**
      * @return array<BaseFilter>
