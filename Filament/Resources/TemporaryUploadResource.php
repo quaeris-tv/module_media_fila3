@@ -21,7 +21,7 @@ use Modules\Media\Models\TemporaryUpload;
 // use Illuminate\Database\Eloquent\Builder;
 // use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class TemporaryUploadResource extends Resource
+class TemporaryUploadResource extends \Modules\Xot\Filament\Resources\XotBaseResource
 {
     protected static ?string $model = TemporaryUpload::class;
 
