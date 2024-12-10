@@ -5,23 +5,24 @@ declare(strict_types=1);
 namespace Modules\Media\Filament\Resources;
 
 use Filament\Forms\Form;
-use Filament\Resources\Pages\PageRegistration;
+use Filament\Tables\Table;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\EditAction;
+use Modules\Media\Models\TemporaryUpload;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Table;
-use Modules\Media\Filament\Resources\TemporaryUploadResource\Pages\CreateTemporaryUpload;
+use Filament\Resources\Pages\PageRegistration;
 // use Modules\Media\Filament\Resources\TemporaryUploadResource\RelationManagers;
-use Modules\Media\Filament\Resources\TemporaryUploadResource\Pages\EditTemporaryUpload;
+use Modules\Xot\Filament\Resources\XotBaseResource;
 // use Filament\Forms;
+use Modules\Media\Filament\Resources\TemporaryUploadResource\Pages\EditTemporaryUpload;
 use Modules\Media\Filament\Resources\TemporaryUploadResource\Pages\ListTemporaryUploads;
-use Modules\Media\Models\TemporaryUpload;
+use Modules\Media\Filament\Resources\TemporaryUploadResource\Pages\CreateTemporaryUpload;
 
 // use Illuminate\Database\Eloquent\Builder;
 // use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class TemporaryUploadResource extends \Modules\Xot\Filament\Resources\XotBaseResource
+class TemporaryUploadResource extends XotBaseResource
 {
     protected static ?string $model = TemporaryUpload::class;
 
