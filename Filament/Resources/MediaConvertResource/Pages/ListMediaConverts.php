@@ -21,7 +21,7 @@ use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 
 class ListMediaConverts extends XotBaseListRecords
 {
-    
+
     protected static string $resource = MediaConvertResource::class;
 
     public function getTableColumns(): array
@@ -73,17 +73,9 @@ class ListMediaConverts extends XotBaseListRecords
         ];
     }
 
-    public function table(Table $table): Table
-    {
-        return $table
-            ->columns($this->getTableColumns())
-            ->filters($this->getTableFilters())
-            ->actions($this->getTableActions())
-            ->bulkActions($this->getTableBulkActions())
-            ->actionsPosition(ActionsPosition::BeforeColumns);
-    }
 
-    
+
+
 
     protected function getHeaderWidgets(): array
     {

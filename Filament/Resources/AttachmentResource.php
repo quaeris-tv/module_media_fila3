@@ -33,13 +33,8 @@ class AttachmentResource extends XotBaseResource
             );
     }
 
-    public static function table(Table $table): Table
-    {
-        Assert::string($date_format = config('app.date_format'), '['.__LINE__.']['.class_basename(__CLASS__).']');
-
-        return $table
-            ->columns(
-                [
+    public function getListTableColumnsAAA():array{
+        return [
                     TextColumn::make('collection_name'),
 
                     TextColumn::make('name'),
@@ -55,7 +50,16 @@ class AttachmentResource extends XotBaseResource
 
                         ->dateTime($date_format)
                         ->toggleable(),
-                ]
+        ];
+    }
+
+    public static function tableAAA(Table $table): Table
+    {
+        Assert::string($date_format = config('app.date_format'), '['.__LINE__.']['.class_basename(__CLASS__).']');
+
+        return $table
+            ->columns([]
+
             )
             ->filters(
                 [

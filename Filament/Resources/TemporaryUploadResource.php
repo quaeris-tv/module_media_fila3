@@ -37,37 +37,7 @@ class TemporaryUploadResource extends XotBaseResource
             );
     }
 
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns(
-                [
-                ]
-            )
-            ->filters(
-                [
-                ]
-            )
-            ->actions(
-                [
-                    EditAction::make(),
-                ]
-            )
-            ->bulkActions(
-                [
-                    BulkActionGroup::make(
-                        [
-                            DeleteBulkAction::make(),
-                        ]
-                    ),
-                ]
-            )
-            ->emptyStateActions(
-                [
-                    // {{ tableEmptyStateActions }}
-                ]
-            );
-    }
+
 
     /**
      * @psalm-return array<never, never>
