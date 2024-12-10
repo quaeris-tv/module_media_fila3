@@ -5,29 +5,26 @@ declare(strict_types=1);
 namespace Modules\Media\Filament\Resources\MediaResource\Pages;
 
 use Exception;
-use Filament\Tables\Table;
-use Webmozart\Assert\Assert;
 use Filament\Actions\CreateAction;
 use Filament\Tables\Actions\Action;
-use Modules\UI\Enums\TableLayoutEnum;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Resources\Pages\ListRecords;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Columns\Layout\Stack;
-use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Modules\Xot\Filament\Pages\XotBaseListRecords;
-use Modules\Media\Filament\Resources\MediaResource;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\Layout\Stack;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\ActionsPosition;
+use Filament\Tables\Table;
 use Modules\Media\Filament\Actions\Table\ConvertAction;
-use Modules\Xot\Filament\Traits\NavigationPageLabelTrait;
+use Modules\Media\Filament\Resources\MediaResource;
+use Modules\Media\Models\Media;
 use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
+use Modules\Xot\Filament\Pages\XotBaseListRecords;
+use Webmozart\Assert\Assert;
 
 class ListMedia extends XotBaseListRecords
 {
-    
     protected static string $resource = MediaResource::class;
 
     public function getGridTableColumns(): array
@@ -36,20 +33,19 @@ class ListMedia extends XotBaseListRecords
 
         return [
             Stack::make([
-                TextColumn::make('collection_name')
-                    ,
+                TextColumn::make('collection_name'),
 
                 TextColumn::make('name')
-                    
+
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('mime_type')
-                    
+
                     ->sortable(),
 
                 ImageColumn::make('preview')
-                    
+
                     ->size(60)
                     ->defaultImageUrl(fn ($record) =>
                         /*
@@ -66,16 +62,16 @@ class ListMedia extends XotBaseListRecords
                         $record->getUrlConv('thumb')),
 
                 TextColumn::make('human_readable_size')
-                    
+
                 // ->sortable()
                 ,
 
                 TextColumn::make('creator.name')
-                    
+
                     ->toggleable(),
 
                 TextColumn::make('created_at')
-                    
+
                     ->dateTime($date_format)
                     ->toggleable(),
             ]),
@@ -87,20 +83,19 @@ class ListMedia extends XotBaseListRecords
         Assert::string($date_format = config('app.date_format'));
 
         return [
-            TextColumn::make('collection_name')
-                ,
+            TextColumn::make('collection_name'),
 
             TextColumn::make('name')
-                
+
                 ->searchable()
                 ->sortable(),
 
             TextColumn::make('mime_type')
-                
+
                 ->sortable(),
 
             ImageColumn::make('preview')
-                
+
                 ->size(60)
                 ->defaultImageUrl(fn ($record) =>
                     /*
@@ -117,16 +112,16 @@ class ListMedia extends XotBaseListRecords
                     $record->getUrlConv('thumb')),
 
             TextColumn::make('human_readable_size')
-                
+
             // ->sortable()
             ,
 
             TextColumn::make('creator.name')
-                
+
                 ->toggleable(),
 
             TextColumn::make('created_at')
-                
+
                 ->dateTime($date_format)
                 ->toggleable(),
         ];
@@ -149,7 +144,7 @@ class ListMedia extends XotBaseListRecords
                 ->icon('heroicon-s-eye')
                 ->color('gray')
                 ->url(
-                    static fn ($record): string => $record->getUrl()
+                    static fn (Media $record): string => $record->getUrl()
                 )->openUrlInNewTab(true),
             DeleteAction::make()
                 ->label('')
@@ -168,7 +163,11 @@ class ListMedia extends XotBaseListRecords
                 ->icon('convert01')
                 ->color('gray')
                 ->url(
-                    static fn ($record): string => static::$resource::getUrl('convert', ['record' => $record])
+                    function ($record): string {
+                        Assert::string($res = static::$resource::getUrl('convert', ['record' => $record]));
+
+                        return $res;
+                    }
                 )->openUrlInNewTab(true),
         ];
     }

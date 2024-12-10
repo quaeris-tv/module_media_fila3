@@ -33,7 +33,7 @@ class ConvertVideoByConvertDataAction
             ->success()
             ->send();
 
-        /**
+        /*
          * -preset ultrafast.
          */
         // Call to an undefined method ProtoneMedia\LaravelFFMpeg\Drivers\PHPFFMpeg::toDisk().
@@ -45,7 +45,7 @@ class ConvertVideoByConvertDataAction
             //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
             // })
             // ->resize(640, 480)
-            ->onProgress(function ($percentage, $remaining, $rate): void {
+            ->onProgress(function (float $percentage, float $remaining, float $rate): void {
                 $msg = "{$percentage}% transcoded";
                 $msg .= "{$remaining} seconds left at rate: {$rate}";
                 Notification::make()
