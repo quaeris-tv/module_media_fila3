@@ -22,11 +22,7 @@ class MediaConvertResource extends XotBaseResource
     {
         return [
             Radio::make('format')
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> origin/dev
                 ->options([
                     'webm' => 'webm',
                     // 'webm02' => 'webm02',
@@ -35,10 +31,6 @@ class MediaConvertResource extends XotBaseResource
                 ->inlineLabel(false),
             // -----------------------------------
             Radio::make('codec_video')
-<<<<<<< HEAD
-                // 
-=======
->>>>>>> origin/dev
                 ->options([
                     'libvpx-vp9' => 'libvpx-vp9',
                     'libvpx-vp8' => 'libvpx-vp8',
@@ -46,10 +38,6 @@ class MediaConvertResource extends XotBaseResource
                 ->inline()
                 ->inlineLabel(false),
             Radio::make('codec_audio')
-<<<<<<< HEAD
-                // 
-=======
->>>>>>> origin/dev
                 ->options([
                     'copy' => 'copy',
                     'libvorbis' => 'libvorbis',
@@ -57,10 +45,6 @@ class MediaConvertResource extends XotBaseResource
                 ->inline()
                 ->inlineLabel(false),
             Radio::make('preset')
-<<<<<<< HEAD
-                // 
-=======
->>>>>>> origin/dev
                 ->options([
                     'fast' => 'fast',
                     'ultrafast' => 'ultrafast',
