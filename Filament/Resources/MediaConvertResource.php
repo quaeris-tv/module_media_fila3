@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Media\Filament\Resources;
 
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Forms\Components\Radio;
-use Modules\Media\Models\MediaConvert;
 use Filament\Forms\Components\TextInput;
-use Modules\Xot\Filament\Resources\XotBaseResource;
+use Filament\Forms\Form;
 use Modules\Media\Filament\Resources\MediaConvertResource\Pages;
+use Modules\Media\Models\MediaConvert;
+use Modules\Xot\Filament\Resources\XotBaseResource;
 
 class MediaConvertResource extends XotBaseResource
 {
@@ -22,11 +21,6 @@ class MediaConvertResource extends XotBaseResource
     {
         return [
             Radio::make('format')
-<<<<<<< HEAD
-                
-=======
-
->>>>>>> origin/dev
                 ->options([
                     'webm' => 'webm',
                     // 'webm02' => 'webm02',
@@ -35,10 +29,6 @@ class MediaConvertResource extends XotBaseResource
                 ->inlineLabel(false),
             // -----------------------------------
             Radio::make('codec_video')
-<<<<<<< HEAD
-                // 
-=======
->>>>>>> origin/dev
                 ->options([
                     'libvpx-vp9' => 'libvpx-vp9',
                     'libvpx-vp8' => 'libvpx-vp8',
@@ -46,10 +36,6 @@ class MediaConvertResource extends XotBaseResource
                 ->inline()
                 ->inlineLabel(false),
             Radio::make('codec_audio')
-<<<<<<< HEAD
-                // 
-=======
->>>>>>> origin/dev
                 ->options([
                     'copy' => 'copy',
                     'libvorbis' => 'libvorbis',
@@ -57,10 +43,6 @@ class MediaConvertResource extends XotBaseResource
                 ->inline()
                 ->inlineLabel(false),
             Radio::make('preset')
-<<<<<<< HEAD
-                // 
-=======
->>>>>>> origin/dev
                 ->options([
                     'fast' => 'fast',
                     'ultrafast' => 'ultrafast',
