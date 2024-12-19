@@ -25,24 +25,6 @@ use Webmozart\Assert\Assert;
  * @property \Illuminate\Support\Carbon|null                                                      $created_at
  * @property \Illuminate\Support\Carbon|null                                                      $updated_at
  * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
-<<<<<<< HEAD
- * @property int|null $media_count
- * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload query()
- * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload whereSessionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TemporaryUpload whereUpdatedAt($value)
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property string|null $deleted_at
- * @property string|null $deleted_by
- * @method static Builder<static>|TemporaryUpload whereCreatedBy($value)
- * @method static Builder<static>|TemporaryUpload whereDeletedAt($value)
- * @method static Builder<static>|TemporaryUpload whereDeletedBy($value)
- * @method static Builder<static>|TemporaryUpload whereUpdatedBy($value)
-=======
  * @property int|null                                                                             $media_count
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload newModelQuery()
@@ -53,7 +35,6 @@ use Webmozart\Assert\Assert;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereSessionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereUpdatedAt($value)
  *
->>>>>>> origin/dev
  * @mixin \Eloquent
  */
 class TemporaryUpload extends Model implements HasMedia

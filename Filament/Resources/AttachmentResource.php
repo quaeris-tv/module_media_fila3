@@ -25,76 +25,6 @@ class AttachmentResource extends XotBaseResource
             );
     }
 
-<<<<<<< HEAD
-    public static function table(Table $table): Table
-    {
-        Assert::string($date_format = config('app.date_format'), '['.__LINE__.']['.class_basename(__CLASS__).']');
-
-        return $table
-            ->columns(
-                [
-                    TextColumn::make('collection_name')
-                        ,
-
-                    TextColumn::make('name')
-                        ,
-
-                    TextColumn::make('human_readable_size')
-                        ,
-
-                    TextColumn::make('creator.full_name')
-                        
-                        // ->default(fn($record)=>dddx($record))
-                        ->toggleable(),
-
-                    TextColumn::make('created_at')
-                        
-                        ->dateTime($date_format)
-                        ->toggleable(),
-                ]
-            )
-            ->filters(
-                [
-                ]
-            )
-            ->actions(
-                [
-                    ActionGroup::make(
-                        [
-                            Action::make('view_attachment')
-                                
-                                ->icon('heroicon-s-eye')
-                                ->color('gray')
-                                ->url(
-                                    static fn ($record): string => $record->getUrl()
-                                )->openUrlInNewTab(true),
-                            DeleteAction::make()->requiresConfirmation(),
-                            Action::make('download_attachment')
-                                
-                                ->icon('heroicon-o-arrow-down-tray')
-                                ->color('primary')
-                                ->action(
-                                    // File extension obtained by substringing
-                                    static fn ($record) => response()->download($record->getPath(), $record->name.mb_substr((string) mb_strrchr((string) $record->file_name, '.'), 0))
-                                ),
-                        ]
-                    ),
-                ]
-            )
-            ->bulkActions(
-                [
-                    DeleteBulkAction::make(),
-                    // AttachmentDownloadBulkAction::make(),
-                ]
-            )
-            ->defaultSort(
-                column: 'created_at',
-                direction: 'DESC',
-            );
-    }
-
-=======
->>>>>>> origin/dev
     /**
      * return (Radio|TextInput|BaseFileUpload|FileUpload)[].
      *
@@ -108,11 +38,6 @@ class AttachmentResource extends XotBaseResource
 
         return [
             FileUpload::make('file')
-<<<<<<< HEAD
-
-                
-=======
->>>>>>> origin/dev
                 ->hint(static::trans('fields.file_hint'))
                 ->storeFileNamesIn('original_file_name')
                 ->disk($disk)
@@ -137,11 +62,7 @@ class AttachmentResource extends XotBaseResource
             // Radio::make('attachment_type')->columnSpanFull(),
             TextInput::make('name')
                 ->translateLabel()
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> origin/dev
                 ->hint(static::trans('fields.name_hint'))
                 ->autocomplete(false)
                 ->maxLength(255)
