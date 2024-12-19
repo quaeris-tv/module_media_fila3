@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Livewire\Wireable;
 use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
+use Webmozart\Assert\Assert;
 
 class ConvertData extends Data implements Wireable
 {
@@ -51,7 +52,8 @@ class ConvertData extends Data implements Wireable
     public function getFFMpegFormat(): DefaultVideo
     {
         $format = new \FFMpeg\Format\Video\WebM($this->codec_audio, $this->codec_video);
-        $format = $format->setKiloBitrate((int) ($this->bitrate));
+        $format = $format->setKiloBitrate((int) $this->bitrate);
+        Assert::isInstanceOf($format, DefaultVideo::class);
 
         return $format;
     }
@@ -62,7 +64,7 @@ class ConvertData extends Data implements Wireable
         $extension = mb_strtolower(class_basename($format));
 
         return Str::of($this->file)
-            ->replaceLast('.mp4', '.' . $extension)
+            ->replaceLast('.mp4', '.'.$extension)
             ->toString();
     }
 }
