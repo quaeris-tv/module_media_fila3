@@ -27,22 +27,22 @@ class ConvertVideoCommand extends Command
     {
         Assert::string($disk = $this->argument('disk'));
         Assert::string($file = $this->argument('file'));
-        $this->info('disk: ' . print_r($disk, true));
-        $this->info('file: ' . print_r($file, true));
+        $this->info('disk: '.print_r($disk, true));
+        $this->info('file: '.print_r($file, true));
         // $this->error('');
         // $this->line('Display this on the screen');
         if (! Storage::disk($disk)->exists($file)) {
-            $this->error('[' . $disk . '] file [' . $file . '] Not Exists');
+            $this->error('['.$disk.'] file ['.$file.'] Not Exists');
 
             return '';
         }
         $format = new \FFMpeg\Format\Video\WebM();
         $extension = mb_strtolower(class_basename($format));
         $file_new = Str::of($file)
-            ->replaceLast('.mp4', '.' . $extension)
+            ->replaceLast('.mp4', '.'.$extension)
             ->toString();
 
-        /**
+        /*
          * -preset ultrafast.
          */
         FFMpeg::fromDisk($disk)
@@ -52,7 +52,7 @@ class ConvertVideoCommand extends Command
             //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
             // })
             // ->resize(640, 480)
-            ->onProgress(function ($percentage, $remaining, $rate): void {
+            ->onProgress(function (float $percentage, float $remaining, float $rate): void {
                 $this->info("{$percentage}% transcoded");
                 $this->info("{$remaining} seconds left at rate: {$rate}");
             })

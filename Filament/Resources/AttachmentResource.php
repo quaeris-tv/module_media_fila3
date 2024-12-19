@@ -9,14 +9,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
 use Modules\Media\Enums\AttachmentTypeEnum;
-use Modules\Sam\Filament\Resources\AssetResource\Actions\AttachmentDownloadBulkAction;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 use Webmozart\Assert\Assert;
 
@@ -32,6 +25,7 @@ class AttachmentResource extends XotBaseResource
             );
     }
 
+<<<<<<< HEAD
     public static function table(Table $table): Table
     {
         Assert::string($date_format = config('app.date_format'), '['.__LINE__.']['.class_basename(__CLASS__).']');
@@ -99,6 +93,8 @@ class AttachmentResource extends XotBaseResource
             );
     }
 
+=======
+>>>>>>> origin/dev
     /**
      * return (Radio|TextInput|BaseFileUpload|FileUpload)[].
      *
@@ -112,8 +108,11 @@ class AttachmentResource extends XotBaseResource
 
         return [
             FileUpload::make('file')
+<<<<<<< HEAD
 
                 
+=======
+>>>>>>> origin/dev
                 ->hint(static::trans('fields.file_hint'))
                 ->storeFileNamesIn('original_file_name')
                 ->disk($disk)
@@ -138,7 +137,11 @@ class AttachmentResource extends XotBaseResource
             // Radio::make('attachment_type')->columnSpanFull(),
             TextInput::make('name')
                 ->translateLabel()
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> origin/dev
                 ->hint(static::trans('fields.name_hint'))
                 ->autocomplete(false)
                 ->maxLength(255)
