@@ -66,7 +66,7 @@ class Clip extends Component
      */
     public function updateDataFromModal(string $id, array $data): void
     {
-        if ($id !== 'editClip') {
+        if ('editClip' !== $id) {
             return;
         }
 
@@ -75,11 +75,11 @@ class Clip extends Component
         }
 
         // dddx(['data'=>$data,'model'=>$this->model]);
-
+        /** @var array<string, string> */
         $up = collect($data)
             ->only(['title', 'subtitle'])
             ->all();
-        // dddx($up);
+
         $this->model->update($up);
         $this->model->refresh();
     }
