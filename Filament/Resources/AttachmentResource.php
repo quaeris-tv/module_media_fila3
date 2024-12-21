@@ -32,16 +32,16 @@ class AttachmentResource extends XotBaseResource
      */
     public static function getFormSchema(bool $asset = true): array
     {
-        Assert::string($disk = $asset ? config('camping.asset.attachments.disk.driver') : config('camping.operation.attachments.disk.driver'));
-        Assert::isArray($file_types = $asset ? config('camping.asset.attachments.allowed_file_types') : config('camping.operation.attachments.allowed_file_types'));
+        // Assert::string($disk = $asset ? config('xra.asset.attachments.disk.driver') : config('xra.operation.attachments.disk.driver'));
+        // Assert::isArray($file_types = $asset ? config('xra.asset.attachments.allowed_file_types') : config('xra.operation.attachments.allowed_file_types'));
         Assert::integer($max_size = config('media-library.max_file_size'));
 
         return [
             FileUpload::make('file')
                 ->hint(static::trans('fields.file_hint'))
                 ->storeFileNamesIn('original_file_name')
-                ->disk($disk)
-                ->acceptedFileTypes($file_types)
+                // ->disk($disk)
+                // ->acceptedFileTypes($file_types)
                 ->visibility('private')
                 ->maxSize($max_size)
                 ->required()
