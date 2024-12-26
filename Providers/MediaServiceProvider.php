@@ -8,7 +8,7 @@ use Modules\Xot\Providers\XotBaseServiceProvider;
 
 class MediaServiceProvider extends XotBaseServiceProvider
 {
-    public string $module_name = 'media';
+    public string $name = 'media';
 
     protected string $module_dir = __DIR__;
 
