@@ -13,7 +13,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables\Enums\ActionsPosition;
 use Modules\Job\Filament\Widgets\ClockWidget;
-use Modules\Xot\Filament\Pages\XotBaseListRecords;
+use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Modules\Job\Filament\Widgets\QueueListenWidget;
 use Modules\Media\Filament\Resources\MediaConvertResource;
 use Modules\Media\Actions\Video\ConvertVideoByMediaConvertAction;
