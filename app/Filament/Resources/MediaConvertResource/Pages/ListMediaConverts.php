@@ -28,7 +28,8 @@ class ListMediaConverts extends XotBaseListRecords
     {
         return [
             TextColumn::make('id'),
-            TextColumn::make('media.file_name'),
+            TextColumn::make('media.file_name')
+                ->sortable(),
             TextColumn::make('format'),
             TextColumn::make('codec_video'),
             TextColumn::make('codec_audio'),
@@ -42,6 +43,41 @@ class ListMediaConverts extends XotBaseListRecords
             TextColumn::make('remaining'),
             TextColumn::make('rate'),
             TextColumn::make('execution_time'),
+        ];
+    }
+
+    public function getListTableColumns(): array
+    {
+        return [
+            TextColumn::make('id')
+                ->sortable(),
+            TextColumn::make('media.file_name')
+                ->sortable(),
+            TextColumn::make('format')
+                ->searchable(),
+            TextColumn::make('codec_video')
+                ->searchable(),
+            TextColumn::make('codec_audio')
+                ->searchable(),
+            TextColumn::make('preset')
+                ->searchable(),
+            TextColumn::make('bitrate'),
+            TextColumn::make('width')
+                ->numeric(),
+            TextColumn::make('height')
+                ->numeric(),
+            TextColumn::make('threads')
+                ->numeric(),
+            TextColumn::make('speed')
+                ->numeric(),
+            TextColumn::make('percentage')
+                ->numeric(),
+            TextColumn::make('remaining')
+                ->numeric(),
+            TextColumn::make('rate')
+                ->numeric(),
+            TextColumn::make('execution_time')
+                ->numeric(),
         ];
     }
 
