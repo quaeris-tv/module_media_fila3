@@ -6,7 +6,7 @@ namespace Modules\Media\Filament\Resources\TemporaryUploadResource\Pages;
 
 use Filament\Actions\CreateAction;
 use Modules\Media\Filament\Resources\TemporaryUploadResource;
-use Modules\Xot\Filament\Pages\XotBaseListRecords;
+use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 
 class ListTemporaryUploads extends XotBaseListRecords
 {
