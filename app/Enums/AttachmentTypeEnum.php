@@ -45,7 +45,7 @@ enum AttachmentTypeEnum: string implements HasLabel
 
     public function getLabel(): string
     {
-        return trans('media::attachments.types.' . $this->value);
+        return trans('media::attachments.types.'.$this->value);
     }
 
     // private static function translateBaseUniquePath(): string

@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Modules\Media\Filament\Resources\HasMediaResource\RelationManagers;
 
-use Filament\Tables;
 use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\Column;
-use Modules\UI\Enums\TableLayoutEnum;
+use Filament\Tables\Columns\Layout\Component as ColumnLayoutComponent;
 use Filament\Tables\Filters\BaseFilter;
 use Illuminate\Database\Eloquent\Model;
-use Filament\Tables\Actions\ActionGroup;
-use Modules\Media\Filament\Resources\MediaResource;
-use Modules\Xot\Filament\Traits\NavigationLabelTrait;
-use Filament\Resources\RelationManagers\RelationManager;
 use Modules\Media\Filament\Resources\AttachmentResource;
-use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
-use Filament\Tables\Columns\Layout\Component as ColumnLayoutComponent;
 use Modules\Media\Filament\Resources\HasMediaResource\Actions\AddAttachmentAction;
+use Modules\Media\Filament\Resources\MediaResource;
+use Modules\UI\Enums\TableLayoutEnum;
+use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 use Modules\Xot\Filament\Resources\XotBaseResource\RelationManager\XotBaseRelationManager;
+use Modules\Xot\Filament\Traits\NavigationLabelTrait;
 
 class MediaRelationManager extends XotBaseRelationManager
 {
