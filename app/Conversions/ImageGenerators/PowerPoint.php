@@ -25,7 +25,7 @@ class PowerPoint extends ImageGenerator
         // EXAMPLE
         // \PowerPoint::convertFileToImage($file)->store($pathToImageFile);
 
-        return pathinfo($file, PATHINFO_DIRNAME) . '/' . pathinfo($file, PATHINFO_FILENAME) . '.jpg';
+        return pathinfo($file, PATHINFO_DIRNAME).'/'.pathinfo($file, PATHINFO_FILENAME).'.jpg';
     }
 
     public function requirementsAreInstalled(): bool

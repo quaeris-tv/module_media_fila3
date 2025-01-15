@@ -12,7 +12,7 @@ class Webm extends ImageGenerator
 {
     public function convert(string $file, ?Conversion $conversion = null): string
     {
-        $pathToImageFile = pathinfo($file, PATHINFO_DIRNAME) . '/' . pathinfo($file, PATHINFO_FILENAME) . '.webmXXX';
+        $pathToImageFile = pathinfo($file, PATHINFO_DIRNAME).'/'.pathinfo($file, PATHINFO_FILENAME).'.webmXXX';
         dddx([
             'file' => $file,
             '$pathToImageFile' => ${$pathToImageFile},

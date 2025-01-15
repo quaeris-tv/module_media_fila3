@@ -20,12 +20,12 @@ use Webmozart\Assert\Assert;
 /**
  * Modules\Media\Models\TemporaryUpload.
  *
- * @property int                                                                                  $id
- * @property string                                                                               $session_id
- * @property \Illuminate\Support\Carbon|null                                                      $created_at
- * @property \Illuminate\Support\Carbon|null                                                      $updated_at
+ * @property int $id
+ * @property string $session_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, Media> $media
- * @property int|null                                                                             $media_count
+ * @property int|null $media_count
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload newQuery()

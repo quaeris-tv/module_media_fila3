@@ -5,23 +5,16 @@ declare(strict_types=1);
 namespace Modules\Media\Filament\Resources\MediaConvertResource\Pages;
 
 use Filament\Tables;
-use Filament\Actions;
-use Filament\Tables\Table;
-use Modules\UI\Enums\TableLayoutEnum;
-use Modules\Media\Models\MediaConvert;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Resources\Pages\ListRecords;
-use Filament\Tables\Enums\ActionsPosition;
 use Modules\Job\Filament\Widgets\ClockWidget;
-use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Modules\Job\Filament\Widgets\QueueListenWidget;
-use Modules\Media\Filament\Resources\MediaConvertResource;
 use Modules\Media\Actions\Video\ConvertVideoByMediaConvertAction;
-use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
+use Modules\Media\Filament\Resources\MediaConvertResource;
+use Modules\Media\Models\MediaConvert;
+use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 
 class ListMediaConverts extends XotBaseListRecords
 {
-
     protected static string $resource = MediaConvertResource::class;
 
     public function getTableColumns(): array
@@ -109,10 +102,6 @@ class ListMediaConverts extends XotBaseListRecords
         ];
     }
 
-
-
-
-
     protected function getHeaderWidgets(): array
     {
         return [
@@ -120,6 +109,4 @@ class ListMediaConverts extends XotBaseListRecords
             ClockWidget::make(),
         ];
     }
-
-    
 }

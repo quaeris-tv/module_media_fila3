@@ -37,7 +37,7 @@ class Merge
             if (! is_string($filename)) {
                 continue;
             }
-            $manager = new ImageManager(new Driver());
+            $manager = new ImageManager(new Driver);
             $img = $manager->read(public_path($filename));
 
             $imgs[] = $img;
