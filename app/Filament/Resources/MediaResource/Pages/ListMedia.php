@@ -20,6 +20,7 @@ use Modules\Media\Models\Media;
 use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Webmozart\Assert\Assert;
+use Filament\Tables;
 
 class ListMedia extends XotBaseListRecords
 {
