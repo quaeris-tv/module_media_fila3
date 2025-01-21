@@ -42,34 +42,34 @@ class ListMediaConverts extends XotBaseListRecords
     public function getListTableColumns(): array
     {
         return [
-            TextColumn::make('id')
+            'id'=> TextColumn::make('id')
                 ->sortable(),
-            TextColumn::make('media.file_name')
+            'media.file_name'=> TextColumn::make('media.file_name')
                 ->sortable(),
-            TextColumn::make('format')
+            'format'=> TextColumn::make('format')
                 ->searchable(),
-            TextColumn::make('codec_video')
+            'codec_video'=> TextColumn::make('codec_video')
                 ->searchable(),
-            TextColumn::make('codec_audio')
+            'codec_audio'=> TextColumn::make('codec_audio')
                 ->searchable(),
-            TextColumn::make('preset')
+            'preset'=> TextColumn::make('preset')
                 ->searchable(),
-            TextColumn::make('bitrate'),
-            TextColumn::make('width')
+            'bitrate'=> TextColumn::make('bitrate'),
+            'width'=> TextColumn::make('width')
                 ->numeric(),
-            TextColumn::make('height')
+            'height'=> TextColumn::make('height')
                 ->numeric(),
-            TextColumn::make('threads')
+            'threads'=> TextColumn::make('threads')
                 ->numeric(),
-            TextColumn::make('speed')
+            'speed'=> TextColumn::make('speed')
                 ->numeric(),
-            TextColumn::make('percentage')
+            'percentage'=> TextColumn::make('percentage')
                 ->numeric(),
-            TextColumn::make('remaining')
+            'remaining'=> TextColumn::make('remaining')
                 ->numeric(),
-            TextColumn::make('rate')
+            'rate'=> TextColumn::make('rate')
                 ->numeric(),
-            TextColumn::make('execution_time')
+            'execution_time'=> TextColumn::make('execution_time')
                 ->numeric(),
         ];
     }
