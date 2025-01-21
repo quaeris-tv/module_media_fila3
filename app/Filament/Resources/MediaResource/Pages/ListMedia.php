@@ -75,51 +75,31 @@ class ListMedia extends XotBaseListRecords
         ];
     }
 
+    /**
+     * @return array<string, \Filament\Tables\Columns\Column>
+     */
     public function getListTableColumns(): array
     {
-        Assert::string($date_format = config('app.date_format'));
-
         return [
-            TextColumn::make('collection_name'),
-
-            TextColumn::make('name')
-
-                ->searchable()
-                ->sortable(),
-
-            TextColumn::make('mime_type')
-
-                ->sortable(),
-
-            ImageColumn::make('preview')
-
-                ->size(60)
-                ->defaultImageUrl(fn ($record) =>
-                    /*
-                    $url = $record->getUrl();
-                    $info = pathinfo($url);
-                    if(!isset($info['dirname'])) {
-
-                        throw new Exception('['.__LINE__.']['.class_basename($this).']');
-                    }
-                    $thumb = $info['dirname'].'/conversions/'.$info['filename'].'-thumb.jpg';
-
-                    return url($thumb);
-                    */
-                    $record->getUrlConv('thumb')),
-
-            TextColumn::make('human_readable_size')
-            // ->sortable()
-            ,
-
-            TextColumn::make('creator.name')
-
-                ->toggleable(),
-
-            TextColumn::make('created_at')
-
-                ->dateTime($date_format)
-                ->toggleable(),
+            'id' => Tables\Columns\TextColumn::make('id'),
+            'model_type' => Tables\Columns\TextColumn::make('model_type')
+                ->searchable(),
+            'model_id' => Tables\Columns\TextColumn::make('model_id')
+                ->searchable(),
+            'collection_name' => Tables\Columns\TextColumn::make('collection_name')
+                ->searchable(),
+            'name' => Tables\Columns\TextColumn::make('name')
+                ->searchable(),
+            'file_name' => Tables\Columns\TextColumn::make('file_name')
+                ->searchable(),
+            'mime_type' => Tables\Columns\TextColumn::make('mime_type')
+                ->searchable(),
+            'disk' => Tables\Columns\TextColumn::make('disk')
+                ->searchable(),
+            'size' => Tables\Columns\TextColumn::make('size')
+                ->formatStateUsing(fn (string $state): string => number_format($state / 1024, 2).' KB'),
+            'created_at' => Tables\Columns\TextColumn::make('created_at')
+                ->dateTime(),
         ];
     }
 
