@@ -6,6 +6,7 @@ namespace Modules\Media\Filament\Resources\MediaResource\Pages;
 
 use Exception;
 use Filament\Actions\CreateAction;
+use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
@@ -20,7 +21,6 @@ use Modules\Media\Models\Media;
 use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Webmozart\Assert\Assert;
-use Filament\Tables;
 
 class ListMedia extends XotBaseListRecords
 {
