@@ -23,13 +23,20 @@ class TemporaryUploadResource extends XotBaseResource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function form(Form $form): Form
+    public static function getFormSchema(): array 
     {
-        return $form
-            ->schema(
-                [
-                ]
-            );
+        return [
+            \Filament\Forms\Components\FileUpload::make('file')
+                ->required()
+                ->preserveFilenames()
+                ->acceptedFileTypes(['image/*', 'application/pdf', 'application/msword'])
+                ->maxSize(10240),
+            \Filament\Forms\Components\TextInput::make('folder')
+                ->required()
+                ->maxLength(255),
+            \Filament\Forms\Components\DateTimePicker::make('expires_at')
+                ->required(),
+        ];
     }
 
     /**
