@@ -113,7 +113,6 @@ class ListMedia extends XotBaseListRecords
     public function getTableActions(): array
     {
         return [
-            // ActionGroup::make([
             ViewAction::make()
                 ->label(''),
             Action::make('view_attachment')
@@ -133,8 +132,6 @@ class ListMedia extends XotBaseListRecords
                 ->action(
                     static fn ($record) => response()->download($record->getPath(), $record->file_name)
                 ),
-            // ]),
-            // ConvertAction::make('convert'),
             Action::make('convert')
                 ->label('')
                 ->icon('convert01')
@@ -153,7 +150,6 @@ class ListMedia extends XotBaseListRecords
     {
         return [
             DeleteBulkAction::make(),
-            // AttachmentDownloadBulkAction::make(),
         ];
     }
 
