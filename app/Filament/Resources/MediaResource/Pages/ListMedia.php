@@ -33,43 +33,18 @@ class ListMedia extends XotBaseListRecords
         return [
             Stack::make([
                 TextColumn::make('collection_name'),
-
                 TextColumn::make('name')
-
                     ->searchable()
                     ->sortable(),
-
                 TextColumn::make('mime_type')
-
                     ->sortable(),
-
                 ImageColumn::make('preview')
-
                     ->size(60)
-                    ->defaultImageUrl(fn ($record) =>
-                        /*
-                    $url = $record->getUrl();
-                    $info = pathinfo($url);
-                    if(!isset($info['dirname'])) {
-
-                        throw new Exception('['.__LINE__.']['.class_basename($this).']');
-                    }
-                    $thumb = $info['dirname'].'/conversions/'.$info['filename'].'-thumb.jpg';
-
-                    return url($thumb);
-                    */
-                        $record->getUrlConv('thumb')),
-
-                TextColumn::make('human_readable_size')
-                // ->sortable()
-                ,
-
+                    ->defaultImageUrl(fn ($record) => $record->getUrlConv('thumb')),
+                TextColumn::make('human_readable_size'),
                 TextColumn::make('creator.name')
-
                     ->toggleable(),
-
                 TextColumn::make('created_at')
-
                     ->dateTime($date_format)
                     ->toggleable(),
             ]),
@@ -107,6 +82,10 @@ class ListMedia extends XotBaseListRecords
     public function getTableFilters(): array
     {
         return [
+            Tables\Filters\SelectFilter::make('collection_name')
+                ->options(fn () => Media::distinct()->pluck('collection_name', 'collection_name')->toArray()),
+            Tables\Filters\SelectFilter::make('mime_type')
+                ->options(fn () => Media::distinct()->pluck('mime_type', 'mime_type')->toArray()),
         ];
     }
 
@@ -139,7 +118,6 @@ class ListMedia extends XotBaseListRecords
                 ->url(
                     function ($record): string {
                         Assert::string($res = static::$resource::getUrl('convert', ['record' => $record]));
-
                         return $res;
                     }
                 )->openUrlInNewTab(true),
@@ -153,18 +131,13 @@ class ListMedia extends XotBaseListRecords
         ];
     }
 
-    protected function getTableHeaderActions(): array
+    public function getTableHeaderActions(): array
     {
         return [
             TableLayoutToggleTableAction::make(),
         ];
     }
 
-    /**
-     * @return CreateAction[]
-     *
-     * @psalm-return list{CreateAction}
-     */
     protected function getHeaderActions(): array
     {
         return [
