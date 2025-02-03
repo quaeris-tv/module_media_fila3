@@ -17,28 +17,6 @@ class ListMediaConverts extends XotBaseListRecords
 {
     protected static string $resource = MediaConvertResource::class;
 
-    public function getTableColumns(): array
-    {
-        return [
-            TextColumn::make('id'),
-            TextColumn::make('media.file_name')
-                ->sortable(),
-            TextColumn::make('format'),
-            TextColumn::make('codec_video'),
-            TextColumn::make('codec_audio'),
-            TextColumn::make('preset'),
-            TextColumn::make('bitrate'),
-            TextColumn::make('width'),
-            TextColumn::make('height'),
-            TextColumn::make('threads'),
-            TextColumn::make('speed'),
-            TextColumn::make('percentage'),
-            TextColumn::make('remaining'),
-            TextColumn::make('rate'),
-            TextColumn::make('execution_time'),
-        ];
-    }
-
     public function getListTableColumns(): array
     {
         return [
@@ -76,12 +54,20 @@ class ListMediaConverts extends XotBaseListRecords
 
     public function getTableFilters(): array
     {
-        return [];
+        return [
+            Tables\Filters\SelectFilter::make('format')
+                ->options(fn () => MediaConvert::distinct()->pluck('format', 'format')->toArray()),
+            Tables\Filters\SelectFilter::make('codec_video')
+                ->options(fn () => MediaConvert::distinct()->pluck('codec_video', 'codec_video')->toArray()),
+            Tables\Filters\SelectFilter::make('codec_audio')
+                ->options(fn () => MediaConvert::distinct()->pluck('codec_audio', 'codec_audio')->toArray()),
+        ];
     }
 
     public function getTableActions(): array
     {
         return [
+            Tables\Actions\ViewAction::make(),
             Tables\Actions\EditAction::make(),
             Tables\Actions\Action::make('convert')
                 ->action(function (MediaConvert $record): void {
@@ -96,16 +82,13 @@ class ListMediaConverts extends XotBaseListRecords
     public function getTableBulkActions(): array
     {
         return [
-            // Tables\Actions\BulkActionGroup::make([
             Tables\Actions\DeleteBulkAction::make(),
-            // ]);
         ];
     }
 
     protected function getHeaderWidgets(): array
     {
         return [
-            // QueueListenWidget::make(),
             ClockWidget::make(),
         ];
     }
