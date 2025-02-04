@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Media\Filament\Resources;
 
-use Filament\Forms\Form;
 use Filament\Resources\Pages\PageRegistration;
 use Modules\Media\Filament\Resources\TemporaryUploadResource\Pages\CreateTemporaryUpload;
 // use Modules\Media\Filament\Resources\TemporaryUploadResource\RelationManagers;
@@ -23,7 +22,7 @@ class TemporaryUploadResource extends XotBaseResource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function getFormSchema(): array 
+    public static function getFormSchema(): array
     {
         return [
             \Filament\Forms\Components\FileUpload::make('file')

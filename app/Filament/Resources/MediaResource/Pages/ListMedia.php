@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Media\Filament\Resources\MediaResource\Pages;
 
-use Exception;
 use Filament\Actions\CreateAction;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
-use Modules\Media\Filament\Actions\Table\ConvertAction;
 use Modules\Media\Filament\Resources\MediaResource;
 use Modules\Media\Models\Media;
 use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
@@ -118,6 +115,7 @@ class ListMedia extends XotBaseListRecords
                 ->url(
                     function ($record): string {
                         Assert::string($res = static::$resource::getUrl('convert', ['record' => $record]));
+
                         return $res;
                     }
                 )->openUrlInNewTab(true),
