@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\Media\Filament\Resources\MediaResource\Pages;
 
-use Filament\Actions\CreateAction;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Modules\Media\Filament\Resources\MediaResource;
 use Modules\Media\Models\Media;
-use Modules\UI\Filament\Actions\Table\TableLayoutToggleTableAction;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 use Webmozart\Assert\Assert;
 
@@ -54,24 +51,24 @@ class ListMedia extends XotBaseListRecords
     public function getListTableColumns(): array
     {
         return [
-            'id' => Tables\Columns\TextColumn::make('id'),
-            'model_type' => Tables\Columns\TextColumn::make('model_type')
+            'id' => TextColumn::make('id'),
+            'model_type' => TextColumn::make('model_type')
                 ->searchable(),
-            'model_id' => Tables\Columns\TextColumn::make('model_id')
+            'model_id' => TextColumn::make('model_id')
                 ->searchable(),
-            'collection_name' => Tables\Columns\TextColumn::make('collection_name')
+            'collection_name' => TextColumn::make('collection_name')
                 ->searchable(),
-            'name' => Tables\Columns\TextColumn::make('name')
+            'name' => TextColumn::make('name')
                 ->searchable(),
-            'file_name' => Tables\Columns\TextColumn::make('file_name')
+            'file_name' => TextColumn::make('file_name')
                 ->searchable(),
-            'mime_type' => Tables\Columns\TextColumn::make('mime_type')
+            'mime_type' => TextColumn::make('mime_type')
                 ->searchable(),
-            'disk' => Tables\Columns\TextColumn::make('disk')
+            'disk' => TextColumn::make('disk')
                 ->searchable(),
-            'size' => Tables\Columns\TextColumn::make('size')
+            'size' => TextColumn::make('size')
                 ->formatStateUsing(fn (string $state): string => number_format($state / 1024, 2).' KB'),
-            'created_at' => Tables\Columns\TextColumn::make('created_at')
+            'created_at' => TextColumn::make('created_at')
                 ->dateTime(),
         ];
     }
@@ -119,27 +116,6 @@ class ListMedia extends XotBaseListRecords
                         return $res;
                     }
                 )->openUrlInNewTab(true),
-        ];
-    }
-
-    public function getTableBulkActions(): array
-    {
-        return [
-            DeleteBulkAction::make(),
-        ];
-    }
-
-    public function getTableHeaderActions(): array
-    {
-        return [
-            TableLayoutToggleTableAction::make(),
-        ];
-    }
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
         ];
     }
 }
