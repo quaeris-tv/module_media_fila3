@@ -7,7 +7,6 @@ namespace Modules\Media\Filament\Resources\MediaConvertResource\Pages;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Modules\Job\Filament\Widgets\ClockWidget;
-use Modules\Job\Filament\Widgets\QueueListenWidget;
 use Modules\Media\Actions\Video\ConvertVideoByMediaConvertAction;
 use Modules\Media\Filament\Resources\MediaConvertResource;
 use Modules\Media\Models\MediaConvert;
