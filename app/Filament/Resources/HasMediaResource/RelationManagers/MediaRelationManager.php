@@ -34,42 +34,12 @@ class MediaRelationManager extends XotBaseRelationManager
 
     public function form(Form $form): Form
     {
-        $form = MediaResource::form($form, false);
+        $form = MediaResource::form($form);
 
         return $form;
     }
 
-    /**
-     * @return array<Column|ColumnLayoutComponent>
-     */
-    public function getGridTableColumns(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<Column|ColumnLayoutComponent>
-     */
-    public function getListTableColumns(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<BaseFilter>
-     */
-    protected function getTableFilters(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<Action|ActionGroup>
-     */
-    protected function getTableActions(): array
-    {
-        return [];
-    }
+    
 
     /**
      * @return array<Action|ActionGroup>
@@ -96,8 +66,5 @@ class MediaRelationManager extends XotBaseRelationManager
         ];
     }
 
-    public static function getRoute($path, $action = null)
-    {
-        // Define the route logic here
-    }
+   
 }
