@@ -36,36 +36,10 @@ class ListTemporaryUploads extends XotBaseListRecords
     public function getTableFilters(): array
     {
         return [
-            \Filament\Tables\Filters\SelectFilter::make('folder')
+            'folder'=>\Filament\Tables\Filters\SelectFilter::make('folder')
                 ->options(fn () => \Modules\Media\Models\TemporaryUpload::distinct()->pluck('folder', 'folder')->toArray()),
         ];
     }
 
-    public function getTableActions(): array
-    {
-        return [
-            ViewAction::make(),
-            EditAction::make(),
-            DeleteAction::make(),
-        ];
-    }
-
-    public function getTableBulkActions(): array
-    {
-        return [
-            \Filament\Tables\Actions\DeleteBulkAction::make(),
-        ];
-    }
-
-    /**
-     * @return CreateAction[]
-     *
-     * @psalm-return list{CreateAction}
-     */
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
-        ];
-    }
+    
 }
