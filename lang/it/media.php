@@ -10,8 +10,12 @@ return [
         'name' => 'Media',
         'plural' => 'Media',
         'group' => [
-            'name' => '',
+            'name' => 'Sistema',
+            'description' => 'Gestione dei file multimediali',
         ],
+        'label' => 'media',
+        'sort' => 35,
+        'icon' => 'heroicon-o-photo',
     ],
     'fields' => [
         'name' => 'Nome',
