@@ -8,7 +8,7 @@ use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Modules\Media\Filament\Resources\MediaConvertResource;
 
-class EditMediaConvert extends EditRecord
+class EditMediaConvert extends \Modules\Xot\Filament\Resources\Pages\XotBaseEditRecord
 {
     protected static string $resource = MediaConvertResource::class;
 

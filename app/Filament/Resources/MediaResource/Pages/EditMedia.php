@@ -8,7 +8,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Modules\Media\Filament\Resources\MediaResource;
 
-class EditMedia extends EditRecord
+class EditMedia extends \Modules\Xot\Filament\Resources\Pages\XotBaseEditRecord
 {
     protected static string $resource = MediaResource::class;
 

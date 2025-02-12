@@ -8,7 +8,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Modules\Media\Filament\Resources\TemporaryUploadResource;
 
-class EditTemporaryUpload extends EditRecord
+class EditTemporaryUpload extends \Modules\Xot\Filament\Resources\Pages\XotBaseEditRecord
 {
     protected static string $resource = TemporaryUploadResource::class;
 
