@@ -34,12 +34,50 @@ class MediaRelationManager extends XotBaseRelationManager
 
     public function form(Form $form): Form
     {
+<<<<<<< HEAD
         $form = MediaResource::form($form);
+=======
+        $form = MediaResource::form($form, false);
+>>>>>>> 5b301225981f0c2116c7e0b5bea444099a08bfd7
 
         return $form;
     }
 
+<<<<<<< HEAD
     
+=======
+    /**
+     * @return array<Column|ColumnLayoutComponent>
+     */
+    public function getGridTableColumns(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<Column|ColumnLayoutComponent>
+     */
+    public function getListTableColumns(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<BaseFilter>
+     */
+    protected function getTableFilters(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<Action|ActionGroup>
+     */
+    protected function getTableActions(): array
+    {
+        return [];
+    }
+>>>>>>> 5b301225981f0c2116c7e0b5bea444099a08bfd7
 
     /**
      * @return array<Action|ActionGroup>
@@ -66,5 +104,12 @@ class MediaRelationManager extends XotBaseRelationManager
         ];
     }
 
+<<<<<<< HEAD
    
+=======
+    public static function getRoute($path, $action = null)
+    {
+        // Define the route logic here
+    }
+>>>>>>> 5b301225981f0c2116c7e0b5bea444099a08bfd7
 }
