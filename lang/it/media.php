@@ -11,7 +11,7 @@
       'description' => 'Gestione dei file multimediali',
     ),
     'label' => 'media',
-    'sort' => 25,
+    'sort' => 20,
     'icon' => 'media-icon',
   ),
   'fields' => 

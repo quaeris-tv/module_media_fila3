@@ -4,6 +4,6 @@
     'label' => 'media convert.navigation',
     'group' => 'media convert.navigation',
     'icon' => 'media convert.navigation',
-    'sort' => 100,
+    'sort' => 20,
   ),
 );

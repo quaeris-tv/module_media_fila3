@@ -4,6 +4,6 @@
     'label' => 'temporary upload.navigation',
     'group' => 'temporary upload.navigation',
     'icon' => 'temporary upload.navigation',
-    'sort' => 72,
+    'sort' => 96,
   ),
 );
