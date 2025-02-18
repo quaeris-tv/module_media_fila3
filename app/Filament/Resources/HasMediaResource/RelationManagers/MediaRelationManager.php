@@ -9,9 +9,6 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Columns\Column;
-use Filament\Tables\Columns\Layout\Component as ColumnLayoutComponent;
-use Filament\Tables\Filters\BaseFilter;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Media\Filament\Resources\AttachmentResource;
 use Modules\Media\Filament\Resources\HasMediaResource\Actions\AddAttachmentAction;
@@ -39,8 +36,6 @@ class MediaRelationManager extends XotBaseRelationManager
         return $form;
     }
 
-    
-
     /**
      * @return array<Action|ActionGroup>
      */
@@ -65,6 +60,4 @@ class MediaRelationManager extends XotBaseRelationManager
             */
         ];
     }
-
-   
 }

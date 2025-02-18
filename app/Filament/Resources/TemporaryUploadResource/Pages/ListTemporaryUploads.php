@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Media\Filament\Resources\TemporaryUploadResource\Pages;
 
-use Filament\Actions\CreateAction;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Modules\Media\Filament\Resources\TemporaryUploadResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
@@ -36,10 +32,8 @@ class ListTemporaryUploads extends XotBaseListRecords
     public function getTableFilters(): array
     {
         return [
-            'folder'=>\Filament\Tables\Filters\SelectFilter::make('folder')
+            'folder' => \Filament\Tables\Filters\SelectFilter::make('folder')
                 ->options(fn () => \Modules\Media\Models\TemporaryUpload::distinct()->pluck('folder', 'folder')->toArray()),
         ];
     }
-
-    
 }

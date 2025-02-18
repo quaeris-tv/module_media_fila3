@@ -6,7 +6,6 @@ namespace Modules\Media\Filament\Resources\MediaConvertResource\Pages;
 
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;

@@ -8,20 +8,14 @@ use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Modules\Media\Filament\Resources\MediaResource;
-use Modules\Media\Models\Media;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
-use Webmozart\Assert\Assert;
 
 class ListMedia extends XotBaseListRecords
 {
     protected static string $resource = MediaResource::class;
-
-   
 
     /**
      * @return array<string, Tables\Columns\Column>
@@ -36,7 +30,7 @@ class ListMedia extends XotBaseListRecords
                 ->sortable()
                 ->searchable(),
             'size' => TextColumn::make('size')
-                ->formatStateUsing(fn (string $state): string => number_format((int)$state / 1024, 2) . ' KB'),
+                ->formatStateUsing(fn (string $state): string => number_format((int) $state / 1024, 2).' KB'),
             'mime_type' => TextColumn::make('mime_type')
                 ->sortable()
                 ->searchable(),
