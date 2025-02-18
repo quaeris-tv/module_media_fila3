@@ -1,9 +1,10 @@
-<?php return array (
+<?php 
+return array (
   'navigation' => 
   array (
-    'label' => 'temporary upload.navigation',
-    'group' => 'temporary upload.navigation',
-    'icon' => 'temporary upload.navigation',
+    'label' => 'temporary upload',
+    'group' => 'temporary upload',
+    'icon' => 'temporary upload',
     'sort' => 96,
   ),
-);
+);

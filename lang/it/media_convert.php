@@ -1,9 +1,10 @@
-<?php return array (
+<?php 
+return array (
   'navigation' => 
   array (
-    'label' => 'media convert.navigation',
-    'group' => 'media convert.navigation',
-    'icon' => 'media convert.navigation',
+    'label' => 'media convert',
+    'group' => 'media convert',
+    'icon' => 'media convert',
     'sort' => 20,
   ),
-);
+);
