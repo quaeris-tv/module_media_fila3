@@ -11,10 +11,5 @@ class EditMediaConvert extends \Modules\Xot\Filament\Resources\Pages\XotBaseEdit
 {
     protected static string $resource = MediaConvertResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\DeleteAction::make(),
-        ];
-    }
+   
 }
