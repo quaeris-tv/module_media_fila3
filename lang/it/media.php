@@ -12,7 +12,7 @@
     ),
     'label' => 'media',
     'sort' => 20,
-    'icon' => 'media-icon',
+    'icon' => 'media-main-animated',
   ),
   'fields' => 
   array (
