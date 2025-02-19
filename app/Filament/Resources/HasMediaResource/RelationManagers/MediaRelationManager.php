@@ -31,88 +31,16 @@ class MediaRelationManager extends XotBaseRelationManager
 
     public function form(Form $form): Form
     {
-<<<<<<< HEAD
-        $form = MediaResource::form($form);
-=======
-        $form = MediaResource::form($form, false);
->>>>>>> 5b301225981f0c2116c7e0b5bea444099a08bfd7
-
-        return $form;
+        return MediaResource::form($form, false);
     }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    
-=======
-    /**
-     * @return array<Column|ColumnLayoutComponent>
-     */
-    public function getGridTableColumns(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<Column|ColumnLayoutComponent>
-     */
-    public function getListTableColumns(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<BaseFilter>
-     */
-    protected function getTableFilters(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<Action|ActionGroup>
-     */
-    protected function getTableActions(): array
-    {
-        return [];
-    }
->>>>>>> 5b301225981f0c2116c7e0b5bea444099a08bfd7
-
->>>>>>> 055718a1 (up)
     /**
      * @return array<Action|ActionGroup>
      */
     protected function getTableHeaderActions(): array
     {
         return [
-            // Tables\Actions\AttachAction::make(),
-            // Tables\Actions\CreateAction::make(),
             AddAttachmentAction::make(),
-            /*
-            Action::make('add_attachment')
-                ->translateLabel()
-                ->icon('heroicon-o-plus')
-                ->color('success')
-                ->button()
-                ->form(
-                    fn (): array => AttachmentResource::getFormSchema(false)
-                )
-                ->action(
-                    fn (RelationManager $livewire, array $data) => AttachmentResource::formHandlerCallback($livewire, $data),
-                ),
-            */
         ];
     }
-<<<<<<< HEAD
-=======
-
-<<<<<<< HEAD
-   
-=======
-    public static function getRoute($path, $action = null)
-    {
-        // Define the route logic here
-    }
->>>>>>> 5b301225981f0c2116c7e0b5bea444099a08bfd7
->>>>>>> 055718a1 (up)
 }

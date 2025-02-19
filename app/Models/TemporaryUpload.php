@@ -40,17 +40,10 @@ use Webmozart\Assert\Assert;
  * @property string|null $deleted_at
  * @property string|null $deleted_by
  *
-<<<<<<< HEAD
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereDeletedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TemporaryUpload whereUpdatedBy($value)
-=======
- * @method static Builder<static>|TemporaryUpload whereCreatedBy($value)
- * @method static Builder<static>|TemporaryUpload whereDeletedAt($value)
- * @method static Builder<static>|TemporaryUpload whereDeletedBy($value)
- * @method static Builder<static>|TemporaryUpload whereUpdatedBy($value)
->>>>>>> 5b301225981f0c2116c7e0b5bea444099a08bfd7
  *
  * @mixin \Eloquent
  */

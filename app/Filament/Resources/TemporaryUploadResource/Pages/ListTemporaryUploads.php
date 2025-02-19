@@ -4,14 +4,23 @@ declare(strict_types=1);
 
 namespace Modules\Media\Filament\Resources\TemporaryUploadResource\Pages;
 
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Modules\Media\Filament\Resources\TemporaryUploadResource;
+use Modules\Media\Models\TemporaryUpload;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 
 class ListTemporaryUploads extends XotBaseListRecords
 {
     protected static string $resource = TemporaryUploadResource::class;
 
+    /**
+     * @return array<string, TextColumn>
+     */
     public function getListTableColumns(): array
     {
         return [
@@ -29,27 +38,20 @@ class ListTemporaryUploads extends XotBaseListRecords
         ];
     }
 
+    /**
+     * @return array<string, SelectFilter>
+     */
     public function getTableFilters(): array
     {
         return [
-<<<<<<< HEAD
-            'folder' => \Filament\Tables\Filters\SelectFilter::make('folder')
-                ->options(fn () => \Modules\Media\Models\TemporaryUpload::distinct()->pluck('folder', 'folder')->toArray()),
-        ];
-    }
-=======
-<<<<<<< HEAD
-            'folder'=>\Filament\Tables\Filters\SelectFilter::make('folder')
-=======
-            \Filament\Tables\Filters\SelectFilter::make('folder')
->>>>>>> 5b301225981f0c2116c7e0b5bea444099a08bfd7
-                ->options(fn () => \Modules\Media\Models\TemporaryUpload::distinct()->pluck('folder', 'folder')->toArray()),
+            'folder' => SelectFilter::make('folder')
+                ->options(fn () => TemporaryUpload::distinct()->pluck('folder', 'folder')->toArray()),
         ];
     }
 
-<<<<<<< HEAD
-    
-=======
+    /**
+     * @return array<int, ViewAction|EditAction|DeleteAction>
+     */
     public function getTableActions(): array
     {
         return [
@@ -59,6 +61,9 @@ class ListTemporaryUploads extends XotBaseListRecords
         ];
     }
 
+    /**
+     * @return array<int, \Filament\Tables\Actions\DeleteBulkAction>
+     */
     public function getTableBulkActions(): array
     {
         return [
@@ -67,9 +72,7 @@ class ListTemporaryUploads extends XotBaseListRecords
     }
 
     /**
-     * @return CreateAction[]
-     *
-     * @psalm-return list{CreateAction}
+     * @return array<int, CreateAction>
      */
     protected function getHeaderActions(): array
     {
@@ -77,6 +80,4 @@ class ListTemporaryUploads extends XotBaseListRecords
             CreateAction::make(),
         ];
     }
->>>>>>> 5b301225981f0c2116c7e0b5bea444099a08bfd7
->>>>>>> 055718a1 (up)
 }

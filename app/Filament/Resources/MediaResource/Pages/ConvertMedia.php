@@ -8,7 +8,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\ViewRecord;
 use Modules\Media\Filament\Resources\MediaResource;
 
-class ConvertMedia extends ViewRecord
+class ConvertMedia extends \Modules\Xot\Filament\Resources\Pages\XotBaseViewRecord
 {
     protected static string $resource = MediaResource::class;
 
