@@ -31,7 +31,9 @@ class MediaRelationManager extends XotBaseRelationManager
 
     public function form(Form $form): Form
     {
-        return MediaResource::form($form, false);
+        $form = MediaResource::form($form);
+
+        return $form;
     }
 
     /**
@@ -40,7 +42,22 @@ class MediaRelationManager extends XotBaseRelationManager
     protected function getTableHeaderActions(): array
     {
         return [
+            // Tables\Actions\AttachAction::make(),
+            // Tables\Actions\CreateAction::make(),
             AddAttachmentAction::make(),
+            /*
+            Action::make('add_attachment')
+                ->translateLabel()
+                ->icon('heroicon-o-plus')
+                ->color('success')
+                ->button()
+                ->form(
+                    fn (): array => AttachmentResource::getFormSchema(false)
+                )
+                ->action(
+                    fn (RelationManager $livewire, array $data) => AttachmentResource::formHandlerCallback($livewire, $data),
+                ),
+            */
         ];
     }
 }

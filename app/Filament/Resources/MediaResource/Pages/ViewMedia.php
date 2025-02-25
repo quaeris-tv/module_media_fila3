@@ -21,7 +21,7 @@ use Modules\Media\Filament\Resources\MediaConvertResource;
 use Modules\Media\Filament\Resources\MediaResource;
 use Modules\Media\Filament\Resources\MediaResource\Widgets\ConvertWidget;
 
-class ViewMedia extends \Modules\Xot\Filament\Resources\Pages\XotBaseViewRecord
+class ViewMedia extends ViewRecord
 {
     protected static string $resource = MediaResource::class;
 
