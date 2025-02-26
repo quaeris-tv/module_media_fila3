@@ -14,27 +14,19 @@
     ],
     "homepage": "https://github.com/laraxot/module_media_fila3.git",
     "license": "MIT",
-    "authors": [{
-        "name": "Marco Sottana",
-        "email": "marco.sottana@gmail.com",
-        "role": "Developer"
-    }],
+    "authors": [
+        {
+            "name": "Marco Sottana",
+            "email": "marco.sottana@gmail.com",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "pbmedia/laravel-ffmpeg": "^8.5",
         "intervention/image": "*"
     },
-    "require_comment": {
-        "thecodingmachine/safe": "^2.5",
-        "laraxot/module_xot_fila3": "*"
-    },
-    "require-dev_comment": {
-        "orchestra/testbench": "*",
-        "orchestra/pest-plugin-testbench": "*",
-        "larastan/larastan": "^2.9",
-        "thecodingmachine/phpstan-safe-rule": "^1.2",
-        "rector/rector": "*"
-    },
+    "require-dev": {},
     "repositories": [
         {
             "type": "path",
@@ -59,14 +51,14 @@
                 "Modules\\Media\\Providers\\MediaServiceProvider",
                 "Modules\\Media\\Providers\\Filament\\AdminPanelProvider"
             ],
-            "aliases": {
-
-            }
+            "aliases": {}
         }
     },
     "autoload": {
         "psr-4": {
-            "Modules\\Media\\": ""
+            "Modules\\Media\\": "app/",
+            "Modules\\Media\\Database\\Factories\\": "database/factories/",
+            "Modules\\Media\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
@@ -75,7 +67,7 @@
         }
     },
     "scripts": {
-        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "post-autoload-dump1": "@php ./vendor/bin/testbench package:discover --ansi",
         "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
@@ -83,7 +75,6 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true,
