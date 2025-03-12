@@ -1,0 +1,29 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\Media\Filament\Resources\MediaResource\Pages;
+
+<<<<<<< HEAD:app_old/Filament/Resources/MediaResource/Pages/ConvertMedia.php
+<<<<<<< HEAD
+=======
+use Filament\Actions\DeleteAction;
+use Filament\Resources\Pages\ViewRecord;
+>>>>>>> 012d87af846e72acdf130a0c5a0a482dd4531f20
+=======
+>>>>>>> 6eb05a1e933912c440be0a88183ddc8e92244d0f:app/Filament/Resources/MediaResource/Pages/ConvertMedia.old
+use Modules\Media\Filament\Resources\MediaResource;
+use Modules\Xot\Filament\Resources\Pages\XotBaseViewRecord;
+
+class ConvertMedia extends \Modules\Xot\Filament\Resources\Pages\XotBaseViewRecord
+{
+    protected static string $resource = MediaResource::class;
+<<<<<<< HEAD:app_old/Filament/Resources/MediaResource/Pages/ConvertMedia.php
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 012d87af846e72acdf130a0c5a0a482dd4531f20
+=======
+>>>>>>> 6eb05a1e933912c440be0a88183ddc8e92244d0f:app/Filament/Resources/MediaResource/Pages/ConvertMedia.old
+}
