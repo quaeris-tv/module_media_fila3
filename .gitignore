@@ -96,4 +96,8 @@ docs/cache/
 cache/
 .git-blame-ignore-revs
 .php-cs-fixer.cache
+<<<<<<< HEAD
 *:Zone.Identifier
+=======
+.php-cs-fixer.cache
+>>>>>>> 012d87af846e72acdf130a0c5a0a482dd4531f20
