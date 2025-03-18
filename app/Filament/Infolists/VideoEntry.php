@@ -205,11 +205,28 @@ class VideoEntry extends Entry
         return null;
     }
 
+    /**
+     * Get the visibility value for the video entry.
+     *
+     * @return string The visibility setting
+     */
     public function getVisibility(): string
     {
-        return $this->evaluate($this->visibility);
+        $visibility = $this->evaluate($this->visibility);
+        
+        if (is_scalar($visibility) || (is_object($visibility) && method_exists($visibility, '__toString'))) {
+            return (string) $visibility;
+        }
+        
+        // Default to public if invalid value
+        return 'public';
     }
 
+    /**
+     * Get the width value for the video entry.
+     *
+     * @return string|null The width value as a string (with 'px' suffix if it was an integer) or null if not set
+     */
     public function getWidth(): ?string
     {
         $width = $this->evaluate($this->width);
@@ -222,7 +239,11 @@ class VideoEntry extends Entry
             return "{$width}px";
         }
 
-        return $width;
+        if (is_scalar($width) || (is_object($width) && method_exists($width, '__toString'))) {
+            return (string) $width;
+        }
+        
+        return null;
     }
 
     public function isCircular(): bool
@@ -250,7 +271,14 @@ class VideoEntry extends Entry
      */
     public function getExtraImgAttributes(): array
     {
-        return $this->evaluate($this->extraImgAttributes);
+        $attributes = $this->evaluate($this->extraImgAttributes);
+        
+        if (is_array($attributes)) {
+            return $attributes;
+        }
+        
+        // Return empty array if invalid value
+        return [];
     }
 
     public function getExtraImgAttributeBag(): ComponentAttributeBag
@@ -277,9 +305,24 @@ class VideoEntry extends Entry
         return $this;
     }
 
+    /**
+     * Get the overlap value for the video entry.
+     *
+     * @return int|null The overlap value or null if not set
+     */
     public function getOverlap(): ?int
     {
-        return $this->evaluate($this->overlap);
+        $overlap = $this->evaluate($this->overlap);
+        
+        if ($overlap === null) {
+            return null;
+        }
+        
+        if (is_numeric($overlap)) {
+            return (int) $overlap;
+        }
+        
+        return null;
     }
 
     public function ring(string|int|\Closure|null $ring): static
@@ -289,9 +332,24 @@ class VideoEntry extends Entry
         return $this;
     }
 
+    /**
+     * Get the ring value for the video entry.
+     *
+     * @return int|null The ring value or null if not set
+     */
     public function getRing(): ?int
     {
-        return $this->evaluate($this->ring);
+        $ring = $this->evaluate($this->ring);
+        
+        if ($ring === null) {
+            return null;
+        }
+        
+        if (is_numeric($ring)) {
+            return (int) $ring;
+        }
+        
+        return null;
     }
 
     public function limit(int|\Closure|null $limit = 3): static
@@ -301,9 +359,24 @@ class VideoEntry extends Entry
         return $this;
     }
 
+    /**
+     * Get the limit value for the video entry.
+     *
+     * @return int|null The limit value or null if not set
+     */
     public function getLimit(): ?int
     {
-        return $this->evaluate($this->limit);
+        $limit = $this->evaluate($this->limit);
+        
+        if ($limit === null) {
+            return null;
+        }
+        
+        if (is_numeric($limit)) {
+            return (int) $limit;
+        }
+        
+        return null;
     }
 
     public function limitedRemainingText(bool|\Closure $condition = true, bool|\Closure $isSeparate = false, string|\Closure|null $size = null): static
@@ -339,9 +412,24 @@ class VideoEntry extends Entry
         return $this;
     }
 
+    /**
+     * Get the limited remaining text size for the video entry.
+     *
+     * @return string|null The text size or null if not set
+     */
     public function getLimitedRemainingTextSize(): ?string
     {
-        return $this->evaluate($this->limitedRemainingTextSize);
+        $size = $this->evaluate($this->limitedRemainingTextSize);
+        
+        if ($size === null) {
+            return null;
+        }
+        
+        if (is_scalar($size) || (is_object($size) && method_exists($size, '__toString'))) {
+            return (string) $size;
+        }
+        
+        return null;
     }
 
     public function checkFileExistence(bool|\Closure $condition = true): static
