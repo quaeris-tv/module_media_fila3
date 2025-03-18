@@ -116,6 +116,11 @@ class VideoEntry extends Entry
         return $res;
     }
 
+    /**
+     * Get the height value for the video entry.
+     *
+     * @return string|null The height value as a string (with 'px' suffix if it was an integer) or null if not set
+     */
     public function getHeight(): ?string
     {
         $height = $this->evaluate($this->height);
@@ -128,7 +133,13 @@ class VideoEntry extends Entry
             return "{$height}px";
         }
 
-        return $height;
+        // Convert to string to ensure consistent return type
+        if (is_scalar($height) || (is_object($height) && method_exists($height, '__toString'))) {
+            return (string) $height;
+        }
+        
+        // If we can't convert to string, return null
+        return null;
     }
 
     public function defaultImageUrl(string|\Closure|null $url): static
@@ -174,9 +185,24 @@ class VideoEntry extends Entry
         return $storage->url($state);
     }
 
+    /**
+     * Get the default image URL for the video entry.
+     *
+     * @return string|null The default image URL or null if not set
+     */
     public function getDefaultImageUrl(): ?string
     {
-        return $this->evaluate($this->defaultImageUrl);
+        $url = $this->evaluate($this->defaultImageUrl);
+        
+        if ($url === null) {
+            return null;
+        }
+        
+        if (is_scalar($url) || (is_object($url) && method_exists($url, '__toString'))) {
+            return (string) $url;
+        }
+        
+        return null;
     }
 
     public function getVisibility(): string
