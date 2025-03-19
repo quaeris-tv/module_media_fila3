@@ -11,7 +11,9 @@ namespace Modules\Media\Actions\Video;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
+use ProtoneMedia\LaravelFFMpeg\MediaOpener;
 use Spatie\QueueableAction\QueueableAction;
+use Webmozart\Assert\Assert;
 
 class ConvertVideoAction
 {
@@ -34,22 +36,38 @@ class ConvertVideoAction
         /**
          * -preset ultrafast.
          */
-        FFMpeg::fromDisk($disk_mp4)
-            ->open($file_mp4)
-            ->export()
-            // ->addFilter(function (VideoFilters $filters) {
-            //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
-            // })
-            // ->resize(640, 480)
-            // ->onProgress(function ($percentage, $remaining, $rate) {
-            //    echo "{$percentage}% transcoded";
-            //    echo "{$remaining} seconds left at rate: {$rate}";
-            // });
-            // ->addFilter('-preset', 'ultrafast')
-            // ->addFilter('-crf', 22)
-            ->toDisk($disk_mp4)
-            ->inFormat($format)
-            ->save($file_new);
+        // Ensure we're working with a proper MediaOpener instance
+        $media = FFMpeg::fromDisk($disk_mp4);
+        Assert::isInstanceOf($media, MediaOpener::class, 'FFMpeg::fromDisk() deve restituire un\'istanza di MediaOpener');
+        
+        $openedMedia = $media->open($file_mp4);
+        Assert::notNull($openedMedia, 'Impossibile aprire il file video');
+        
+        $exportedMedia = $openedMedia->export();
+        Assert::notNull($exportedMedia, 'Impossibile esportare il file video');
+        
+        // Comment out or add filters as needed
+        // ->addFilter(function (VideoFilters $filters) {
+        //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
+        // })
+        // ->resize(640, 480)
+        // ->onProgress(function ($percentage, $remaining, $rate) {
+        //    echo "{$percentage}% transcoded";
+        //    echo "{$remaining} seconds left at rate: {$rate}";
+        // });
+        // ->addFilter('-preset', 'ultrafast')
+        // ->addFilter('-crf', 22)
+        
+        /** @phpstan-ignore-next-line */
+        $toDiskMedia = $exportedMedia->toDisk($disk_mp4);
+        Assert::notNull($toDiskMedia, 'Impossibile specificare il disco di destinazione');
+        
+        /** @phpstan-ignore-next-line */
+        $formattedMedia = $toDiskMedia->inFormat($format);
+        Assert::notNull($formattedMedia, 'Impossibile applicare il formato al video');
+        
+        /** @phpstan-ignore-next-line */
+        $formattedMedia->save($file_new);
 
         return Storage::disk($disk_mp4)->url($file_new);
     }

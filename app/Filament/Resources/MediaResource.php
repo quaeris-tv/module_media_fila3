@@ -16,6 +16,11 @@ class MediaResource extends XotBaseResource
 {
     protected static ?string $model = Media::class;
 
+    protected static ?string $navigationIcon = 'fas-photo-film';
+
+    /**
+     * @return array<string, \Filament\Forms\Components\Component>
+     */
     public static function getFormSchema(): array
     {
         return [

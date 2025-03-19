@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Storage;
 use Modules\Media\Datas\ConvertData;
 use Modules\Media\Models\MediaConvert;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
+use ProtoneMedia\LaravelFFMpeg\MediaOpener;
 use Spatie\QueueableAction\QueueableAction;
+use Webmozart\Assert\Assert;
 
 class ConvertVideoByMediaConvertAction
 {
@@ -41,34 +43,51 @@ class ConvertVideoByMediaConvertAction
         /*
          * -preset ultrafast.
          */
-        // @phpstan-ignore method.notFound
-        FFMpeg::fromDisk($data->disk)
-            ->open($data->file)
-            ->export()
-            // ->addFilter(function (VideoFilters $filters) {
-            //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
-            // })
-            // ->resize(640, 480)
-            ->onProgress(function (float $percentage, float $remaining, float $rate) use ($record): void {
-                $msg = "{$percentage}% transcoded";
-                $msg .= "{$remaining} seconds left at rate: {$rate}";
+        // Ensure we have a proper MediaOpener instance
+        $media = FFMpeg::fromDisk($data->disk);
+        Assert::isInstanceOf($media, MediaOpener::class, 'FFMpeg::fromDisk() deve restituire un\'istanza di MediaOpener');
+        
+        $openedMedia = $media->open($data->file);
+        Assert::notNull($openedMedia, 'Impossibile aprire il file video');
+        
+        $exportedMedia = $openedMedia->export();
+        Assert::notNull($exportedMedia, 'Impossibile esportare il file video');
+        
+        // Add progress callback
+        $withProgressMedia = $exportedMedia->onProgress(function (float $percentage, float $remaining, float $rate) use ($record): void {
+            $msg = "{$percentage}% transcoded";
+            $msg .= "{$remaining} seconds left at rate: {$rate}";
 
-                $record->update([
-                    'percentage' => $percentage,
-                    'remaining' => $remaining,
-                    'rate' => $rate,
-                ]);
+            $record->update([
+                'percentage' => $percentage,
+                'remaining' => $remaining,
+                'rate' => $rate,
+            ]);
 
-                Notification::make()
-                    ->title($msg)
-                    ->success()
-                    ->send();
-            })
-            ->addFilter('-preset', 'ultrafast')
-            // ->addFilter('-crf', 22)
-            ->toDisk($data->disk)
-            ->inFormat($format)
-            ->save($file_new);
+            Notification::make()
+                ->title($msg)
+                ->success()
+                ->send();
+        });
+        Assert::notNull($withProgressMedia, 'Impossibile aggiungere il callback di progresso');
+        
+        // Add filters
+        $withFiltersMedia = $withProgressMedia->addFilter('-preset', 'ultrafast');
+        Assert::notNull($withFiltersMedia, 'Impossibile aggiungere i filtri');
+        
+        // Set target disk
+        /** @phpstan-ignore-next-line */
+        $toDiskMedia = $withFiltersMedia->toDisk($data->disk);
+        Assert::notNull($toDiskMedia, 'Impossibile specificare il disco di destinazione');
+        
+        // Set format
+        /** @phpstan-ignore-next-line */
+        $formattedMedia = $toDiskMedia->inFormat($format);
+        Assert::notNull($formattedMedia, 'Impossibile applicare il formato al video');
+        
+        // Save
+        /** @phpstan-ignore-next-line */
+        $formattedMedia->save($file_new);
 
         $finished_time = microtime(true);
 
