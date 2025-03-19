@@ -14,8 +14,12 @@ use Modules\Media\Datas\ConvertData;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use ProtoneMedia\LaravelFFMpeg\MediaOpener;
 use Spatie\QueueableAction\QueueableAction;
+use FFMpeg\Format\Video\DefaultVideo;
 use Webmozart\Assert\Assert;
 
+/**
+ * @method \ProtoneMedia\LaravelFFMpeg\Drivers\PHPFFMpeg inFormat(DefaultVideo $format)
+ */
 class ConvertVideoByConvertDataAction
 {
     use QueueableAction;
@@ -23,60 +27,33 @@ class ConvertVideoByConvertDataAction
     /**
      * Execute the action.
      */
-    public function execute(ConvertData $data): ?string
+    public function execute(ConvertData $data): string
     {
-        if (! $data->exists()) {
-            return '';
+        if (!$data->exists()) {
+            throw new \Exception('Il file non esiste');
         }
+
         $format = $data->getFFMpegFormat();
         $file_new = $data->getConvertedFilename();
-        Notification::make()
-            ->title('Start')
-            ->success()
-            ->send();
 
-        /*
-         * -preset ultrafast.
-         */
-        // Ensure we have a proper MediaOpener instance
-        $media = FFMpeg::fromDisk($data->disk);
-        Assert::isInstanceOf($media, MediaOpener::class, 'FFMpeg::fromDisk() deve restituire un\'istanza di MediaOpener');
-        
-        $openedMedia = $media->open($data->file);
-        Assert::notNull($openedMedia, 'Impossibile aprire il file video');
-        
-        $exportedMedia = $openedMedia->export();
-        Assert::notNull($exportedMedia, 'Impossibile esportare il file video');
-        
-        // Add progress callback
-        $withProgressMedia = $exportedMedia->onProgress(function (float $percentage, float $remaining, float $rate): void {
-            $msg = "{$percentage}% transcoded";
-            $msg .= "{$remaining} seconds left at rate: {$rate}";
-            Notification::make()
-                ->title($msg)
-                ->success()
-                ->send();
-        });
-        Assert::notNull($withProgressMedia, 'Impossibile aggiungere il callback di progresso');
-        
-        // Add filters
-        $withFiltersMedia = $withProgressMedia->addFilter('-preset', 'ultrafast');
-        Assert::notNull($withFiltersMedia, 'Impossibile aggiungere i filtri');
-        
-        // Set target disk
-        /** @phpstan-ignore-next-line */
-        $toDiskMedia = $withFiltersMedia->toDisk($data->disk);
-        Assert::notNull($toDiskMedia, 'Impossibile specificare il disco di destinazione');
-        
-        // Set format
-        /** @phpstan-ignore-next-line */
-        $formattedMedia = $toDiskMedia->inFormat($format);
-        Assert::notNull($formattedMedia, 'Impossibile applicare il formato al video');
-        
-        // Save
-        /** @phpstan-ignore-next-line */
-        $formattedMedia->save($file_new);
+        if (!$file_new) {
+            throw new \Exception('Il nome del file convertito non è stato specificato');
+        }
 
-        return Storage::disk($data->disk)->url($file_new);
+        FFMpeg::fromDisk($data->disk)
+            ->open($data->file)
+            ->export()
+            ->onProgress(function (float $percentage, float $remaining, float $rate): void {
+                // Gestione del progresso
+                $msg = "{$percentage}% transcoded";
+                $msg .= "{$remaining} seconds left at rate: {$rate}";
+                // Log o notifica del progresso
+            })
+            ->addFilter('-preset', 'ultrafast')
+            ->inFormat($format)
+            ->save($file_new);
+
+        // Restituisci il percorso del file senza usare il metodo url()
+        return $file_new;
     }
 }

@@ -14,6 +14,7 @@ use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use ProtoneMedia\LaravelFFMpeg\MediaOpener;
 use Spatie\QueueableAction\QueueableAction;
 use Webmozart\Assert\Assert;
+use FFMpeg\Format\Video\X264;
 
 class ConvertVideoAction
 {
@@ -22,51 +23,21 @@ class ConvertVideoAction
     /**
      * Execute the action.
      */
-    public function execute(string $disk_mp4, string $file_mp4, string $format): ?string
+    public function execute(string $disk_mp4, string $file_mp4, string $file_new): string
     {
-        if (! Storage::disk($disk_mp4)->exists($file_mp4)) {
-            return '';
-        }
-        $format = new \FFMpeg\Format\Video\WebM;
-        $extension = mb_strtolower(class_basename($format));
-        $file_new = Str::of($file_mp4)
-            ->replaceLast('.mp4', '.'.$extension)
-            ->toString();
-
-        /**
-         * -preset ultrafast.
-         */
-        // Ensure we're working with a proper MediaOpener instance
         $media = FFMpeg::fromDisk($disk_mp4);
-        Assert::isInstanceOf($media, MediaOpener::class, 'FFMpeg::fromDisk() deve restituire un\'istanza di MediaOpener');
-        
+
         $openedMedia = $media->open($file_mp4);
-        Assert::notNull($openedMedia, 'Impossibile aprire il file video');
         
         $exportedMedia = $openedMedia->export();
-        Assert::notNull($exportedMedia, 'Impossibile esportare il file video');
-        
-        // Comment out or add filters as needed
-        // ->addFilter(function (VideoFilters $filters) {
-        //    $filters->resize(new \FFMpeg\Coordinate\Dimension(640, 480));
-        // })
-        // ->resize(640, 480)
-        // ->onProgress(function ($percentage, $remaining, $rate) {
-        //    echo "{$percentage}% transcoded";
-        //    echo "{$remaining} seconds left at rate: {$rate}";
-        // });
-        // ->addFilter('-preset', 'ultrafast')
-        // ->addFilter('-crf', 22)
-        
-        /** @phpstan-ignore-next-line */
+
+        $format = new X264();
+        $format->setKiloBitrate(1000);
+
         $toDiskMedia = $exportedMedia->toDisk($disk_mp4);
-        Assert::notNull($toDiskMedia, 'Impossibile specificare il disco di destinazione');
         
-        /** @phpstan-ignore-next-line */
         $formattedMedia = $toDiskMedia->inFormat($format);
-        Assert::notNull($formattedMedia, 'Impossibile applicare il formato al video');
         
-        /** @phpstan-ignore-next-line */
         $formattedMedia->save($file_new);
 
         return Storage::disk($disk_mp4)->url($file_new);

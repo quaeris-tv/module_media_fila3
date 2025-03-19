@@ -15,8 +15,12 @@ use Modules\Media\Models\MediaConvert;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use ProtoneMedia\LaravelFFMpeg\MediaOpener;
 use Spatie\QueueableAction\QueueableAction;
+use FFMpeg\Format\Video\DefaultVideo;
 use Webmozart\Assert\Assert;
 
+/**
+ * @method \ProtoneMedia\LaravelFFMpeg\Drivers\PHPFFMpeg inFormat(DefaultVideo $format)
+ */
 class ConvertVideoByMediaConvertAction
 {
     use QueueableAction;
@@ -24,77 +28,37 @@ class ConvertVideoByMediaConvertAction
     /**
      * Execute the action.
      */
-    public function execute(MediaConvert $record): ?string
+    public function execute(ConvertData $data, MediaConvert $record): string
     {
-        $data = ConvertData::from($record);
-        $starting_time = microtime(true);
-        if (! $data->exists()) {
-            return '';
+        if (!$data->exists()) {
+            throw new \Exception('Il file non esiste');
         }
+
         $format = $data->getFFMpegFormat();
-        // $file_new = $data->getConvertedFilename();
         $file_new = $record->converted_file;
 
-        Notification::make()
-            ->title('Start')
-            ->success()
-            ->send();
+        if (!$file_new) {
+            throw new \Exception('Il nome del file convertito non è stato specificato');
+        }
 
-        /*
-         * -preset ultrafast.
-         */
-        // Ensure we have a proper MediaOpener instance
-        $media = FFMpeg::fromDisk($data->disk);
-        Assert::isInstanceOf($media, MediaOpener::class, 'FFMpeg::fromDisk() deve restituire un\'istanza di MediaOpener');
-        
-        $openedMedia = $media->open($data->file);
-        Assert::notNull($openedMedia, 'Impossibile aprire il file video');
-        
-        $exportedMedia = $openedMedia->export();
-        Assert::notNull($exportedMedia, 'Impossibile esportare il file video');
-        
-        // Add progress callback
-        $withProgressMedia = $exportedMedia->onProgress(function (float $percentage, float $remaining, float $rate) use ($record): void {
-            $msg = "{$percentage}% transcoded";
-            $msg .= "{$remaining} seconds left at rate: {$rate}";
-
-            $record->update([
-                'percentage' => $percentage,
-                'remaining' => $remaining,
-                'rate' => $rate,
-            ]);
-
-            Notification::make()
-                ->title($msg)
-                ->success()
-                ->send();
-        });
-        Assert::notNull($withProgressMedia, 'Impossibile aggiungere il callback di progresso');
-        
-        // Add filters
-        $withFiltersMedia = $withProgressMedia->addFilter('-preset', 'ultrafast');
-        Assert::notNull($withFiltersMedia, 'Impossibile aggiungere i filtri');
-        
-        // Set target disk
-        /** @phpstan-ignore-next-line */
-        $toDiskMedia = $withFiltersMedia->toDisk($data->disk);
-        Assert::notNull($toDiskMedia, 'Impossibile specificare il disco di destinazione');
-        
-        // Set format
-        /** @phpstan-ignore-next-line */
-        $formattedMedia = $toDiskMedia->inFormat($format);
-        Assert::notNull($formattedMedia, 'Impossibile applicare il formato al video');
-        
-        // Save
-        /** @phpstan-ignore-next-line */
-        $formattedMedia->save($file_new);
-
-        $finished_time = microtime(true);
+        FFMpeg::fromDisk($data->disk)
+            ->open($data->file)
+            ->export()
+            ->onProgress(function (float $percentage, float $remaining, float $rate) use ($record): void {
+                $record->update([
+                    'percentage' => $percentage,
+                    'remaining' => $remaining,
+                    'rate' => $rate,
+                ]);
+            })
+            ->addFilter('-preset', 'ultrafast')
+            ->inFormat($format)
+            ->save($file_new);
 
         $record->update([
-            'execution_time' => $finished_time - $starting_time,
+            'status' => 'completed',
         ]);
 
-        return Storage::disk($data->disk)->url((string) $file_new);
+        return $file_new;
     }
 }

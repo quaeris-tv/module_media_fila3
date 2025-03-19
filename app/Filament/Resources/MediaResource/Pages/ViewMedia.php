@@ -54,7 +54,7 @@ class ViewMedia extends \Modules\Xot\Filament\Resources\Pages\XotBaseViewRecord
                             ->form(MediaConvertResource::getFormSchema())
                             ->action(function ($record, array $data): void {
                                 $data['disk'] = $record->disk;
-                                $data['file'] = $record->id.'/'.$record->file_name;
+                                $data['file'] = $record->path.'/'.$record->file_name;
                                 $convert_data = ConvertData::from($data);
                                 $record->mediaConverts()->create($convert_data->toArray());
                             }),
